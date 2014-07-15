@@ -1,0 +1,19 @@
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+    ],
+    "require": {
+        "monolog/monolog": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Judopay\\":"src/Judopay"
+        },
+        "files": [
+        ]
+    }
+}
