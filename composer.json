@@ -8,7 +8,8 @@
         "guzzlehttp/guzzle": "4.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.0",
+        "phpdocumentor/phpdocumentor": "2.*"
     },
     "config": {
         "bin-dir": "bin"
