@@ -9,7 +9,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "phpdocumentor/phpdocumentor": "2.*"
+        "phpdocumentor/phpdocumentor": "2.*",
+        "jaz303/phake": "dev-master"
     },
     "config": {
         "bin-dir": "bin"
