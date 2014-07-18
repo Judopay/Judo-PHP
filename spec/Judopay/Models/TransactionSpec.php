@@ -19,14 +19,17 @@ class TransactionSpec extends ObjectBehavior
     {
 		$client = new Client();
 
-		// Create a mock subscriber and queue two responses.
+		$mockResponse = new Response(200);
+//    	$mockResponse->setBody('banana');
 		$mock = new Mock([
-		    new Response(200, ['X-Foo' => 'Bar']),         // Use response object
+		    $mockResponse
 		]);
 
 		// Add the mock subscriber to the client.
 		$client->getEmitter()->attach($mock);
-		//$client->get('/')->getStatusCode()->shouldReturn(200);
+
+		$this->setClient($client);
+		$this->all()->shouldReturn('banana');
     }
 }
 
