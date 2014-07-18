@@ -2,4 +2,7 @@
 
 namespace Judopay;
 
-class Model {}
+class Model
+{
+
+}
