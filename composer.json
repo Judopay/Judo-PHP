@@ -4,8 +4,9 @@
     "repositories": [
     ],
     "require": {
-        "monolog/monolog": "*",
-        "guzzlehttp/guzzle": "4.*"
+        "php": ">=5.3.3",
+        "guzzle/guzzle": ">=3.7.0,<=3.9.9",
+        "monolog/monolog": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
