@@ -2,7 +2,7 @@
 
 namespace Judopay;
 
-class Client
+class Wrapper
 {
 	protected $config;
 	protected $valid_config_keys = array(
@@ -20,6 +20,13 @@ class Client
 	public function __construct($config = null)
 	{
 		$this->config = $this->removeInvalidConfigKeys($config);
+	}
+
+	public function connect()
+	{
+		$connection = new \Judopay\Connection;
+
+		return $connection;
 	}
 
     public function getConfig()

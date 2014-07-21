@@ -5,11 +5,11 @@ namespace spec\Judopay;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ClientSpec extends ObjectBehavior
+class WrapperSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Judopay\Client');
+        $this->shouldHaveType('Judopay\Wrapper');
     }
 
     public function it_should_set_config_values_on_initialisation()
