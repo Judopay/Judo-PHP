@@ -4,9 +4,7 @@ namespace spec\Judopay\Models;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Message\Response;
+use Guzzle\Http\Client;
 
 class TransactionSpec extends ObjectBehavior
 {
@@ -17,16 +15,12 @@ class TransactionSpec extends ObjectBehavior
 
     public function it_should_list_all_transactions()
     {
-		$client = new Client();
 
-		$mockResponse = new Response(200);
-//    	$mockResponse->setBody('banana');
-		$mock = new Mock([
-		    $mockResponse
-		]);
-
-		// Add the mock subscriber to the client.
-		$client->getEmitter()->attach($mock);
+        $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
+        $mockResponse = new \Guzzle\Http\Message\Response(200, null, 'banana');
+        $plugin->addResponse($mockResponse);
+        $client = new \Guzzle\Http\Client();
+        $client->addSubscriber($plugin);
 
 		$this->setClient($client);
 		$this->all()->shouldReturn('banana');
