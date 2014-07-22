@@ -28,6 +28,15 @@ class Configuration
     	return (in_array($key, $this->valid_config_keys));
     }
 
+    public function get($key)
+    {
+    	if (!array_key_exists($key, $this->settings)) {
+    		return null;
+    	}
+
+    	return $this->configuration[$key];
+    }
+
     public function getAll()
     {
     	return $this->settings;
