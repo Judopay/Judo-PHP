@@ -6,6 +6,8 @@ class Model
 {
 	protected $client;
 	protected $configuration;
+	protected $resourcePath;
+	protected $validApiMethods;
 
 	public function __construct(\Judopay\Configuration $configuration = null)
 	{
