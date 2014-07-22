@@ -24,6 +24,6 @@ class Model
 		$requestUrl = $this->configuration->get('endpoint_url').'/'.$this->resourcePath;
         $request = $this->client->get($requestUrl);
         $response = $request->send();
-        return (string)$response->getBody();
+        return $response->json();
 	}
 }

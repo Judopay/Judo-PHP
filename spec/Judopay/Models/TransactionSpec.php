@@ -35,17 +35,8 @@ class TransactionSpec extends ObjectBehavior
         $client->addSubscriber($plugin);
 		$this->setClient($client);
 
-		$this->all()->shouldReturn('banana');
+		$output = $this->all();
+        $output->shouldBeArray();
+        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 }
-
-
-  // it 'should list all transactions' do
-  //   stub_get('/transactions').
-  //     to_return(:status => 200,
-  //               :body => lambda { |_request| fixture('transactions/all.json') })
-
-  //   transactions = Judopay::Transaction.all
-  //   expect(transactions).to be_a(Hash)
-  //   expect(transactions.results[0].amount).to equal(1.01)
-  // end
