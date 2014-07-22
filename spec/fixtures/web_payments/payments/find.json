@@ -1,0 +1,39 @@
+{
+  "reference": "4gcBAAMAGAASAAAADA66kRor6ofknGqU3A6i-759FprFGPH3ecVcW5ChMQK0f3pLBQ",
+  "status": "Open",
+  "transactionType": "Payment",
+  "judoId": "1234-4567",
+  "amount": 12.34,
+  "currency": "GBP",
+  "expiryDate": "2014-03-18T14:35:54.5428+00:00",
+  "companyName": "AnyMerchant Ltd",
+  "yourConsumerReference": "consumer0053252",
+  "yourPaymentReference": "payment12412312",
+  "yourPaymentMetaData": {},
+  "response": {
+    "postUrl": "http://pay.judopay-sandbox.com/",
+    "reference": "4gcBAAMAGAASAAAADA66kRor6ofknGqU3A6i-759FprFGPH3ecVcW5ChMQK0f3pLBQ"
+  },
+  "cardAddress": "",
+  "clientIpAddress": "127.0.0.1",
+  "clientUserAgent": "Mozilla/5.0 (Windows NT 6.2; Win64; x64)...",
+  "paymentSuccessUrl": "http://www.yourcompany.co.uk/success",
+  "paymentCancelUrl": "http://www.yourcompany.co.uk/cancel",
+  "receipt": {
+    "receiptId": "1234",
+    "type": "Payment",
+    "createdAt": "2012-12-05T14:40:53.4529+00:00",
+    "result": "Success",
+    "message": "Payment was successful",
+    "judoId": "123-4567",
+    "merchantName": "AnyMerchant Ltd",
+    "appearsOnStatementAs": "Judo Payments/AnyMerch",
+    "refunds": 0.00,
+    "netAmount": 12.34,
+    "cardDetails": {
+      "cardLastFour": "3436",
+      "endDate": "12/15",
+      "cardType": 1
+    }
+  }
+}

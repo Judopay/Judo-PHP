@@ -1,0 +1,22 @@
+{
+  "receiptId": "1234",
+  "type": "Payment",
+  "createdAt": "2012-12-05T14:40:53.4529+00:00",
+  "result": "Success",
+  "message": "Payment was successful",
+  "judoId": "123-456",
+  "merchantName": "AnyMerchant Ltd",
+  "appearsOnStatementAs": "Judo Payments/AnyMerch",
+  "refunds": 0.00,
+  "netAmount": 12.34,
+  "cardDetails": {
+    "cardLastFour": "3436",
+    "endDate": "12/15",
+    "cardToken": "ax035fds95325df3",
+    "cardType": 1
+  },
+  "consumer": {
+    "consumerToken": "abcdefghijklABCDDEF",
+    "yourConsumerReference": "consumer0053252"
+  }
+}

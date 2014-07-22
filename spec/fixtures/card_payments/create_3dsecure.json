@@ -1,0 +1,8 @@
+{
+  "receiptId": "61382",
+  "result": "Requires 3D Secure",
+  "message": "Issuer authentication required",
+  "acsUrl": "https://gw1.paymentsensegateway.com:4430/ACS/Default.aspx",
+  "md": "140618100412780501505009",
+  "paReq": "eJxVUtuO2jAQfa/Uf7DyTOJLLiTR4BXdqCpVQyllH/pobC+kIgnrJAX+vjYBtpX8MHPGczlzBp7O9QH90aar2mbm0YB4SDeyVVWzm3kvm89+6j3xjx9gszdaFz+1HIzmUOquEzuNKjXzVvO1fstCFqZhmDLicbgiHG5VuS0aMMB31yYbuRdNz0HIt0+LJacsjOJkmgK+AVBrsygeeAZ4BKARteZfB9Wio7jUuuk7BPgKgmyHpjcXnrIE8N2BwRz4vu+POcan0yn4bVNtZiDbGrCLAX6fZjU4q7O1zpXiy2LBlpt5XG5+xd+LH+fS2cXuUhYvM8DuByjRa84IjUhCU0RpTqKcWqZXHETthuCUkCCMLLXRhaPrMn/EXOhfCOyCjVXgTuTugT4f28Yy5rbBwwalO8lXwvSNNmstFyqnE/TcNqPNMpJNUNluq4Ne69dcTV+tSFHiKxkmfmQV89MtY/42zKgUdJopkc2l/NbKMT+aILdsV5UQQpMJUhe77UoWtq3JXcyydSMAft/e8xenrOytYEkc2UfDJCZO3CvmmFRWGxrTkYpzALssfLscfLsva/13d38BsjHbeQ=="
+}

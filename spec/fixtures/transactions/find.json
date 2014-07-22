@@ -1,0 +1,23 @@
+{
+    "receiptId": "439539",
+    "type": "Payment",
+    "createdAt": "2014-06-17T14:56:49.7571+01:00",
+    "result": "Success",
+    "message": "AuthCode: 210658",
+    "judoId": 100016,
+    "merchantName": "Judo Pay test",
+    "appearsOnStatementAs": "JudoPay/JudoPayt",
+    "netAmount": 1.01,
+    "amount": 1.01,
+    "currency": "GBP",
+    "cardDetails": {
+        "cardLastfour": "5462",
+        "endDate": "1215",
+        "cardType": 11
+    },
+    "consumer": {
+        "consumerToken": "HUClqv3MSdCh6g5M",
+        "yourConsumerReference": "WebPayDemo_17/06/2014 14:56:53 +01:00"
+    },
+    "yourPaymentMetaData": {}
+}

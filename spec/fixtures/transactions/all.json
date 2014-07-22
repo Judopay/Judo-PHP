@@ -1,0 +1,238 @@
+{
+    "resultCount": 1985,
+    "pageSize": 10,
+    "offset": 0,
+    "results": [
+        {
+            "receiptId": "439539",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:56:49.7571+01:00",
+            "result": "Success",
+            "message": "AuthCode: 210658",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5462",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "HUClqv3MSdCh6g5M",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:56:53 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439521",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:45:06.3913+01:00",
+            "result": "Success",
+            "message": "AuthCode: 347064",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5462",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "uNU14OInekdSp5GC",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:45:07 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439513",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:43:05.5359+01:00",
+            "result": "Success",
+            "message": "AuthCode: 980205",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "3436",
+                "endDate": "1215",
+                "cardType": 1
+            },
+            "consumer": {
+                "consumerToken": "PTRSlsgp41XvKIgn",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:43:10 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439505",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:42:27.3257+01:00",
+            "result": "Declined",
+            "message": "Card declined",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "8074",
+                "endDate": "1215",
+                "cardType": 0
+            },
+            "consumer": {
+                "consumerToken": "i3CVWJwicqQ7z3lR",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:42:31 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439497",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:41:55.1559+01:00",
+            "result": "Declined",
+            "message": "Card declined",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "4963",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "YTCwOjQCu3gWS3IZ",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:41:59 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439489",
+            "type": "Payment",
+            "createdAt": "2014-06-17T14:41:19.3158+01:00",
+            "result": "Success",
+            "message": "AuthCode: 653887",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5462",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "alGXJnK8K44qP8pj",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 14:41:23 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439448",
+            "type": "Payment",
+            "createdAt": "2014-06-17T13:55:50.5212+01:00",
+            "result": "Success",
+            "message": "AuthCode: 813883",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5462",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "2O4OD7tERdJLfcbr",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 13:54:11 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439331",
+            "type": "Payment",
+            "createdAt": "2014-06-17T11:26:50.7979+01:00",
+            "result": "Success",
+            "message": "AuthCode: 231455",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5462",
+                "endDate": "1215",
+                "cardType": 11
+            },
+            "consumer": {
+                "consumerToken": "HcQD4V7yUfHwNQl5",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 11:25:42 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439323",
+            "type": "Payment",
+            "createdAt": "2014-06-17T11:23:58.4341+01:00",
+            "result": "Success",
+            "message": "AuthCode: 472047",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "6204",
+                "endDate": "1215",
+                "cardType": 1
+            },
+            "consumer": {
+                "consumerToken": "sitr0qdIGD58oL4z",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 11:24:00 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        },
+        {
+            "receiptId": "439315",
+            "type": "Payment",
+            "createdAt": "2014-06-17T11:21:55.6956+01:00",
+            "result": "Success",
+            "message": "AuthCode: 295259",
+            "judoId": 100016,
+            "merchantName": "Judo Pay test",
+            "appearsOnStatementAs": "JudoPay/JudoPayt",
+            "netAmount": 1.01,
+            "amount": 1.01,
+            "currency": "GBP",
+            "cardDetails": {
+                "cardLastfour": "5460",
+                "endDate": "1215",
+                "cardType": 2
+            },
+            "consumer": {
+                "consumerToken": "PLJh1QRPppvsJze9",
+                "yourConsumerReference": "WebPayDemo_17/06/2014 11:21:57 +01:00"
+            },
+            "yourPaymentMetaData": {}
+        }
+    ],
+    "sort": "time-descending"
+}

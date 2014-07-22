@@ -1,0 +1,24 @@
+{
+    "receiptId": "444224",
+    "type": "Payment",
+    "createdAt": "2014-06-19T16:26:15.6420+01:00",
+    "result": "Declined",
+    "message": "Card declined",
+    "judoId": 100016,
+    "merchantName": "Judo Pay test",
+    "appearsOnStatementAs": "JudoPay/JudoPayt",
+    "originalAmount": 1.01,
+    "netAmount": 1.01,
+    "amount": 1.01,
+    "currency": "GBP",
+    "cardDetails": {
+        "cardLastfour": "4963",
+        "endDate": "1215",
+        "cardToken": "TRANSACTION_FAILED",
+        "cardType": 11
+    },
+    "consumer": {
+        "consumerToken": "zSfNrkH5i0LjgAN6",
+        "yourConsumerReference": "bjk-235452-1214"
+    }
+}
