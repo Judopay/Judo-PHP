@@ -15,4 +15,9 @@ class Wrapper
 	{
         return $this->configuration;
 	}
+
+    public function transaction()
+    {
+        return new \Judopay\Models\Transaction($configuration);
+    }
 }

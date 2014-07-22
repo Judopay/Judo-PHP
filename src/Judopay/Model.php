@@ -5,6 +5,12 @@ namespace Judopay;
 class Model
 {
 	protected $client;
+	protected $configuration;
+
+	public function __construct(\Judopay\Configuration $configuration)
+	{
+		$this->configuration = $configuration;
+	}
 
 	public function setClient(\Guzzle\Http\Client $client)
 	{

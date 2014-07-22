@@ -29,4 +29,9 @@ class WrapperSpec extends ObjectBehavior
     		)
     	);
     }
+
+    public function it_should_return_a_transaction_model()
+    {
+        $this->transaction()->shouldHaveType('Judopay\Models\Transaction');
+    }
 }

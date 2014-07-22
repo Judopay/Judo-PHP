@@ -2,4 +2,6 @@
 
 namespace Judopay\Models;
 
-class Transaction extends \Judopay\Model {}
+class Transaction extends \Judopay\Model
+{
+}
