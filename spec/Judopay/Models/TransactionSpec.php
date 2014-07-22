@@ -2,6 +2,8 @@
 
 namespace spec\Judopay\Models;
 
+require_once __DIR__.'/../../SpecHelper.php';
+
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Guzzle\Http\Client;
@@ -16,13 +18,23 @@ class TransactionSpec extends ObjectBehavior
     public function it_should_list_all_transactions()
     {
 
-        $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
-        $mockResponse = new \Guzzle\Http\Message\Response(200, null, 'banana');
-        $plugin->addResponse($mockResponse);
-        $client = new \Guzzle\Http\Client();
-        $client->addSubscriber($plugin);
+        $configuration = new \Judopay\Configuration(array(
+                'api_token' => 'token',
+                'api_secret' => 'secret'
+            )
+        );
 
+        $this->beConstructedWith($configuration);
+
+        $client = new \Guzzle\Http\Client();
+        $plugin = \Judopay\SpecHelper::getMockResponsePlugin(
+            200,
+            null,
+            file_get_contents(__DIR__.'/../../fixtures/transactions/all.json')
+        );
+        $client->addSubscriber($plugin);
 		$this->setClient($client);
+
 		$this->all()->shouldReturn('banana');
     }
 }

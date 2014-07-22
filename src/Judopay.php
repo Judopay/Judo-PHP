@@ -21,7 +21,7 @@ class Judopay {
 		return $this->container[$objName];
 	}
 
-	public function get_model($modelName)
+	public function getModel($modelName)
 	{
 		$this->container[$modelName] = function ($c) use ($modelName) {
 			$modelClassName = '\Judopay\Models\\'.ucfirst($modelName);

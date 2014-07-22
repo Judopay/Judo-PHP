@@ -21,6 +21,7 @@ class Configuration
 	public function __construct($settings = null)
 	{
 		$this->settings = $this->removeInvalidConfigKeys($settings);
+		$this->setEndpointUrl();
 	}
 
     public function isValidConfigKey($key)
@@ -34,7 +35,7 @@ class Configuration
     		return null;
     	}
 
-    	return $this->configuration[$key];
+    	return $this->settings[$key];
     }
 
     public function getAll()
@@ -57,5 +58,14 @@ class Configuration
 		}
 
 		return $output;
+    }
+
+    protected function setEndpointUrl()
+    {
+    	if (isset($this->settings['use_production']) && $this->settings['use_production'] === true) {
+    		$this->settings['endpoint_url'] = 'http://production.local';
+    	} else {
+    		$this->settings['endpoint_url'] = 'https://partnerapi.judopay-sandbox.com';
+    	}
     }
 }

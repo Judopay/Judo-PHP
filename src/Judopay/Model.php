@@ -21,7 +21,8 @@ class Model
 
 	public function all()
 	{
-        $request = $this->client->get('http://www.test.com/');
+		$requestUrl = $this->configuration->get('endpoint_url').'/'.$this->resourcePath;
+        $request = $this->client->get($requestUrl);
         $response = $request->send();
         return (string)$response->getBody();
 	}
