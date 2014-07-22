@@ -20,6 +20,10 @@ class Configuration
 
 	public function __construct($settings = null)
 	{
+		// Set sensible defaults
+		$this->settings['api_version'] = '4.0.0';
+
+		// Override defaults with user settings
 		$this->settings = $this->removeInvalidConfigKeys($settings);
 		$this->setEndpointUrl();
 	}
@@ -63,7 +67,7 @@ class Configuration
     protected function setEndpointUrl()
     {
     	if (isset($this->settings['use_production']) && $this->settings['use_production'] === true) {
-    		$this->settings['endpoint_url'] = 'http://production.local';
+    		$this->settings['endpoint_url'] = 'https://partnerapi.judopay.com';
     	} else {
     		$this->settings['endpoint_url'] = 'https://partnerapi.judopay-sandbox.com';
     	}
