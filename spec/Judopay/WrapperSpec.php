@@ -22,7 +22,7 @@ class WrapperSpec extends ObjectBehavior
 			)
     	);
 
-    	$this->getConfig()->shouldReturn(
+    	$this->configuration()->getAll()->shouldReturn(
     		array(
 				'api_token' => 'token',
 				'api_secret' => 'secret'

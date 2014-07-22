@@ -4,55 +4,15 @@ namespace Judopay;
 
 class Wrapper
 {
-	protected $config;
-	protected $valid_config_keys = array(
-    	'api_version',
-        'api_token',
-        'api_secret',
-        'oauth_access_token',
-        'format',
-        'endpoint_url',
-        'user_agent',
-        'judo_id',
-        'use_production'
-	);
+	protected $configuration;
 
-	public function __construct($config = null)
+	public function __construct($settings = null)
 	{
-		$this->config = $this->removeInvalidConfigKeys($config);
+		$this->configuration = new \Judopay\Configuration($settings);
 	}
 
-	public function connect()
+	public function configuration()
 	{
-		$connection = new \Judopay\Connection;
-
-		return $connection;
+        return $this->configuration;
 	}
-
-    public function getConfig()
-    {
-    	return $this->config;
-    }
-
-    public function isValidConfigKey($key)
-    {
-    	return (in_array($key, $this->valid_config_keys));
-    }
-
-    protected function removeInvalidConfigKeys($config)
-    {
-    	if (!is_array($config)) {
-    		return false;
-		}
-
-		$output = array();
-
-		foreach ($config as $key => $value) {
-			if (in_array($key, $this->valid_config_keys)) {
-				$output[$key] = $value;
-			}
-		}
-
-		return $output;
-    }
 }
