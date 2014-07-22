@@ -7,7 +7,7 @@ class Model
 	protected $client;
 	protected $configuration;
 
-	public function __construct(\Judopay\Configuration $configuration)
+	public function __construct(\Judopay\Configuration $configuration = null)
 	{
 		$this->configuration = $configuration;
 	}

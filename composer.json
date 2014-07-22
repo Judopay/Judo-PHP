@@ -21,6 +21,7 @@
             "Judopay\\":"src/Judopay"
         },
         "files": [
+            "src/Judopay.php"
         ]
     }
 }

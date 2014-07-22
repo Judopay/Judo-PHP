@@ -1,15 +1,17 @@
 <?php
 
-namespace spec\Judopay;
+namespace spec;
+
+require_once __DIR__.'/../src/Judopay.php';
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class WrapperSpec extends ObjectBehavior
+class JudopaySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Judopay\Wrapper');
+        $this->shouldHaveType('Judopay');
     }
 
     public function it_should_set_config_values_on_initialisation()
@@ -22,7 +24,7 @@ class WrapperSpec extends ObjectBehavior
 			)
     	);
 
-    	$this->configuration()->getAll()->shouldReturn(
+    	$this->get('configuration')->getAll()->shouldReturn(
     		array(
 				'api_token' => 'token',
 				'api_secret' => 'secret'
@@ -30,8 +32,8 @@ class WrapperSpec extends ObjectBehavior
     	);
     }
 
-    public function it_should_return_a_transaction_model()
+    public function it_should_return_a_model_instance()
     {
-        $this->transaction()->shouldHaveType('Judopay\Models\Transaction');
+        $this->get_model('transaction')->shouldHaveType('\Judopay\Models\Transaction');
     }
 }
