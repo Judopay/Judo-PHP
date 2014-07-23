@@ -23,4 +23,19 @@ task('test', function() {
     passthru("./bin/phpspec run");
 });
 
+group('transactions', function() {
+    task('all', function() {
+    	$judopay = new \Judopay(
+    		array(
+    			'api_token' => getenv('JUDO_TOKEN'),
+    			'api_secret' => getenv('JUDO_SECRET'),
+    			'judo_id' => getenv('JUDO_ID')
+    		)
+    	);
+
+    	$transaction = $judopay->getModel('Transaction');
+    	print_r($transaction->all());
+    });
+});
+
 task('default', 'list');

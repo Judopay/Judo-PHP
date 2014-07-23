@@ -4,6 +4,6 @@ namespace Judopay\Models;
 
 class Transaction extends \Judopay\Model
 {
-	protected $resourcePath = 'transaction';
+	protected $resourcePath = 'transactions';
 	protected $validApiMethods = array('all');
 }
