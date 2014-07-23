@@ -11,7 +11,7 @@ task('list', function() {
 
 desc('Generate phpDocumentor docs');
 task('doc', function() {
-    passthru("./bin/phpdoc -d ./src -t ./doc");
+    passthru("phpdoc -d ./src -t ./doc");
 
     // Fix missing font in generated docs
     // https://github.com/phpDocumentor/template.clean/pull/41
