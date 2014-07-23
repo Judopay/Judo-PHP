@@ -24,7 +24,10 @@ class Configuration
 		$this->settings['api_version'] = '4.0.0';
 
 		// Override defaults with user settings
-		$this->settings = array_merge($this->settings, $this->removeInvalidConfigKeys($settings));
+        $newSettings = $this->removeInvalidConfigKeys($settings);
+        if (is_array($newSettings)) {
+		  $this->settings = array_merge($this->settings, $newSettings);
+        }
 		$this->setEndpointUrl();
 	}
 

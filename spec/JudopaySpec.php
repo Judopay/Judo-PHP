@@ -24,17 +24,21 @@ class JudopaySpec extends ObjectBehavior
 			)
     	);
 
-    	$this->get('configuration')->getAll()->shouldReturn(
-    		array(
-				'api_token' => 'token',
-				'api_secret' => 'secret',
-                'endpoint_url' => 'https://partnerapi.judopay-sandbox.com'
-    		)
-    	);
+    	$this->get('configuration')->getAll()->shouldBeArray();
+        $this->get('configuration')->getAll()->shouldNotHaveKey('dodgy_key');
     }
 
     public function it_should_return_a_model_instance()
     {
         $this->getModel('transaction')->shouldHaveType('\Judopay\Models\Transaction');
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'notHaveKey' => function($subject, $key) {
+                return !array_key_exists($key, $subject);
+            }
+        ];
     }
 }
