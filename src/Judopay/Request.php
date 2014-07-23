@@ -15,17 +15,27 @@ class Request
 	public function setClient(\Guzzle\Http\Client $client)
 	{
 		$this->client = $client;
+
+		// Set headers
+		$this->client->setDefaultOption(
+			'headers',
+			array(
+				'API-Version' => $this->configuration->get('api_version'),
+        		'Accept' => 'application/json; charset=utf-8',
+        		'Content-Type' => 'application/json'
+			)
+		);
 	}
 
-	public function get($url)
+	public function get($resourcePath)
 	{
-		$request = $client->get($url);
+		$endpointUrl = $this->configuration->get('endpoint_url');
+		$request = $this->client->get($endpointUrl.'/'.$resourcePath);
 		$request->setAuth(
 			$this->configuration->get('api_token'),
 			$this->configuration->get('api_secret')
 		);
 
-		//echo $request->getUrl();
 		$response = $request->send();
 
 		return $response;

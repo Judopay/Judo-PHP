@@ -21,9 +21,8 @@ class Model
 
 	public function all()
 	{
-		$requestUrl = $this->configuration->get('endpoint_url').'/'.$this->resourcePath;
-        $request = $this->client->get($requestUrl);
-        $response = $request->send();
-        return $response->json();
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient(new \Guzzle\Http\Client);
+        return $request->get($this->resourcePath);
 	}
 }
