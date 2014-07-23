@@ -22,7 +22,7 @@ class Model
 	public function all()
 	{
         $request = new \Judopay\Request($this->configuration);
-        $request->setClient(new \Guzzle\Http\Client);
+        $request->setClient($this->client);
         return $request->get($this->resourcePath)->json();
 	}
 }

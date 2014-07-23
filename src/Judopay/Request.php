@@ -17,7 +17,7 @@ class Request
 	public function setClient(\Guzzle\Http\Client $client)
 	{
 		$this->client = $client;
-		print_r($this->configuration->getAll());
+
 		// Set headers
 		$this->client->setDefaultOption(
 			'headers',
@@ -27,7 +27,9 @@ class Request
         		'Content-Type' => 'application/json'
 			)
 		);
-		$this->client->addSubscriber(LogPlugin::getDebugPlugin());
+
+		// Debug logging
+		//$this->client->addSubscriber(LogPlugin::getDebugPlugin());
 	}
 
 	public function get($resourcePath)
