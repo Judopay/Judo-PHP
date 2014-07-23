@@ -23,6 +23,6 @@ class Model
 	{
         $request = new \Judopay\Request($this->configuration);
         $request->setClient(new \Guzzle\Http\Client);
-        return $request->get($this->resourcePath);
+        return $request->get($this->resourcePath)->json();
 	}
 }

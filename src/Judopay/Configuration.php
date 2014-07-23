@@ -4,7 +4,7 @@ namespace Judopay;
 
 class Configuration
 {
-	protected $settings;
+	protected $settings = array();
 
 	protected $valid_config_keys = array(
     	'api_version',
@@ -24,7 +24,7 @@ class Configuration
 		$this->settings['api_version'] = '4.0.0';
 
 		// Override defaults with user settings
-		$this->settings = $this->removeInvalidConfigKeys($settings);
+		$this->settings = array_merge($this->settings, $this->removeInvalidConfigKeys($settings));
 		$this->setEndpointUrl();
 	}
 
