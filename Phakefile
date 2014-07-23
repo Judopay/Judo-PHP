@@ -18,6 +18,11 @@ task('doc', function() {
     passthru('cp -fR font doc/');
 });
 
+desc('Generate phpDocumentor docs in XML format');
+task('doc_xml', function() {
+    passthru('phpdoc -d ./src -t ./doc  --template="xml"');
+});
+
 desc('Run phpspec tests');
 task('test', function() {
     passthru("./bin/phpspec run");
