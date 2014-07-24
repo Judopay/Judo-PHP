@@ -11,10 +11,10 @@ class ResponseValidator
 	public function __construct(\Guzzle\Http\Message\Response $response)
 	{
 		$this->response = $response;
-		$this->checkResponseForErrors();
+		$this->check();
 	}
 
-	protected function checkResponseForErrors()
+	protected function check()
 	{
 		switch ($this->response->getStatusCode()) {
 			case 400:

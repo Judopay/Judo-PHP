@@ -38,9 +38,16 @@ class Request
 		$request = $this->client->get($endpointUrl.'/'.$resourcePath);
 		$request = $this->setRequestAuthentication($request);
 
-		$response = $request->send();
+		try {
+			$guzzleResponse = $request->send();
+		} catch (\Guzzle\Http\Exception\BadResponseException $e) {
+			// Guzzle throws an exception when it encounters a 4xx or 5xx error
+			// Rethrow the exception so we can raise our custom exception classes
+			$responseValidator = new \Judopay\ResponseValidator($e->getResponse());
+			$responseValidator->check();
+		}
 
-		return $response;
+		return $guzzleResponse;
 	}
 
 	protected function setRequestAuthentication(\Guzzle\Http\Message\Request $request)

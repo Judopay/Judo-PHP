@@ -2,7 +2,8 @@
 
 use Pimple\Container;
 
-class Judopay {
+class Judopay
+{
 	protected $container;
 
 	public function __construct($settings = null)
