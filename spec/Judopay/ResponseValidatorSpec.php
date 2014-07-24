@@ -12,4 +12,16 @@ class ResponseValidatorSpec extends ObjectBehavior
     	$this->beConstructedWith(new \Guzzle\Http\Message\Response(200));
         $this->shouldHaveType('Judopay\ResponseValidator');
     }
+
+    function it_raises_an_exception_when_there_is_a_problematic_response()
+    {
+    	$exceptions = array(
+    		400 => 'BadRequest'
+    	);
+
+    	foreach ($exceptions as $statusCode => $exceptionClass) {
+    		$response = new \Guzzle\Http\Message\Response($statusCode);
+    		$this->shouldThrow('\Judopay\Exception\\'.$exceptionClass)->during('__construct', array($response));
+    	}
+    }
 }
