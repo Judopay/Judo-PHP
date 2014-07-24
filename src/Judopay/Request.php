@@ -36,13 +36,20 @@ class Request
 	{
 		$endpointUrl = $this->configuration->get('endpoint_url');
 		$request = $this->client->get($endpointUrl.'/'.$resourcePath);
+		$request = $this->setRequestAuthentication($request);
+
+		$response = $request->send();
+
+		return $response;
+	}
+
+	protected function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
+	{
 		$request->setAuth(
 			$this->configuration->get('api_token'),
 			$this->configuration->get('api_secret')
 		);
 
-		$response = $request->send();
-
-		return $response;
+		return $request;
 	}
 }
