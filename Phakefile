@@ -42,6 +42,20 @@ group('transactions', function() {
     	$transaction->setClient(new \Guzzle\Http\Client);
     	print_r($transaction->all());
     });
+
+    task('find', function() {
+        $judopay = new \Judopay(
+            array(
+                'api_token' => getenv('JUDO_TOKEN'),
+                'api_secret' => getenv('JUDO_SECRET'),
+                'judo_id' => getenv('JUDO_ID')
+            )
+        );
+
+        $transaction = $judopay->getModel('Transaction');
+        $transaction->setClient(new \Guzzle\Http\Client);
+        print_r($transaction->find(465906));
+    });
 });
 
 task('default', 'list');
