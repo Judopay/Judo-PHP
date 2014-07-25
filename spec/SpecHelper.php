@@ -4,12 +4,16 @@ namespace Judopay;
 
 class SpecHelper
 {
-	public static function getMockResponsePlugin($responseCode, $headers, $body)
+	public static function getMockResponseClient($responseCode, $fixtureFile)
 	{
+        $client = new \Guzzle\Http\Client();
         $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
-        $mockResponse = new \Guzzle\Http\Message\Response($responseCode, $headers, $body);
-        $plugin->addResponse($mockResponse);
+        $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
 
-        return $plugin;
+        $mockResponse = new \Guzzle\Http\Message\Response($responseCode, null, $fixtureContent);
+        $plugin->addResponse($mockResponse);
+        $client->addSubscriber($plugin);
+
+        return $client;
 	}
 }

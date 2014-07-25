@@ -17,7 +17,37 @@ class TransactionSpec extends ObjectBehavior
 
     public function it_should_list_all_transactions()
     {
+        $this->configure();
+		$this->setClient(
+            \Judopay\SpecHelper::getMockResponseClient(
+                200,
+                'transactions/all.json'
+            )
+        );
 
+		$output = $this->all();
+        $output->shouldBeArray();
+        $output['results'][0]['amount']->shouldEqual(1.01);
+    }
+
+    public function it_should_give_details_of_a_single_transaction_given_a_valid_receipt_id()
+    {
+        $this->configure();
+        $this->setClient(
+            \Judopay\SpecHelper::getMockResponseClient(
+                200,
+                'transactions/find.json'
+            )
+        );
+
+        $receiptId = 439539;
+        $output = $this->find($receiptId);
+        $output->shouldBeArray();
+        $output['receiptId']->shouldEqual((string)$receiptId);
+    }
+
+    protected function configure()
+    {
         $configuration = new \Judopay\Configuration(array(
                 'api_token' => 'token',
                 'api_secret' => 'secret'
@@ -25,18 +55,5 @@ class TransactionSpec extends ObjectBehavior
         );
 
         $this->beConstructedWith($configuration);
-
-        $client = new \Guzzle\Http\Client();
-        $plugin = \Judopay\SpecHelper::getMockResponsePlugin(
-            200,
-            null,
-            file_get_contents(__DIR__.'/../../fixtures/transactions/all.json')
-        );
-        $client->addSubscriber($plugin);
-		$this->setClient($client);
-
-		$output = $this->all();
-        $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 }

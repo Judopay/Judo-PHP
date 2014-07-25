@@ -25,4 +25,11 @@ class Model
         $request->setClient($this->client);
         return $request->get($this->resourcePath)->json();
 	}
+
+	public function find($resourceId)
+	{
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient($this->client);
+        return $request->get($this->resourcePath.'/'.(int)$resourceId)->json();
+	}
 }
