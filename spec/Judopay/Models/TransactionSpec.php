@@ -12,12 +12,13 @@ class TransactionSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
+        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $this->shouldHaveType('Judopay\Models\Transaction');
     }
 
     public function it_should_list_all_transactions()
     {
-        $this->configure();
+        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
 		$this->setClient(
             \Judopay\SpecHelper::getMockResponseClient(
                 200,
@@ -32,7 +33,7 @@ class TransactionSpec extends ObjectBehavior
 
     public function it_should_give_details_of_a_single_transaction_given_a_valid_receipt_id()
     {
-        $this->configure();
+        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $this->setClient(
             \Judopay\SpecHelper::getMockResponseClient(
                 200,
@@ -44,16 +45,5 @@ class TransactionSpec extends ObjectBehavior
         $output = $this->find($receiptId);
         $output->shouldBeArray();
         $output['receiptId']->shouldEqual((string)$receiptId);
-    }
-
-    protected function configure()
-    {
-        $configuration = new \Judopay\Configuration(array(
-                'api_token' => 'token',
-                'api_secret' => 'secret'
-            )
-        );
-
-        $this->beConstructedWith($configuration);
     }
 }

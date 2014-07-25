@@ -50,6 +50,12 @@ class Configuration
     	return $this->settings;
     }
 
+    public function add($key, $value)
+    {
+        $this->settings[$key] = $value;
+        return $this->settings[$key];
+    }
+
     protected function removeInvalidConfigKeys($config)
     {
     	if (!is_array($config)) {

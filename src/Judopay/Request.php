@@ -9,7 +9,7 @@ class Request
 	protected $configuration;
 	protected $client;
 
-	public function __construct(\Judopay\Configuration $configuration = null)
+	public function __construct(\Judopay\Configuration $configuration)
 	{
 		$this->configuration = $configuration;
 	}
@@ -50,12 +50,20 @@ class Request
 		return $guzzleResponse;
 	}
 
-	protected function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
+	public function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
 	{
-		$request->setAuth(
-			$this->configuration->get('api_token'),
-			$this->configuration->get('api_secret')
-		);
+		$oauthAccessToken = $this->configuration->get('oauth_access_token');
+
+		// Do we have an oAuth2 access token?
+		if (!empty($oauthAccessToken)) {
+			$request->setHeader('Authorization', 'Bearer '.$oauthAccessToken);
+		} else {
+			// Otherwise, use basic authentication
+			$request->setAuth(
+				$this->configuration->get('api_token'),
+				$this->configuration->get('api_secret')
+			);
+		}
 
 		return $request;
 	}

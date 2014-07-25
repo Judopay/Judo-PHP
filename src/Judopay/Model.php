@@ -9,7 +9,7 @@ class Model
 	protected $resourcePath;
 	protected $validApiMethods;
 
-	public function __construct(\Judopay\Configuration $configuration = null)
+	public function __construct(\Judopay\Configuration $configuration)
 	{
 		$this->configuration = $configuration;
 	}

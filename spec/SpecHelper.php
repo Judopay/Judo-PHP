@@ -16,4 +16,15 @@ class SpecHelper
 
         return $client;
 	}
+
+	public static function getConfiguration()
+	{
+        $configuration = new \Judopay\Configuration(array(
+                'api_token' => 'token',
+                'api_secret' => 'secret'
+            )
+        );
+
+        return $configuration;
+	}
 }
