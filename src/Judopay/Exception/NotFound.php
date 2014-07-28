@@ -2,4 +2,4 @@
 
 namespace Judopay\Exception;
 
-class NotFound extends \Exception {}
+class NotFound extends \Judopay\Exception\ApiException {}

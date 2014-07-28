@@ -2,4 +2,4 @@
 
 namespace Judopay\Exception;
 
-class InternalServerError extends \Exception {}
+class InternalServerError extends \Judopay\Exception\ApiException {}

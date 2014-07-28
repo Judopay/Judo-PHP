@@ -2,4 +2,4 @@
 
 namespace Judopay\Exception;
 
-class ServiceUnavailable extends \Exception {}
+class ServiceUnavailable extends \Judopay\Exception\ApiException {}
