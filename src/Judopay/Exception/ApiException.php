@@ -11,6 +11,26 @@ class ApiException extends \Exception
 		$this->response = $response;
 	}
 
+	public function __toString()
+	{
+		// As a sensible default, use the class name
+		$message = get_class($this);
+
+		// See if we have an error message in the response
+		$apiErrorMessage = $this->getBodyAttribute('errorMessage');
+		if (!empty($apiErrorMessage)) {
+			$message = $apiErrorMessage;
+		}
+
+		// Append model errors summary if applicable
+		$modelErrorSummary = $this->getModelErrorSummary();
+		if (!empty($modelErrorSummary)) {
+			$message .= ' ('.$modelErrorSummary.')';
+		}
+
+		return $message;
+	}
+
 	public function getHttpStatusCode()
 	{
 		return $this->response->getStatusCode();
@@ -28,12 +48,27 @@ class ApiException extends \Exception
 
     public function getModelErrors()
     {
+    	return $this->getBodyAttribute('modelErrors');
+    }
+
+    protected function getBodyAttribute($attributeName)
+    {
     	$parsedBody = $this->getParsedBody();
-    	if (!isset($parsedBody['modelErrors']))
+    	if (!isset($parsedBody[$attributeName]))
     	{
     		return null;
     	}
 
-    	return $parsedBody['modelErrors'];
+    	return $parsedBody[$attributeName];
+    }
+
+    protected function getModelErrorSummary()
+    {
+    	$modelErrors = $this->getModelErrors();
+    	if (!is_array($modelErrors)) {
+    		return null;
+    	}
+
+    	return join('; ', $modelErrors);
     }
 }
