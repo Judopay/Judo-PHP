@@ -45,6 +45,6 @@ class ApiExceptionSpec extends ObjectBehavior
         $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
         $this->beConstructedWith($response);
         $this->__toString()->shouldEqual($expectedReturn);
-        $this->getMessage()->shouldEqual($expectedReturn);
+        $this->getSummary()->shouldEqual($expectedReturn);
     }
 }

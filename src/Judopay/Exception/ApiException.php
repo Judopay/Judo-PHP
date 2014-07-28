@@ -9,9 +9,10 @@ class ApiException extends \Exception
 	public function __construct(\Guzzle\Http\Message\Response $response)
 	{
 		$this->response = $response;
+		$this->message = get_class($this);
 	}
 
-	public function __toString()
+	public function getSummary()
 	{
 		// As a sensible default, use the class name
 		$message = get_class($this);
@@ -29,6 +30,11 @@ class ApiException extends \Exception
 		}
 
 		return $message;
+	}
+
+	public function __toString()
+	{
+		return $this->getSummary();
 	}
 
 	public function getHttpStatusCode()
