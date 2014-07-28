@@ -26,7 +26,10 @@ class ApiExceptionSpec extends ObjectBehavior
 
     public function it_should_return_the_http_response_body()
     {
-
+        $responseBody = 'judo judo judo';
+        $response = \Judopay\SpecHelper::getMockResponse(200, $responseBody);
+        $this->beConstructedWith($response);
+        $this->getHttpBody()->shouldEqual($responseBody);
     }
 
     public function it_should_return_the_model_errors_if_applicable()

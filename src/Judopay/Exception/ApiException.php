@@ -15,4 +15,9 @@ class ApiException extends \Exception
 	{
 		return $this->response->getStatusCode();
 	}
+
+    public function getHttpBody()
+    {
+        return (string)$this->response->getBody();
+    }
 }
