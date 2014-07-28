@@ -28,6 +28,9 @@ class Request
 			)
 		);
 
+		// Use CA cert bundle to verify SSL connection
+		$this->client->setDefaultOption('verify', __DIR__.'/../../cert/rapidssl_ca.crt');
+
 		// Debug logging
 		//$this->client->addSubscriber(LogPlugin::getDebugPlugin());
 	}
@@ -35,7 +38,9 @@ class Request
 	public function get($resourcePath)
 	{
 		$endpointUrl = $this->configuration->get('endpoint_url');
-		$request = $this->client->get($endpointUrl.'/'.$resourcePath);
+		$request = $this->client->get(
+			$endpointUrl.'/'.$resourcePath
+		);
 		$request = $this->setRequestAuthentication($request);
 
 		try {
