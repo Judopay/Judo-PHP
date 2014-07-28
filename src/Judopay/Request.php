@@ -29,8 +29,7 @@ class Request
 		);
 
 		// Use CA cert bundle to verify SSL connection
-		$this->client->setDefaultOption('verify', __DIR__.'/../../cert/rapidssl_ca.crt');
-		$this->client->setDefaultOption('ssl.certificate_authority', false);
+		$this->client->setSslVerification(__DIR__.'/../../cert/rapidssl_ca.crt');
 
 		// Debug logging
 		//$this->client->addSubscriber(LogPlugin::getDebugPlugin());
