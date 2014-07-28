@@ -18,36 +18,36 @@ class ResponseValidator
 	{
 		switch ($this->response->getStatusCode()) {
 			case 400:
-				throw new \Judopay\Exception\BadRequest($this->response);
+				throw new \Judopay\Exception\BadRequest('Bad Request', $this->response);
 				break;
 
 			case 401:
 			case 403:
-				throw new \Judopay\Exception\NotAuthorized($this->response);
+				throw new \Judopay\Exception\NotAuthorized('Not Authorized', $this->response);
 				break;
 
 			case 404:
-				throw new \Judopay\Exception\NotFound($this->response);
+				throw new \Judopay\Exception\NotFound('Not Found', $this->response);
 				break;
 
 			case 409:
-				throw new \Judopay\Exception\Conflict($this->response);
+				throw new \Judopay\Exception\Conflict('Conflict', $this->response);
 				break;
 
 			case 500:
-				throw new \Judopay\Exception\InternalServerError($this->response);
+				throw new \Judopay\Exception\InternalServerError('Internal Server Error', $this->response);
 				break;
 
 			case 502:
-				throw new \Judopay\Exception\BadGateway($this->response);
+				throw new \Judopay\Exception\BadGateway('Bad Gateway', $this->response);
 				break;
 
 			case 503:
-				throw new \Judopay\Exception\ServiceUnavailable($this->response);
+				throw new \Judopay\Exception\ServiceUnavailable('Search Unavailable', $this->response);
 				break;
 
 			case 504:
-				throw new \Judopay\Exception\GatewayTimeout($this->response);
+				throw new \Judopay\Exception\GatewayTimeout('Gateway Timeout', $this->response);
 				break;
 		}
 	}

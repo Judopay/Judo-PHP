@@ -12,7 +12,7 @@ class ApiExceptionSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getMockResponse(200));
+        $this->beConstructedWith('OK', \Judopay\SpecHelper::getMockResponse(200));
         $this->shouldHaveType('Judopay\Exception\ApiException');
     }
 
@@ -20,7 +20,7 @@ class ApiExceptionSpec extends ObjectBehavior
     {
         $statusCode = 400;
         $response = \Judopay\SpecHelper::getMockResponse($statusCode);
-        $this->beConstructedWith($response);
+        $this->beConstructedWith('Bad Request', $response);
         $this->getHttpStatusCode()->shouldEqual($statusCode);
     }
 
@@ -28,14 +28,14 @@ class ApiExceptionSpec extends ObjectBehavior
     {
         $responseBody = 'judo judo judo';
         $response = \Judopay\SpecHelper::getMockResponse(200, $responseBody);
-        $this->beConstructedWith($response);
+        $this->beConstructedWith('OK', $response);
         $this->getHttpBody()->shouldEqual($responseBody);
     }
 
     public function it_should_return_the_model_errors_if_applicable()
     {
         $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
-        $this->beConstructedWith($response);
+        $this->beConstructedWith('Bad Request', $response);
         $this->getModelErrors()->shouldEqual(array('Something went pear-shaped'));
     }
 
@@ -43,8 +43,15 @@ class ApiExceptionSpec extends ObjectBehavior
     {
         $expectedReturn = 'Please check the card token. (Something went pear-shaped)';
         $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
-        $this->beConstructedWith($response);
+        $this->beConstructedWith('Bad Request', $response);
         $this->__toString()->shouldEqual($expectedReturn);
         $this->getSummary()->shouldEqual($expectedReturn);
+    }
+
+    public function it_should_return_the_error_type_in_get_message()
+    {
+        $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
+        $this->beConstructedWith('Bad Request', $response);
+        $this->getMessage()->shouldEqual('Bad Request');
     }
 }

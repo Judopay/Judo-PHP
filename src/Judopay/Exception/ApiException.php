@@ -2,14 +2,14 @@
 
 namespace Judopay\Exception;
 
-class ApiException extends \Exception
+class ApiException extends \RuntimeException
 {
 	protected $response;
 
-	public function __construct(\Guzzle\Http\Message\Response $response)
+	public function __construct($message, \Guzzle\Http\Message\Response $response)
 	{
+		$this->message = $message;
 		$this->response = $response;
-		$this->message = get_class($this);
 	}
 
 	public function getSummary()
