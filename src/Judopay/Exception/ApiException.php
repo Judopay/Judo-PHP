@@ -20,4 +20,20 @@ class ApiException extends \Exception
     {
         return (string)$this->response->getBody();
     }
+
+    public function getParsedBody()
+    {
+    	return $this->response->json();
+    }
+
+    public function getModelErrors()
+    {
+    	$parsedBody = $this->getParsedBody();
+    	if (!isset($parsedBody['modelErrors']))
+    	{
+    		return null;
+    	}
+
+    	return $parsedBody['modelErrors'];
+    }
 }
