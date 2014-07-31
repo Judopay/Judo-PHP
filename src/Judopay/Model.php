@@ -26,11 +26,25 @@ class Model
 		$this->client = $client;
 	}
 
-	public function all()
+	/**
+	 * Retrieve a list of records
+	 *
+	 * @param int $offset The start point in the sorted list of records from which the results set will start
+	 * @param int $pageSize The number of records to display per page
+	 * @param string $sort Determines how judo sorts the list. The list can be displayed as time-descending and time-ascending.
+	 * @return array
+	 **/
+	public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
 	{
         $request = new \Judopay\Request($this->configuration);
         $request->setClient($this->client);
-        return $request->get($this->resourcePath)->json();
+        $pagingOptions = array(
+        	'offset' => $offset,
+        	'pageSize' => $pageSize,
+        	'sort' => $sort
+        );
+        $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
+        return $request->get($uri)->json();
 	}
 
 	public function find($resourceId)

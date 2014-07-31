@@ -7,6 +7,7 @@ require_once __DIR__.'/../../SpecHelper.php';
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Guzzle\Http\Client;
+use \Judopay\SpecHelper;
 
 class TransactionSpec extends ObjectBehavior
 {
@@ -45,5 +46,34 @@ class TransactionSpec extends ObjectBehavior
         $output = $this->find($receiptId);
         $output->shouldBeArray();
         $output['receiptId']->shouldEqual((string)$receiptId);
+    }
+
+    public function it_should_send_paging_parameters_with_a_request()
+    {
+        // Setup: we need the mock plugin to examine the request afterwards
+        $this->beConstructedWith(SpecHelper::getConfiguration());
+        $client = new \Guzzle\Http\Client();
+        $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
+        $mockResponse = SpecHelper::getMockResponse(200);
+        $plugin->addResponse($mockResponse);
+        $client->addSubscriber($plugin);
+        $this->setClient($client);
+
+        // Get all records and check paging parameters were sent correctly
+        $pagingOptions = array(
+            'offset' => 100,
+            'pageSize' => 99,
+            'sort' => 'time-descending'
+        );
+
+        $output = $this->all(
+            $pagingOptions['offset'],
+            $pagingOptions['pageSize'],
+            $pagingOptions['sort']
+        );
+
+        // Verify that the query string matches the input
+        $requests = $plugin->getReceivedRequests();
+        expect($requests[0]->getQuery()->urlEncode())->toBeLike($pagingOptions);
     }
 }

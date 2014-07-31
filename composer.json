@@ -11,6 +11,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
+        "bossa/phpspec2-expect": "*",
         "jaz303/phake": "dev-master"
     },
     "config": {
