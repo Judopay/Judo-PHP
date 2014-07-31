@@ -1,6 +1,7 @@
 <?php
 
 namespace Judopay;
+use \Judopay\DataType;
 
 class Model
 {
@@ -10,11 +11,6 @@ class Model
 	protected $validApiMethods;
 	protected $attributes = array();
 	protected $attributeValues = array();
-
-	const DATA_TYPE_STRING = 'string';
-	const DATA_TYPE_FLOAT = 'float';
-	const DATA_TYPE_INTEGER = 'int';
-	const DATA_TYPE_ARRAY = 'array';
 
 	public function __construct(\Judopay\Configuration $configuration)
 	{
@@ -77,20 +73,20 @@ class Model
 		$targetDataType = $this->attributes[$key];
 
 		switch ($targetDataType) {
-			case self::DATA_TYPE_FLOAT:
+			case DataType::TYPE_FLOAT:
 				// Check that the provided value appears numeric
 				if (!is_numeric($value)) {
 					throw new \OutOfBoundsException('Invalid float value');
 				}
 				return (float)$value;
 
-			case self::DATA_TYPE_ARRAY:
+			case DataType::TYPE_ARRAY:
 				if (!is_array($value)) {
 					$value = array($value);
 				}
 				return $value;
 
-			case self::DATA_TYPE_INTEGER:
+			case DataType::TYPE_INTEGER:
 				return (int)$value;
 		}
 

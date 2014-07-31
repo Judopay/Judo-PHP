@@ -1,6 +1,7 @@
 <?php
 
 namespace Judopay\Models;
+use \Judopay\DataType;
 
 class Transaction extends \Judopay\Model
 {
