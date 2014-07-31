@@ -1,6 +1,6 @@
 <?php
 
-namespace Judopay\Models;
+namespace Judopay\Model;
 use \Judopay\DataType;
 
 class CardPayment extends \Judopay\Model

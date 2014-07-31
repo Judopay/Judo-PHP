@@ -25,7 +25,7 @@ class Judopay
 	public function getModel($modelName)
 	{
 		$this->container[$modelName] = function ($c) use ($modelName) {
-			$modelClassName = '\Judopay\Models\\'.ucfirst($modelName);
+			$modelClassName = '\Judopay\Model\\'.ucfirst($modelName);
 		    $model = new $modelClassName($this->get('configuration'));
 		    $model->setClient(new \Judopay\Client);
 			return $model;

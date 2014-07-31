@@ -30,7 +30,7 @@ class JudopaySpec extends ObjectBehavior
 
     public function it_should_return_a_model_instance()
     {
-        $this->getModel('transaction')->shouldHaveType('\Judopay\Models\Transaction');
+        $this->getModel('transaction')->shouldHaveType('\Judopay\Model\Transaction');
     }
 
     public function getMatchers()

@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Judopay\Models;
+namespace spec\Judopay\Model;
 
 require_once __DIR__.'/../../SpecHelper.php';
 
@@ -13,7 +13,7 @@ class CardPaymentSpec extends ObjectBehavior
     public function it_is_initializable()
     {
         $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
-        $this->shouldHaveType('Judopay\Models\CardPayment');
+        $this->shouldHaveType('Judopay\Model\CardPayment');
     }
 
     // Generic model methods

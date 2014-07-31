@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Judopay\Models;
+namespace spec\Judopay\Model;
 
 require_once __DIR__.'/../../SpecHelper.php';
 
@@ -14,7 +14,7 @@ class TransactionSpec extends ObjectBehavior
     public function it_is_initializable()
     {
         $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
-        $this->shouldHaveType('Judopay\Models\Transaction');
+        $this->shouldHaveType('Judopay\Model\Transaction');
     }
 
     public function it_should_list_all_transactions()
