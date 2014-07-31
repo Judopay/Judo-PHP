@@ -64,6 +64,10 @@ class Model
 
 		switch ($targetDataType) {
 			case self::DATA_TYPE_FLOAT:
+				// Check that the provided value appears numeric
+				if (!is_numeric($value)) {
+					throw new \OutOfBoundsException('Invalid float value');
+				}
 				return (float)$value;
 
 			case self::DATA_TYPE_ARRAY:
