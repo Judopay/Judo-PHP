@@ -39,7 +39,6 @@ group('transactions', function() {
     	);
 
     	$transaction = $judopay->getModel('Transaction');
-    	$transaction->setClient(new \Guzzle\Http\Client);
     	print_r($transaction->all());
     });
 
@@ -53,7 +52,6 @@ group('transactions', function() {
         );
 
         $transaction = $judopay->getModel('Transaction');
-        $transaction->setClient(new \Guzzle\Http\Client);
         print_r($transaction->find(465906));
     });
 });
