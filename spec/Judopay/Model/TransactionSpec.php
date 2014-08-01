@@ -11,15 +11,18 @@ use \Judopay\SpecHelper;
 
 class TransactionSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function let()
     {
         $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
+    }
+
+    public function it_is_initializable()
+    {
         $this->shouldHaveType('Judopay\Model\Transaction');
     }
 
     public function it_should_list_all_transactions()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
 		$this->setClient(
             \Judopay\SpecHelper::getMockResponseClient(
                 200,
@@ -34,7 +37,6 @@ class TransactionSpec extends ObjectBehavior
 
     public function it_should_give_details_of_a_single_transaction_given_a_valid_receipt_id()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $this->setClient(
             \Judopay\SpecHelper::getMockResponseClient(
                 200,
@@ -51,7 +53,6 @@ class TransactionSpec extends ObjectBehavior
     public function it_should_send_paging_parameters_with_a_request()
     {
         // Setup: we need the mock plugin to examine the request afterwards
-        $this->beConstructedWith(SpecHelper::getConfiguration());
         $client = new \Guzzle\Http\Client();
         $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
         $mockResponse = SpecHelper::getMockResponse(200);
@@ -75,5 +76,14 @@ class TransactionSpec extends ObjectBehavior
         // Verify that the query string matches the input
         $requests = $plugin->getReceivedRequests();
         expect($requests[0]->getQuery()->urlEncode())->toBeLike($pagingOptions);
+    }
+
+    public function it_should_only_allow_valid_api_methods_to_be_called()
+    {
+        $this->beConstructedWith(SpecHelper::getConfiguration());
+
+        // 'create' is not a valid method on Transaction
+        $this->shouldThrow('\RuntimeException')->during('create');
+
     }
 }

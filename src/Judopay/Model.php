@@ -32,6 +32,7 @@ class Model
 	 **/
 	public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
 	{
+		$this->checkApiMethodIsSupported(__FUNCTION__);
         $request = new \Judopay\Request($this->configuration);
         $request->setClient($this->client);
         $pagingOptions = array(
@@ -45,9 +46,15 @@ class Model
 
 	public function find($resourceId)
 	{
+		$this->checkApiMethodIsSupported(__FUNCTION__);
         $request = new \Judopay\Request($this->configuration);
         $request->setClient($this->client);
         return $request->get($this->resourcePath.'/'.(int)$resourceId)->json();
+	}
+
+	public function create()
+	{
+		$this->checkApiMethodIsSupported(__FUNCTION__);
 	}
 
 	public function getAttributeValues()
@@ -91,5 +98,12 @@ class Model
 		}
 
 		return $value;
+	}
+
+	protected function checkApiMethodIsSupported($methodName)
+	{
+		if (empty($this->validApiMethods) || !in_array($methodName, $this->validApiMethods)) {
+			throw new \RuntimeException('API method is not supported');
+		}
 	}
 }
