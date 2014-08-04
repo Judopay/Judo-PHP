@@ -45,24 +45,37 @@ class Request implements \Psr\Log\LoggerAwareInterface
 		$this->client->addSubscriber($logPlugin);
 	}
 
+	/**
+	 * Make a GET request to the specified resource path
+	 *
+	 * @param string $resourcePath
+	 **/
 	public function get($resourcePath)
 	{
 		$endpointUrl = $this->configuration->get('endpoint_url');
-		$request = $this->client->get(
+		$guzzleRequest = $this->client->get(
 			$endpointUrl.'/'.$resourcePath
 		);
-		$request = $this->setRequestAuthentication($request);
 
-		try {
-			$guzzleResponse = $request->send();
-		} catch (\Guzzle\Http\Exception\BadResponseException $e) {
-			// Guzzle throws an exception when it encounters a 4xx or 5xx error
-			// Rethrow the exception so we can raise our custom exception classes
-			$responseValidator = new \Judopay\ResponseValidator($e->getResponse());
-			$responseValidator->check();
-		}
+		return $this->send($guzzleRequest);
+	}
 
-		return $guzzleResponse;
+	/**
+	 * Make a POST request to the specified resource path
+	 *
+	 * @param string $resourcePath
+	 * @param array $data
+	 **/
+	public function post($resourcePath, $data)
+	{
+		$endpointUrl = $this->configuration->get('endpoint_url');
+		$guzzleRequest = $this->client->post(
+			$endpointUrl.'/'.$resourcePath,
+			array(),
+			$data
+		);
+
+		return $this->send($guzzleRequest);
 	}
 
 	public function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
@@ -87,5 +100,21 @@ class Request implements \Psr\Log\LoggerAwareInterface
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    protected function send(\Guzzle\Http\Message\Request $guzzleRequest)
+    {
+    	$guzzleRequest = $this->setRequestAuthentication($guzzleRequest);
+
+		try {
+			$guzzleResponse = $guzzleRequest->send();
+		} catch (\Guzzle\Http\Exception\BadResponseException $e) {
+			// Guzzle throws an exception when it encounters a 4xx or 5xx error
+			// Rethrow the exception so we can raise our custom exception classes
+			$responseValidator = new \Judopay\ResponseValidator($e->getResponse());
+			$responseValidator->check();
+		}
+
+		return $guzzleResponse;
     }
 }

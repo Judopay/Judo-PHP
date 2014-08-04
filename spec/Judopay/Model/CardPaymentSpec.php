@@ -10,17 +10,42 @@ use Guzzle\Http\Client;
 
 class CardPaymentSpec extends ObjectBehavior
 {
+    protected $configuration;
+
     public function let()
     {
-        $configuration = \Judopay\SpecHelper::getConfiguration();
+        $this->configuration = \Judopay\SpecHelper::getConfiguration();
         $this->beConstructedWith(
-            new \Judopay\Request($configuration)
+            new \Judopay\Request($this->configuration)
         );
     }
 
     public function it_is_initializable()
     {
         $this->shouldHaveType('Judopay\Model\CardPayment');
+    }
+
+    public function it_should_create_a_new_payment()
+    {
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient(
+            \Judopay\SpecHelper::getMockResponseClient(
+                200,
+                'card_payments/create.json'
+            )
+        );
+
+        $this->beConstructedWith($request);
+
+        $output = $this->create(
+            array(
+                'judoId' => 12345
+            )
+        );
+
+        $output->shouldBeArray();
+        $output['result']->shouldEqual('Success');
+
     }
 
     // Generic model methods

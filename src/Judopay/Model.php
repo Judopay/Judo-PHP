@@ -42,9 +42,10 @@ class Model
         return $this->request->get($this->resourcePath.'/'.(int)$resourceId)->json();
 	}
 
-	public function create()
+	public function create($data)
 	{
 		$this->checkApiMethodIsSupported(__FUNCTION__);
+		return $this->request->post($this->resourcePath, $data)->json();
 	}
 
 	public function getAttributeValues()
