@@ -22,6 +22,7 @@ class Configuration
 	{
 		// Set sensible defaults
 		$this->settings['api_version'] = '4.0.0';
+        $this->settings['logger'] = new \Psr\Log\NullLogger;
 
 		// Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);
