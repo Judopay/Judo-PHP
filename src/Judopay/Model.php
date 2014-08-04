@@ -5,21 +5,15 @@ use \Judopay\DataType;
 
 class Model
 {
-	protected $client;
-	protected $configuration;
+	protected $request;
 	protected $resourcePath;
 	protected $validApiMethods;
 	protected $attributes = array();
 	protected $attributeValues = array();
 
-	public function __construct(\Judopay\Configuration $configuration)
+	public function __construct(\Judopay\Request $request)
 	{
-		$this->configuration = $configuration;
-	}
-
-	public function setClient(\Guzzle\Http\Client $client)
-	{
-		$this->client = $client;
+		$this->request = $request;
 	}
 
 	/**
@@ -27,29 +21,25 @@ class Model
 	 *
 	 * @param int $offset The start point in the sorted list of records from which the results set will start
 	 * @param int $pageSize The number of records to display per page
-	 * @param string $sort Determines how judo sorts the list. The list can be displayed as time-descending and time-ascending.
+	 * @param string $sort Determines how the list is sorted. The list can be displayed as time-descending and time-ascending.
 	 * @return array
 	 **/
 	public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
 	{
 		$this->checkApiMethodIsSupported(__FUNCTION__);
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient($this->client);
         $pagingOptions = array(
         	'offset' => $offset,
         	'pageSize' => $pageSize,
         	'sort' => $sort
         );
         $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
-        return $request->get($uri)->json();
+        return $this->request->get($uri)->json();
 	}
 
 	public function find($resourceId)
 	{
 		$this->checkApiMethodIsSupported(__FUNCTION__);
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient($this->client);
-        return $request->get($this->resourcePath.'/'.(int)$resourceId)->json();
+        return $this->request->get($this->resourcePath.'/'.(int)$resourceId)->json();
 	}
 
 	public function create()

@@ -15,6 +15,15 @@ class Judopay
 		$this->container['configuration'] = function ($c) use ($settings) {
 		    return new \Judopay\Configuration($settings);
 		};
+
+		// Create request factory
+		$this->container['request'] = $this->container->factory(function ($c) {
+		    $configuration = $this->get('configuration');
+		    $request = new \Judopay\Request($configuration);
+		    $request->setClient(new \Judopay\Client);
+		    $request->setLogger($configuration->get('logger'));
+		    return $request;
+		});
 	}
 
 	public function get($objName)
@@ -25,9 +34,13 @@ class Judopay
 	public function getModel($modelName)
 	{
 		$this->container[$modelName] = function ($c) use ($modelName) {
+			$configuration = $this->get('configuration');
+
 			$modelClassName = '\Judopay\Model\\'.ucfirst($modelName);
-		    $model = new $modelClassName($this->get('configuration'));
-		    $model->setClient(new \Judopay\Client);
+		    $model = new $modelClassName(
+		    	$this->get('request')
+		    );
+
 			return $model;
 		};
 

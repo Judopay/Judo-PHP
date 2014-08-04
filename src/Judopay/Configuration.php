@@ -15,7 +15,8 @@ class Configuration
         'endpoint_url',
         'user_agent',
         'judo_id',
-        'use_production'
+        'use_production',
+        'logger'
 	);
 
 	public function __construct($settings = null)

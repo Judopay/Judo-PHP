@@ -10,16 +10,22 @@ use Guzzle\Http\Client;
 
 class CardPaymentSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $configuration = \Judopay\SpecHelper::getConfiguration();
+        $this->beConstructedWith(
+            new \Judopay\Request($configuration)
+        );
+    }
+
     public function it_is_initializable()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $this->shouldHaveType('Judopay\Model\CardPayment');
     }
 
     // Generic model methods
     public function it_coerces_attributes_into_the_correct_data_type()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $input = array(
             'yourPaymentMetaData' => 'an unexpected string',
             'judoId' => 'judo123',
@@ -38,7 +44,6 @@ class CardPaymentSpec extends ObjectBehavior
 
     public function it_should_baulk_at_very_unusual_float_values()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
         $input = array(
             'amount' => '123.23GBP'
         );

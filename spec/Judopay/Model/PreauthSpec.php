@@ -10,24 +10,30 @@ use \Judopay\SpecHelper;
 
 class PreauthSpec extends ObjectBehavior
 {
+    protected $configuration;
+
     public function let()
     {
-        $this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
+        $this->configuration = \Judopay\SpecHelper::getConfiguration();
     }
 
     public function it_is_initializable()
     {
+        $this->beConstructedWith(new \Judopay\Request($this->configuration));
         $this->shouldHaveType('Judopay\Model\Preauth');
     }
 
     public function it_should_list_all_transactions()
     {
-		$this->setClient(
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient(
             \Judopay\SpecHelper::getMockResponseClient(
                 200,
                 'transactions/all.json'
             )
         );
+
+        $this->beConstructedWith($request);
 
 		$output = $this->all();
         $output->shouldBeArray();

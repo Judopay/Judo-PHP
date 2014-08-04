@@ -30,11 +30,17 @@ task('test', function() {
 
 group('transactions', function() {
     task('all', function() {
+
+        // Create logger
+        $logger = new Logger('Judopay');
+        $logger->pushHandler(new StreamHandler('judopay.log'));
+
     	$judopay = new \Judopay(
     		array(
     			'api_token' => getenv('JUDO_TOKEN'),
     			'api_secret' => getenv('JUDO_SECRET'),
-    			'judo_id' => getenv('JUDO_ID')
+    			'judo_id' => getenv('JUDO_ID'),
+                'logger' => $logger
     		)
     	);
 

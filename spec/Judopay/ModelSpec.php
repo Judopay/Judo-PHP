@@ -9,7 +9,7 @@ class ModelSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-    	$this->beConstructedWith(\Judopay\SpecHelper::getConfiguration());
+    	$this->beConstructedWith(new \Judopay\Request(\Judopay\SpecHelper::getConfiguration()));
         $this->shouldHaveType('Judopay\Model');
     }
 }
