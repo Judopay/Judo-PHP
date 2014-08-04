@@ -4,10 +4,11 @@ namespace Judopay;
 
 use Guzzle\Plugin\Log\LogPlugin;
 
-class Request
+class Request implements \Psr\Log\LoggerAwareInterface
 {
 	protected $configuration;
 	protected $client;
+	protected $logger;
 
 	public function __construct(\Judopay\Configuration $configuration)
 	{
@@ -72,4 +73,10 @@ class Request
 
 		return $request;
 	}
+
+    /* PSR-3 */
+    public function setLogger(\Psr\Log\LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 }
