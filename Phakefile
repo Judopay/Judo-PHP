@@ -75,7 +75,7 @@ group('transactions', function() {
             )
         );
 
-        $transaction = $judopay->getModel('CardPayment');
+        $transaction = $judopay->getModel('CardPreauth');
         $result = $transaction->create(
             array(
                 'judoId' => getenv('JUDO_ID'),
