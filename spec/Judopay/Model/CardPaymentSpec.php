@@ -27,25 +27,29 @@ class CardPaymentSpec extends ObjectBehavior
 
     public function it_should_create_a_new_payment()
     {
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient(
-            \Judopay\SpecHelper::getMockResponseClient(
-                200,
-                'card_payments/create.json'
-            )
-        );
-
-        $this->beConstructedWith($request);
+        $this->beConstructedWith($this->concoctCardPaymentCreateRequest());
 
         $output = $this->create(
             array(
-                'judoId' => 12345
+                'judoId' => 12345,
+                'yourConsumerReference' => '12345',
+                'yourPaymentReference' => '12345',
+                'judoId' => '123-456-789',
+                'amount' => 1.01,
+                'cardNumber' => '4976000000003436',
+                'expiryDate' => '12/15',
+                'cv2' => 452
             )
         );
 
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');
+    }
 
+    public function it_should_raise_an_error_when_required_fields_are_missing()
+    {
+        $this->beConstructedWith($this->concoctCardPaymentCreateRequest());
+        $this->shouldThrow('\Judopay\Exception\ValidationError')->during('create');
     }
 
     // Generic model methods
@@ -74,5 +78,18 @@ class CardPaymentSpec extends ObjectBehavior
         );
 
         $this->shouldThrow('\OutOfBoundsException')->during('setAttributeValues', array($input));
+    }
+
+    protected function concoctCardPaymentCreateRequest()
+    {
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient(
+            \Judopay\SpecHelper::getMockResponseClient(
+                200,
+                'card_payments/create.json'
+            )
+        );
+
+        return $request;
     }
 }

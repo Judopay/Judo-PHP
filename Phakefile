@@ -58,8 +58,39 @@ group('transactions', function() {
         );
 
         $transaction = $judopay->getModel('Transaction');
-        print_r($transaction->find(465906));
+        print_r($transaction->find(497107));
     });
+
+    task('create', function() {
+        // Create logger
+        $logger = new Logger('Judopay');
+        $logger->pushHandler(new StreamHandler('judopay.log'));
+
+        $judopay = new \Judopay(
+            array(
+                'api_token' => getenv('JUDO_TOKEN'),
+                'api_secret' => getenv('JUDO_SECRET'),
+                'judo_id' => getenv('JUDO_ID'),
+                'logger' => $logger
+            )
+        );
+
+        $transaction = $judopay->getModel('CardPayment');
+        $result = $transaction->create(
+            array(
+                'judoId' => getenv('JUDO_ID'),
+                'yourConsumerReference' => '12345',
+                'yourPaymentReference' => '12345',
+                'amount' => 1.01,
+                'cardNumber' => '4976000000003436',
+                'expiryDate' => '12/15',
+                'cv2' => 452
+            )
+        );
+
+        print_r($result);
+    });
+
 });
 
 task('default', 'list');

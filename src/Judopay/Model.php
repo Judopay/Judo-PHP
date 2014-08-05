@@ -2,6 +2,7 @@
 
 namespace Judopay;
 use \Judopay\DataType;
+use \Judopay\Exception\ValidationError;
 
 class Model
 {
@@ -43,10 +44,11 @@ class Model
         return $this->request->get($this->resourcePath.'/'.(int)$resourceId)->json();
 	}
 
-	public function create($data)
+	public function create($data = array())
 	{
 		$this->checkApiMethodIsSupported(__FUNCTION__);
-		return $this->request->post($this->resourcePath, $data)->json();
+		$this->checkRequiredAttributes($data);
+		return $this->request->post($this->resourcePath, json_encode($data))->json();
 	}
 
 	public function getAttributeValues()
@@ -73,5 +75,27 @@ class Model
 		if (empty($this->validApiMethods) || !in_array($methodName, $this->validApiMethods)) {
 			throw new \RuntimeException('API method is not supported');
 		}
+	}
+
+	/**
+	 * Check if request data contains all of the required attributes to create a new record
+	 *
+	 * @param array $data Request data
+	 **/
+	protected function checkRequiredAttributes($data)
+	{
+		$existingAttributes = array_keys($data);
+		$errors = array();
+		foreach ($this->requiredAttributes as $requiredAttribute) {
+			if (!in_array($requiredAttribute, $existingAttributes)) {
+				$errors[] = $requiredAttribute.' is missing';
+			}
+		}
+
+		if (count($errors) > 0) {
+			throw new \Judopay\Exception\ValidationError('Missing required fields', $errors);
+		}
+
+		return true;
 	}
 }
