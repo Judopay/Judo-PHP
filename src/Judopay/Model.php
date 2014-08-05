@@ -10,6 +10,7 @@ class Model
 	protected $validApiMethods;
 	protected $attributes = array();
 	protected $attributeValues = array();
+	protected $requiredAttributes = array();
 
 	public function __construct(\Judopay\Request $request)
 	{
