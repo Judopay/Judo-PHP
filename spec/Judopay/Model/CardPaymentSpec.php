@@ -29,7 +29,9 @@ class CardPaymentSpec extends ObjectBehavior
     {
         $this->beConstructedWith($this->concoctRequest());
 
-        $output = $this->create(
+        // Refactor: allow model object to be constructed with array of values
+        // Add request with setRequest using DI container
+        $this->setAttributeValues(
             array(
                 'judoId' => 12345,
                 'yourConsumerReference' => '12345',
@@ -41,6 +43,7 @@ class CardPaymentSpec extends ObjectBehavior
                 'cv2' => 452
             )
         );
+        $output = $this->create();
 
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');

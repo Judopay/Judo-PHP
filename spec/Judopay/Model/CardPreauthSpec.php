@@ -29,7 +29,7 @@ class CardPreauthSpec extends ObjectBehavior
     {
         $this->beConstructedWith($this->concoctRequest());
 
-        $output = $this->create(
+        $this->setAttributeValues(
             array(
                 'judoId' => 12345,
                 'yourConsumerReference' => '12345',
@@ -41,6 +41,7 @@ class CardPreauthSpec extends ObjectBehavior
                 'cv2' => 452
             )
         );
+        $output = $this->create();
 
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');
