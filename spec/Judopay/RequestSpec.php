@@ -18,7 +18,7 @@ class RequestSpec extends ObjectBehavior
     	// Add access token to configuration
     	$oauthAccessToken = 'xyz';
     	$config = \Judopay\SpecHelper::getConfiguration();
-    	$config->add('oauth_access_token', $oauthAccessToken);
+    	$config->add('oauthAccessToken', $oauthAccessToken);
 
     	// Create a request
     	$this->beConstructedWith($config);

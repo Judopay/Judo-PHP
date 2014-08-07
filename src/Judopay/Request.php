@@ -25,7 +25,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
 		$this->client->setDefaultOption(
 			'headers',
 			array(
-				'API-Version' => $this->configuration->get('api_version'),
+				'API-Version' => $this->configuration->get('apiVersion'),
         		'Accept' => 'application/json; charset=utf-8',
         		'Content-Type' => 'application/json'
 			)
@@ -52,7 +52,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
 	 **/
 	public function get($resourcePath)
 	{
-		$endpointUrl = $this->configuration->get('endpoint_url');
+		$endpointUrl = $this->configuration->get('endpointUrl');
 		$guzzleRequest = $this->client->get(
 			$endpointUrl.'/'.$resourcePath
 		);
@@ -68,7 +68,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
 	 **/
 	public function post($resourcePath, $data)
 	{
-		$endpointUrl = $this->configuration->get('endpoint_url');
+		$endpointUrl = $this->configuration->get('endpointUrl');
 		$guzzleRequest = $this->client->post(
 			$endpointUrl.'/'.$resourcePath,
 			array(),
@@ -80,7 +80,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
 
 	public function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
 	{
-		$oauthAccessToken = $this->configuration->get('oauth_access_token');
+		$oauthAccessToken = $this->configuration->get('oauthAccessToken');
 
 		// Do we have an oAuth2 access token?
 		if (!empty($oauthAccessToken)) {
@@ -88,8 +88,8 @@ class Request implements \Psr\Log\LoggerAwareInterface
 		} else {
 			// Otherwise, use basic authentication
 			$request->setAuth(
-				$this->configuration->get('api_token'),
-				$this->configuration->get('api_secret')
+				$this->configuration->get('apiToken'),
+				$this->configuration->get('apiSecret')
 			);
 		}
 

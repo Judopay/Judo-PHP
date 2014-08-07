@@ -37,8 +37,8 @@ class SpecHelper
 	public static function getConfiguration()
 	{
         $configuration = new \Judopay\Configuration(array(
-                'api_token' => 'token',
-                'api_secret' => 'secret'
+                'apiToken' => 'token',
+                'apiSecret' => 'secret'
             )
         );
 

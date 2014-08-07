@@ -7,22 +7,22 @@ class Configuration
 	protected $settings = array();
 
 	protected $valid_config_keys = array(
-    	'api_version',
-        'api_token',
-        'api_secret',
-        'oauth_access_token',
+    	'apiVersion',
+        'apiToken',
+        'apiSecret',
+        'oauthAccessToken',
         'format',
-        'endpoint_url',
-        'user_agent',
-        'judo_id',
-        'use_production',
+        'endpointUrl',
+        'userAgent',
+        'judoId',
+        'useProduction',
         'logger'
 	);
 
 	public function __construct($settings = null)
 	{
 		// Set sensible defaults
-		$this->settings['api_version'] = '4.0.0';
+		$this->settings['apiVersion'] = '4.0.0';
         $this->settings['logger'] = new \Psr\Log\NullLogger;
 
 		// Override defaults with user settings
@@ -77,10 +77,10 @@ class Configuration
 
     protected function setEndpointUrl()
     {
-    	if (isset($this->settings['use_production']) && $this->settings['use_production'] === true) {
-    		$this->settings['endpoint_url'] = 'https://partnerapi.judopay.com';
+    	if (isset($this->settings['useProduction']) && $this->settings['useProduction'] === true) {
+    		$this->settings['endpointUrl'] = 'https://partnerapi.judopay.com';
     	} else {
-    		$this->settings['endpoint_url'] = 'https://partnerapi.judopay-sandbox.com';
+    		$this->settings['endpointUrl'] = 'https://partnerapi.judopay-sandbox.com';
     	}
     }
 }

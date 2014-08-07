@@ -18,8 +18,8 @@ class JudopaySpec extends ObjectBehavior
     {
     	$this->beConstructedWith(
 			array(
-				'api_token' => 'token',
-				'api_secret' => 'secret',
+				'apiToken' => 'token',
+				'apiSecret' => 'secret',
 				'dodgy_key' => 'dodgy value'
 			)
     	);
