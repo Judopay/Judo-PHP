@@ -29,17 +29,9 @@ class CardPreauthSpec extends ObjectBehavior
     {
         $this->beConstructedWith($this->concoctRequest());
 
+        $modelBuilder = new \Judopay\Test\CardPreauthBuilder;
         $this->setAttributeValues(
-            array(
-                'judoId' => 12345,
-                'yourConsumerReference' => '12345',
-                'yourPaymentReference' => '12345',
-                'judoId' => '123-456-789',
-                'amount' => 1.01,
-                'cardNumber' => '4976000000003436',
-                'expiryDate' => '12/15',
-                'cv2' => 452
-            )
+            $modelBuilder->getAttributeValues()
         );
         $output = $this->create();
 
