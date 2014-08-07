@@ -27,7 +27,6 @@ class CardPayment extends \Judopay\Model
     	'judoId',
     	'amount',
     	'cardNumber',
-    	'expiryDate',
-    	'cv2'
+    	'expiryDate'
     );
 }
