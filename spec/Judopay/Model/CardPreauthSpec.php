@@ -15,7 +15,7 @@ class CardPreauthSpec extends ModelObjectBehavior
     {
         $this->beConstructedWith($this->concoctRequest());
 
-        $modelBuilder = new \Judopay\Test\CardPreauthBuilder;
+        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
         $this->setAttributeValues(
             $modelBuilder->getAttributeValues()
         );
