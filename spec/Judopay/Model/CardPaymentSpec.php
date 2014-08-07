@@ -2,24 +2,10 @@
 
 namespace spec\Judopay\Model;
 
-require_once __DIR__.'/../../SpecHelper.php';
+require_once 'ModelObjectBehavior.php';
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Guzzle\Http\Client;
-
-class CardPaymentSpec extends ObjectBehavior
+class CardPaymentSpec extends ModelObjectBehavior
 {
-    protected $configuration;
-
-    public function let()
-    {
-        $this->configuration = \Judopay\SpecHelper::getConfiguration();
-        $this->beConstructedWith(
-            new \Judopay\Request($this->configuration)
-        );
-    }
-
     public function it_is_initializable()
     {
         $this->shouldHaveType('Judopay\Model\CardPayment');

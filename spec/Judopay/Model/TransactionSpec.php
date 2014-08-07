@@ -2,21 +2,10 @@
 
 namespace spec\Judopay\Model;
 
-require_once __DIR__.'/../../SpecHelper.php';
+require_once 'ModelObjectBehavior.php';
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use \Judopay\SpecHelper;
-
-class TransactionSpec extends ObjectBehavior
+class TransactionSpec extends ModelObjectBehavior
 {
-    protected $configuration;
-
-    public function let()
-    {
-        $this->configuration = \Judopay\SpecHelper::getConfiguration();
-    }
-
     public function it_is_initializable()
     {
         $this->beConstructedWith(new \Judopay\Request($this->configuration));
