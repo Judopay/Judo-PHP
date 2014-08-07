@@ -25,12 +25,6 @@ class TokenPaymentSpec extends ModelObjectBehavior
         $output['result']->shouldEqual('Success');
     }
 
-    public function it_should_raise_an_error_when_required_fields_are_missing()
-    {
-        $this->beConstructedWith($this->concoctRequest());
-        $this->shouldThrow('\Judopay\Exception\ValidationError')->during('create');
-    }
-
     protected function concoctRequest()
     {
         $request = new \Judopay\Request($this->configuration);
