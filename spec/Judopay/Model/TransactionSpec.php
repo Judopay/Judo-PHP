@@ -14,14 +14,7 @@ class TransactionSpec extends ModelObjectBehavior
 
     public function it_should_list_all_transactions()
     {
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient(
-            \Judopay\SpecHelper::getMockResponseClient(
-                200,
-                'transactions/all.json'
-            )
-        );
-
+        $request = $this->concoctRequest('transactions/all.json');
         $this->beConstructedWith($request);
 
         $output = $this->all();

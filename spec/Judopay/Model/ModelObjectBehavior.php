@@ -18,4 +18,17 @@ abstract class ModelObjectBehavior extends ObjectBehavior
             new \Judopay\Request($this->configuration)
         );
     }
+
+    protected function concoctRequest($fixtureFile)
+    {
+        $request = new \Judopay\Request($this->configuration);
+        $request->setClient(
+            \Judopay\SpecHelper::getMockResponseClient(
+                200,
+                $fixtureFile
+            )
+        );
+
+        return $request;
+    }
 }

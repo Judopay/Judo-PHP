@@ -13,7 +13,7 @@ class CardPreauthSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_preauth()
     {
-        $this->beConstructedWith($this->concoctRequest());
+        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
 
         $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
         $this->setAttributeValues(
@@ -23,18 +23,5 @@ class CardPreauthSpec extends ModelObjectBehavior
 
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');
-    }
-
-    protected function concoctRequest()
-    {
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient(
-            \Judopay\SpecHelper::getMockResponseClient(
-                200,
-                'card_payments/create.json'
-            )
-        );
-
-        return $request;
     }
 }

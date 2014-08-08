@@ -13,7 +13,7 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_payment()
     {
-        $this->beConstructedWith($this->concoctRequest());
+        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
 
         $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
         $this->setAttributeValues(
@@ -27,7 +27,7 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_raise_an_error_when_required_fields_are_missing()
     {
-        $this->beConstructedWith($this->concoctRequest());
+        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
         $this->shouldThrow('\Judopay\Exception\ValidationError')->during('create');
     }
 
@@ -57,18 +57,5 @@ class CardPaymentSpec extends ModelObjectBehavior
         );
 
         $this->shouldThrow('\OutOfBoundsException')->during('setAttributeValues', array($input));
-    }
-
-    protected function concoctRequest()
-    {
-        $request = new \Judopay\Request($this->configuration);
-        $request->setClient(
-            \Judopay\SpecHelper::getMockResponseClient(
-                200,
-                'card_payments/create.json'
-            )
-        );
-
-        return $request;
     }
 }
