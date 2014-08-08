@@ -37,9 +37,9 @@ group('transactions', function() {
 
     	$judopay = new \Judopay(
     		array(
-    			'api_token' => getenv('JUDO_TOKEN'),
-    			'api_secret' => getenv('JUDO_SECRET'),
-    			'judo_id' => getenv('JUDO_ID'),
+                'apiToken' => getenv('JUDO_TOKEN'),
+                'apiSecret' => getenv('JUDO_SECRET'),
+                'judoId' => getenv('JUDO_ID'),
                 'logger' => $logger
     		)
     	);
@@ -51,9 +51,9 @@ group('transactions', function() {
     task('find', function() {
         $judopay = new \Judopay(
             array(
-                'api_token' => getenv('JUDO_TOKEN'),
-                'api_secret' => getenv('JUDO_SECRET'),
-                'judo_id' => getenv('JUDO_ID')
+                'apiToken' => getenv('JUDO_TOKEN'),
+                'apiSecret' => getenv('JUDO_SECRET'),
+                'judoId' => getenv('JUDO_ID')
             )
         );
 
@@ -68,15 +68,15 @@ group('transactions', function() {
 
         $judopay = new \Judopay(
             array(
-                'api_token' => getenv('JUDO_TOKEN'),
-                'api_secret' => getenv('JUDO_SECRET'),
-                'judo_id' => getenv('JUDO_ID'),
+                'apiToken' => getenv('JUDO_TOKEN'),
+                'apiSecret' => getenv('JUDO_SECRET'),
+                'judoId' => getenv('JUDO_ID'),
                 'logger' => $logger
             )
         );
 
         $transaction = $judopay->getModel('CardPreauth');
-        $result = $transaction->create(
+        $transaction->setAttributeValues(
             array(
                 'judoId' => getenv('JUDO_ID'),
                 'yourConsumerReference' => '12345',
@@ -87,6 +87,7 @@ group('transactions', function() {
                 'cv2' => 452
             )
         );
+        $result = $transaction->create();
 
         print_r($result);
     });
