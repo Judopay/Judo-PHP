@@ -4,6 +4,8 @@ use Pimple\Container;
 
 class Judopay
 {
+	const VERSION = '4.0.0';
+
 	protected $container;
 
 	public function __construct($settings = null)

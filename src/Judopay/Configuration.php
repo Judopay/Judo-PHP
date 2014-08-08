@@ -24,6 +24,7 @@ class Configuration
 		// Set sensible defaults
 		$this->settings['apiVersion'] = '4.0.0';
         $this->settings['logger'] = new \Psr\Log\NullLogger;
+        $this->settings['userAgent'] = 'Judopay PHP SDK v'.\Judopay::VERSION;
 
 		// Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);
