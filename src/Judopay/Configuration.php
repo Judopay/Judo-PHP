@@ -16,7 +16,8 @@ class Configuration
         'userAgent',
         'judoId',
         'useProduction',
-        'logger'
+        'logger',
+        'httpLogFormat'
 	);
 
 	public function __construct($settings = null)
@@ -25,6 +26,8 @@ class Configuration
 		$this->settings['apiVersion'] = '4.0.0';
         $this->settings['logger'] = new \Psr\Log\NullLogger;
         $this->settings['userAgent'] = 'Judopay PHP SDK v'.\Judopay::VERSION;
+        $this->settings['httpLogFormat'] = "\"{method} {resource} {protocol}/{version}\" ".
+                                           "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
 
 		// Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);

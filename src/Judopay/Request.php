@@ -38,7 +38,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
 		$adapter = new \Guzzle\Log\PsrLogAdapter(
 			$this->logger
 		);
-		$logPlugin = new LogPlugin($adapter, MessageFormatter::DEBUG_FORMAT);
+		$logPlugin = new LogPlugin($adapter, $this->configuration->get('httpLogFormat'));
 
 		// Set user agent
 		$this->client->setUserAgent($this->configuration->get('userAgent'));
