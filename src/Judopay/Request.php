@@ -105,6 +105,11 @@ class Request implements \Psr\Log\LoggerAwareInterface
         $this->logger = $logger;
     }
 
+    public function getConfiguration()
+    {
+    	return $this->configuration;
+    }
+
     protected function send(\Guzzle\Http\Message\Request $guzzleRequest)
     {
     	$guzzleRequest = $this->setRequestAuthentication($guzzleRequest);

@@ -47,8 +47,19 @@ class Model
 	public function create()
 	{
 		$this->checkApiMethodIsSupported(__FUNCTION__);
+		$this->checkJudoId();
 		$this->checkRequiredAttributes($this->attributeValues);
+
 		return $this->request->post($this->resourcePath, json_encode($this->attributeValues))->json();
+	}
+
+	public function getAttributeValue($attribute)
+	{
+		if (!array_key_exists($attribute, $this->attributeValues)) {
+			return null;
+		}
+
+		return $this->attributeValues[$attribute];
 	}
 
 	public function getAttributeValues()
@@ -97,5 +108,19 @@ class Model
 		}
 
 		return true;
+	}
+
+	/**
+	 * If a Judo ID is not set, use the value from configuration
+	 **/
+	protected function checkJudoId()
+	{
+		$judoId = $this->getAttributeValue('judoId');
+		if (!empty($judoId)) {
+			return;
+		}
+
+		$configuration = $this->request->getConfiguration();
+		$this->attributeValues['judoId'] = '123-456'; //$configuration->get('judoId');
 	}
 }

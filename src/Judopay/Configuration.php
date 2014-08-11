@@ -32,8 +32,9 @@ class Configuration
 		// Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);
         if (is_array($newSettings)) {
-		  $this->settings = array_merge($this->settings, $newSettings);
+            $this->settings = array_replace($this->settings, $newSettings);
         }
+
 		$this->setEndpointUrl();
 	}
 

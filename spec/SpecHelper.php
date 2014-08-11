@@ -38,7 +38,8 @@ class SpecHelper
 	{
         $configuration = new \Judopay\Configuration(array(
                 'apiToken' => 'token',
-                'apiSecret' => 'secret'
+                'apiSecret' => 'secret',
+                'judoId' => '123-456'
             )
         );
 

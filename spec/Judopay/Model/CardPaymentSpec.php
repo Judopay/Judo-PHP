@@ -45,6 +45,23 @@ class CardPaymentSpec extends ModelObjectBehavior
         $output['errorMessage']->shouldContain('good to go');
     }
 
+    public function it_should_use_the_configured_judo_id_if_one_is_not_provided()
+    {
+        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+
+        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+
+        // Set an empty Judo ID to make sure the config value is used
+        $modelBuilder->setJudoId(null);
+
+        $this->setAttributeValues(
+            $modelBuilder->getAttributeValues()
+        );
+        $output = $this->create();
+
+        $this->getAttributeValue('judoId')->shouldEqual('123-456');
+    }
+
     // Generic model methods
     public function it_coerces_attributes_into_the_correct_data_type()
     {
