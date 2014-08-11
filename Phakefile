@@ -75,7 +75,7 @@ group('transactions', function() {
             )
         );
 
-        $transaction = $judopay->getModel('CardPreauth');
+        $transaction = $judopay->getModel('CardPayment');
         $transaction->setAttributeValues(
             array(
                 'judoId' => getenv('JUDO_ID'),
@@ -87,7 +87,7 @@ group('transactions', function() {
                 'cv2' => 452
             )
         );
-        $result = $transaction->create();
+        $result = $transaction->validate();
 
         print_r($result);
     });

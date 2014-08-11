@@ -6,7 +6,7 @@ use \Judopay\DataType;
 class CardPayment extends \Judopay\Model
 {
 	protected $resourcePath = 'transactions/payments';
-	protected $validApiMethods = array('create');
+	protected $validApiMethods = array('create', 'validate');
 	protected $attributes = array(
 		'yourConsumerReference' => DataType::TYPE_STRING,
 		'yourPaymentReference' => DataType::TYPE_STRING,
@@ -29,4 +29,17 @@ class CardPayment extends \Judopay\Model
     	'cardNumber',
     	'expiryDate'
     );
+
+	/**
+	 * Validate card payment details without making a payment
+	 *
+	 * @return array $response
+	 **/
+	public function validate()
+	{
+		$validateResourcePath = $this->resourcePath.'/validate';
+		$this->checkApiMethodIsSupported(__FUNCTION__);
+		$this->checkRequiredAttributes($this->attributeValues);
+		return $this->request->post($validateResourcePath, json_encode($this->attributeValues))->json();
+	}
 }

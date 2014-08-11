@@ -31,6 +31,20 @@ class CardPaymentSpec extends ModelObjectBehavior
         $this->shouldThrow('\Judopay\Exception\ValidationError')->during('create');
     }
 
+    public function it_should_validate_a_new_payment_given_valid_card_details()
+    {
+        $this->beConstructedWith($this->concoctRequest('card_payments/validate.json'));
+
+        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+        $this->setAttributeValues(
+            $modelBuilder->getAttributeValues()
+        );
+        $output = $this->validate();
+
+        $output->shouldBeArray();
+        $output['errorMessage']->shouldContain('good to go');
+    }
+
     // Generic model methods
     public function it_coerces_attributes_into_the_correct_data_type()
     {
