@@ -94,4 +94,46 @@ group('transactions', function() {
 
 });
 
+group('web_payments', function() {
+    task('create', function() {
+        // Create logger
+        $logger = new Logger('Judopay');
+        $logger->pushHandler(new StreamHandler('judopay.log'));
+
+        $judopay = new \Judopay(
+            array(
+                'apiToken' => getenv('JUDO_TOKEN'),
+                'apiSecret' => getenv('JUDO_SECRET'),
+                'judoId' => getenv('JUDO_ID'),
+                'logger' => $logger
+            )
+        );
+
+        $transaction = $judopay->getModel('WebPayments\Payment');
+        $transaction->setAttributeValues(
+            array(
+                'judoId' => getenv('JUDO_ID'),
+                'yourConsumerReference' => '12345',
+                'yourPaymentReference' => '12345',
+                'amount' => 1.01,
+            )
+        );
+        $result = $transaction->create();
+
+        print_r($result);
+    });
+
+    task('find', function() {
+        $judopay = new \Judopay(
+            array(
+                'apiToken' => getenv('JUDO_TOKEN'),
+                'apiSecret' => getenv('JUDO_SECRET'),
+                'judoId' => getenv('JUDO_ID')
+            )
+        );
+
+        $transaction = $judopay->getModel('WebPayments\Transaction');
+        print_r($transaction->find('3gcAAAgAAAAMAAAACwAAANCEpjI078FA-82yABvtFm2etJbVenSv3oIfp75Y2t1KVXfysg'));
+    });     
+});
 task('default', 'list');
