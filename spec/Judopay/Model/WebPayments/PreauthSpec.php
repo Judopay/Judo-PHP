@@ -4,12 +4,12 @@ namespace spec\Judopay\Model\WebPayments;
 
 require_once __DIR__.'/../ModelObjectBehavior.php';
 
-class PaymentSpec extends \spec\Judopay\Model\ModelObjectBehavior
+class PreauthSpec extends \spec\Judopay\Model\ModelObjectBehavior
 {
     public function it_is_initializable()
     {
         $this->beConstructedWith(new \Judopay\Request($this->configuration));
-        $this->shouldHaveType('Judopay\Model\WebPayments\Payment');
+        $this->shouldHaveType('Judopay\Model\WebPayments\Preauth');
     }
 
     public function it_should_create_a_new_payment()
