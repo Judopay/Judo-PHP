@@ -22,8 +22,8 @@ class SpecHelper
         return $mockResponse;
     }
 
-	public static function getMockResponseClient($responseCode, $fixtureFile)
-	{
+    public static function getMockResponseClient($responseCode, $fixtureFile)
+    {
         $client = new \Guzzle\Http\Client();
         $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
 
@@ -32,10 +32,10 @@ class SpecHelper
         $client->addSubscriber($plugin);
 
         return $client;
-	}
+    }
 
-	public static function getConfiguration()
-	{
+    public static function getConfiguration()
+    {
         $configuration = new \Judopay\Configuration(array(
                 'apiToken' => 'token',
                 'apiSecret' => 'secret',
@@ -44,5 +44,5 @@ class SpecHelper
         );
 
         return $configuration;
-	}
+    }
 }

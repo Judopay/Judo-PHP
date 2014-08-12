@@ -17,7 +17,7 @@ class PaymentSpec extends ModelObjectBehavior
         $request = $this->concoctRequest('transactions/all.json');
         $this->beConstructedWith($request);
 
-		$output = $this->all();
+        $output = $this->all();
         $output->shouldBeArray();
         $output['results'][0]['amount']->shouldEqual(1.01);
     }

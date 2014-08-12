@@ -16,15 +16,15 @@ class JudopaySpec extends ObjectBehavior
 
     public function it_should_set_config_values_on_initialisation()
     {
-    	$this->beConstructedWith(
-			array(
-				'apiToken' => 'token',
-				'apiSecret' => 'secret',
-				'dodgy_key' => 'dodgy value'
-			)
-    	);
+        $this->beConstructedWith(
+            array(
+                'apiToken' => 'token',
+                'apiSecret' => 'secret',
+                'dodgy_key' => 'dodgy value'
+            )
+        );
 
-    	$this->get('configuration')->getAll()->shouldBeArray();
+        $this->get('configuration')->getAll()->shouldBeArray();
         $this->get('configuration')->getAll()->shouldNotHaveKey('dodgy_key');
     }
 
