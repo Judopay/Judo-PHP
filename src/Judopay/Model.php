@@ -121,6 +121,6 @@ class Model
         }
 
         $configuration = $this->request->getConfiguration();
-        $this->attributeValues['judoId'] = '123-456'; //$configuration->get('judoId');
+        $this->attributeValues['judoId'] = $configuration->get('judoId');
     }
 }
