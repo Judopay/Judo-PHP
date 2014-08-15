@@ -4,15 +4,15 @@ namespace spec\Judopay\Model\Market;
 
 require_once __DIR__.'/../ModelObjectBehavior.php';
 
-class PreauthSpec extends \spec\Judopay\Model\ModelObjectBehavior
+class TransactionSpec extends \spec\Judopay\Model\ModelObjectBehavior
 {
     public function it_is_initializable()
     {
         $this->beConstructedWith(new \Judopay\Request($this->configuration));
-        $this->shouldHaveType('Judopay\Model\Market\Preauth');
+        $this->shouldHaveType('Judopay\Model\Market\Transaction');
     }
 
-    public function it_should_list_all_preauths()
+    public function it_should_list_all_transactions()
     {
         $request = $this->concoctRequest('transactions/all.json');
         $this->beConstructedWith($request);
