@@ -105,6 +105,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
         $this->logger = $logger;
     }
 
+    // @todo Ideally, configuration should be a separate dependency
     public function getConfiguration()
     {
         return $this->configuration;

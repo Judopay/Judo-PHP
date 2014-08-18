@@ -87,7 +87,7 @@ group('transactions', function() {
                 'cv2' => 452
             )
         );
-        $result = $transaction->validate();
+        $result = $transaction->create();
 
         print_r($result);
     });
@@ -118,7 +118,26 @@ group('web_payments', function() {
                 'amount' => 1.01,
             )
         );
-        $result = $transaction->create();
+        
+        try {
+            $result = $transaction->create();
+        } catch (\Judopay\Exception\ValidationError $e) {
+            // There were missing or invalid fields
+            echo $e->getSummary();
+            print_r($e->getModelErrors()); // Array of model errors
+        } catch (\Judopay\Exception\BadRequest $e) {
+          // Invalid parameters were supplied to Judopay's API
+            echo $e->getSummary();
+            print_r($e->getModelErrors()); // Array of model errors
+        } catch (\Judopay\Exception\    NotAuthorized $e) {
+            // You're not authorized to make the request - check credentials and permissions in the Judopay portal
+        } catch (\Judopay\Exception\NotFound $e) {
+            // The resource was not found
+        } catch (\Judopay\Exception\Conflict $e) {
+            // Rate limiting - you have made too many requests to the Judopay API
+        } catch (\Exception $e) {
+          // A problem occurred outside the Judopay SDK
+        }        
 
         print_r($result);
     });
