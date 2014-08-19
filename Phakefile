@@ -12,10 +12,6 @@ task('list', function() {
 desc('Generate phpDocumentor docs');
 task('doc', function() {
     passthru("phpdoc -d ./src -t ./doc");
-
-    // Fix missing font in generated docs
-    // https://github.com/phpDocumentor/template.clean/pull/41
-    passthru('cp -fR font doc/');
 });
 
 desc('Generate phpDocumentor docs in XML format');
