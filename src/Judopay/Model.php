@@ -4,13 +4,57 @@ namespace Judopay;
 use \Judopay\DataType;
 use \Judopay\Exception\ValidationError;
 
+/**
+ * Base model class
+ *
+ * @package Judopay
+ **/ 
 class Model
 {
+    /**
+     * Request object
+     *
+     * @var object \Judopay\Request
+     **/
     protected $request;
+    
+    /**
+     * Resource path (e.g. /transactions/payments)
+     *
+     * @var string
+     **/
     protected $resourcePath;
+
+    /**
+     * Valid API methods for this model
+     * e.g. array('all', 'create')
+     *
+     * @var array
+     **/
     protected $validApiMethods;
+
+    /**
+     * Attributes with expected data types
+     * e.g. array('yourConsumerReference' => DataType::TYPE_STRING)
+     *
+     * @var array
+     **/
     protected $attributes = array();
+
+    /**
+     * Attributes with values
+     * e.g. array('yourConsumerReference' => '123456')
+     *
+     * @var array
+     **/
     protected $attributeValues = array();
+
+    /**
+     * Attributes that must be present before submission to the API
+     * e.g. array('yourConsumerReference', 'judoId')
+     *
+     * @var array
+     **/
     protected $requiredAttributes = array();
 
     public function __construct(\Judopay\Request $request)
@@ -38,12 +82,24 @@ class Model
         return $this->request->get($uri)->json();
     }
 
+    /**
+     * Retrieve a specific record
+     *
+     * @param int $resourceId
+     * @return array API response
+     * @author 
+     **/
     public function find($resourceId)
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
         return $this->request->get($this->resourcePath.'/'.(int)$resourceId)->json();
     }
 
+    /**
+     * Create a new record
+     *
+     * @return array API response
+     **/
     public function create()
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
@@ -53,6 +109,12 @@ class Model
         return $this->request->post($this->resourcePath, json_encode($this->attributeValues))->json();
     }
 
+    /**
+     * Get a single attribute value
+     *
+     * @param string Attribute name
+     * @return string Attribute value
+     **/
     public function getAttributeValue($attribute)
     {
         if (!array_key_exists($attribute, $this->attributeValues)) {
@@ -62,11 +124,22 @@ class Model
         return $this->attributeValues[$attribute];
     }
 
+    /**
+     * Get all attribute values
+     *
+     * @return array Attribute values
+     **/
     public function getAttributeValues()
     {
         return $this->attributeValues;
     }
 
+    /**
+     * Set attribute values
+     *
+     * @param array Attribute values
+     * @return void
+     **/
     public function setAttributeValues($values)
     {
         foreach ($values as $key => $value) {
@@ -81,6 +154,12 @@ class Model
         }
     }
 
+    /**
+     * Check if the specified method name is supported by this model
+     *
+     * @param string Method name
+     * @return void
+     **/
     protected function checkApiMethodIsSupported($methodName)
     {
         if (empty($this->validApiMethods) || !in_array($methodName, $this->validApiMethods)) {
@@ -112,6 +191,8 @@ class Model
 
     /**
      * If a Judo ID is not set, use the value from configuration
+     * 
+     * @return void
      **/
     protected function checkJudoId()
     {
