@@ -11,7 +11,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "bossa/phpspec2-expect": "~1.0"
+        "bossa/phpspec2-expect": "~1.0",
+        "squizlabs/php_codesniffer": "~1.5"
     },
     "config": {
         "bin-dir": "bin"

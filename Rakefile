@@ -16,3 +16,8 @@ task :test do
   sh './bin/phpspec run'
 end
 
+namespace :code do
+  task :sniff do
+    sh 'bin/phpcs --standard=PSR2 src'
+  end
+end
