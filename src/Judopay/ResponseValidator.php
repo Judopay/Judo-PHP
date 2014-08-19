@@ -2,8 +2,6 @@
 
 namespace Judopay;
 
-use Guzzle\Plugin\Log\LogPlugin;
-
 class ResponseValidator
 {
     protected $response;

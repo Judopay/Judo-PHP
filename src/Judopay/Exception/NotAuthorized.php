@@ -2,4 +2,6 @@
 
 namespace Judopay\Exception;
 
-class NotAuthorized extends \Judopay\Exception\ApiException {}
+class NotAuthorized extends \Judopay\Exception\ApiException
+{
+}

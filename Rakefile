@@ -18,6 +18,6 @@ end
 
 namespace :code do
   task :sniff do
-    sh 'bin/phpcs --standard=PSR2 src'
+    sh 'bin/phpcs --standard=.phpcs.xml src'
   end
 end

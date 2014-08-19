@@ -16,5 +16,5 @@ class Transaction extends \Judopay\Model
     public function find($reference)
     {
         return $this->request->get($this->resourcePath.'/'.$reference)->json();
-    }   
+    }
 }

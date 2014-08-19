@@ -23,8 +23,9 @@ abstract class AbstractModelBuilder
     public function build()
     {
         $modelName = '\Judopay\Model\\'.substr(get_class($this, 0, -7));
-        $model = new $modelName(new \Judopay\Request);
+        $model = new $modelName(new \Judopay\Request());
         $model->setAttributeValues($this->attributeValues);
+
         return $model;
     }
 

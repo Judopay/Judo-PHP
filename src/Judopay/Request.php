@@ -3,7 +3,6 @@
 namespace Judopay;
 
 use Guzzle\Plugin\Log\LogPlugin;
-use Guzzle\Log\MessageFormatter;
 
 class Request implements \Psr\Log\LoggerAwareInterface
 {
@@ -67,7 +66,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
      * Make a POST request to the specified resource path
      *
      * @param string $resourcePath
-     * @param array $data
+     * @param array  $data
      **/
     public function post($resourcePath, $data)
     {

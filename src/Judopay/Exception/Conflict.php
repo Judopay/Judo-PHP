@@ -2,4 +2,6 @@
 
 namespace Judopay\Exception;
 
-class Conflict extends \Judopay\Exception\ApiException {}
+class Conflict extends \Judopay\Exception\ApiException
+{
+}

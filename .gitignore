@@ -4,3 +4,5 @@ doc
 vendor
 composer.phar
 *.log
+
+php-cs-fixer.phar

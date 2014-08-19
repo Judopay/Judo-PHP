@@ -1,7 +1,6 @@
 <?php
 
 namespace Judopay\Model;
-use \Judopay\DataType;
 
 class Preauth extends \Judopay\Model
 {

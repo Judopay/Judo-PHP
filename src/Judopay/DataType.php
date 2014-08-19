@@ -17,16 +17,18 @@ class DataType
                 if (!is_numeric($value)) {
                     throw new \OutOfBoundsException('Invalid float value');
                 }
-                return (float)$value;
+
+                return (float) $value;
 
             case DataType::TYPE_ARRAY:
                 if (!is_array($value)) {
                     $value = array($value);
                 }
+
                 return $value;
 
             case DataType::TYPE_INTEGER:
-                return (int)$value;
+                return (int) $value;
         }
 
         return $value;

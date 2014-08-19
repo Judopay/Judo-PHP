@@ -44,7 +44,7 @@ class ApiException extends \RuntimeException
 
     public function getHttpBody()
     {
-        return (string)$this->response->getBody();
+        return (string) $this->response->getBody();
     }
 
     public function getParsedBody()
@@ -60,8 +60,7 @@ class ApiException extends \RuntimeException
     protected function getBodyAttribute($attributeName)
     {
         $parsedBody = $this->getParsedBody();
-        if (!isset($parsedBody[$attributeName]))
-        {
+        if (!isset($parsedBody[$attributeName])) {
             return null;
         }
 

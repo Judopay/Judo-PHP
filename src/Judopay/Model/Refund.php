@@ -1,6 +1,7 @@
 <?php
 
 namespace Judopay\Model;
+
 use \Judopay\DataType;
 
 class Refund extends \Judopay\Model

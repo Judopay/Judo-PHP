@@ -1,6 +1,7 @@
 <?php
 
 namespace Judopay\Model;
+
 use \Judopay\DataType;
 
 class CardPayment extends \Judopay\Model
@@ -40,6 +41,7 @@ class CardPayment extends \Judopay\Model
         $validateResourcePath = $this->resourcePath.'/validate';
         $this->checkApiMethodIsSupported(__FUNCTION__);
         $this->checkRequiredAttributes($this->attributeValues);
+
         return $this->request->post($validateResourcePath, json_encode($this->attributeValues))->json();
     }
 }

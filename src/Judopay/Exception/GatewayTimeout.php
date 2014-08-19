@@ -2,4 +2,6 @@
 
 namespace Judopay\Exception;
 
-class GatewayTimeout extends \Judopay\Exception\ApiException {}
+class GatewayTimeout extends \Judopay\Exception\ApiException
+{
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+ <description>The coding standard for the Judopay PHP SDK</description>
+
+ <rule ref="PSR2"/>
+ <!-- The main Judopay wrapper class is not in a namespace -->
+ <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+   <severity>0</severity>
+ </rule>
+</ruleset>

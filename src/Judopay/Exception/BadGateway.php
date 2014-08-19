@@ -2,4 +2,6 @@
 
 namespace Judopay\Exception;
 
-class BadGateway extends \Judopay\Exception\ApiException {}
+class BadGateway extends \Judopay\Exception\ApiException
+{
+}

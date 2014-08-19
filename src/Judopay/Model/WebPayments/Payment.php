@@ -1,6 +1,7 @@
 <?php
 
 namespace Judopay\Model\WebPayments;
+
 use \Judopay\DataType;
 
 class Payment extends \Judopay\Model
@@ -22,5 +23,5 @@ class Payment extends \Judopay\Model
         'yourPaymentReference',
         'judoId',
         'amount'
-    );  
+    );
 }

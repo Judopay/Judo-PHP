@@ -1,14 +1,14 @@
 <?php
 
 namespace Judopay;
-use \Judopay\DataType;
+
 use \Judopay\Exception\ValidationError;
 
 /**
  * Base model class
  *
  * @package Judopay
- **/ 
+ **/
 class Model
 {
     /**
@@ -17,7 +17,7 @@ class Model
      * @var object \Judopay\Request
      **/
     protected $request;
-    
+
     /**
      * Resource path (e.g. /transactions/payments)
      *
@@ -65,9 +65,9 @@ class Model
     /**
      * Retrieve a list of records
      *
-     * @param int $offset The start point in the sorted list of records from which the results set will start
-     * @param int $pageSize The number of records to display per page
-     * @param string $sort Determines how the list is sorted. The list can be displayed as time-descending and time-ascending.
+     * @param  int    $offset   The start point in the sorted list of records from which the results set will start
+     * @param  int    $pageSize The number of records to display per page
+     * @param  string $sort     Determines how the list is sorted (time-descending or time-ascending)
      * @return array
      **/
     public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
@@ -79,20 +79,22 @@ class Model
             'sort' => $sort
         );
         $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
+
         return $this->request->get($uri)->json();
     }
 
     /**
      * Retrieve a specific record
      *
-     * @param int $resourceId
+     * @param  int   $resourceId
      * @return array API response
-     * @author 
+     * @author
      **/
     public function find($resourceId)
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
-        return $this->request->get($this->resourcePath.'/'.(int)$resourceId)->json();
+
+        return $this->request->get($this->resourcePath.'/'.(int) $resourceId)->json();
     }
 
     /**
@@ -191,7 +193,7 @@ class Model
 
     /**
      * If a Judo ID is not set, use the value from configuration
-     * 
+     *
      * @return void
      **/
     protected function checkJudoId()

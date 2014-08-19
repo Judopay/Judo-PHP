@@ -2,4 +2,6 @@
 
 namespace Judopay\Exception;
 
-class BadRequest extends \Judopay\Exception\ApiException {}
+class BadRequest extends \Judopay\Exception\ApiException
+{
+}
