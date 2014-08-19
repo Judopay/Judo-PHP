@@ -1,3 +1,7 @@
+task :doc do
+  Rake::Task['doc:html'].invoke
+end
+
 namespace :doc do
   task :html do
     sh 'phpdoc -d ./src -t ./doc'
@@ -11,3 +15,4 @@ end
 task :test do
   sh './bin/phpspec run'
 end
+
