@@ -2,12 +2,27 @@
 
 use Pimple\Container;
 
+/**
+ * Main Judopay wrapper
+ *
+ * Handle initial configuration and build service objects
+ *
+ * @package      Judopay
+ */
 class Judopay
 {
     const VERSION = '4.0.0';
 
+    /**
+     * Pimple DI container
+     *
+     * @var object Pimple\Container
+     **/
     protected $container;
 
+    /**
+     * @param array Configuration settings (e.g. [judoId] => '123-456')
+     **/
     public function __construct($settings = null)
     {
         // Create new DI container
@@ -28,23 +43,36 @@ class Judopay
         });
     }
 
+    /**
+     * Get an object from the DI container
+     *
+     * @param string Object name
+     * @return object
+     **/
     public function get($objName)
     {
         return $this->container[$objName];
     }
 
+    /**
+     * Build a new model object
+     **/
     public function getModel($modelName)
     {
-        $this->container[$modelName] = function ($c) use ($modelName) {
-            $configuration = $this->get('configuration');
+        // If the model is already defined in the container, just return it
+        if (isset($this->container[$modelName])) {
+            return $this->get($modelName);
+        }
 
+        // Set up the model in the DI container
+        $this->container[$modelName] = $this->container->factory(function ($c) use ($modelName) {
             $modelClassName = '\Judopay\Model\\'.ucfirst($modelName);
             $model = new $modelClassName(
                 $this->get('request')
             );
 
             return $model;
-        };
+        });
 
         return $this->get($modelName);
     }
