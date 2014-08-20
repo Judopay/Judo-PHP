@@ -9,7 +9,7 @@ The Judopay PHP SDK supports PHP 5.3.3 and above. You'll need the PHP cURL exten
 Installation of the SDK is via the Composer package manager. Add the judopay package to your composer.json file:
 
     "require": {
-        "judopay": "~1.0"
+        "judopay/judopay-sdk": "~1.0"
     }
 
 And then execute:

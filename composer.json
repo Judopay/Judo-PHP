@@ -1,4 +1,16 @@
 {
+    "name": "judopay/judopay-sdk",
+    "type": "library",
+    "description": "SDK for the Judopay API",
+    "keywords": ["payment"],
+    "homepage": "https://www.judopay.com/docs",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Judopay",
+            "email": "developersupport@judopay.com"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
