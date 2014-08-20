@@ -1,7 +1,5 @@
 # Getting started - PHP
 
-[Include standard create account/getting started sections]
-
 ## Installation
 
 The Judopay PHP SDK supports PHP 5.3.3 and above. You'll need the PHP cURL extension installed.
