@@ -28,6 +28,6 @@ $judopay = new \Judopay(
 	array(
         'apiToken' => 'your-token,
         'apiSecret' => 'your-secret',
-        'judoId' => 'your-judo-id
+        'judoId' => 'your-judo-id'
 	)
 );
