@@ -35,7 +35,7 @@ class Judopay
 
         // Create request factory
         $this->container['request'] = $this->container->factory(function ($c) {
-            $configuration = $this->get('configuration');
+            $configuration = $c['configuration'];
             $request = new \Judopay\Request($configuration);
             $request->setClient(new \Judopay\Client());
             $request->setLogger($configuration->get('logger'));
