@@ -33,10 +33,10 @@ class RequestSpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return [
+        return array(
             'startWith' => function($subject, $key) {
                 return (stripos(trim($subject), $key) === 0);
             }
-        ];
+        );
     }
 }
