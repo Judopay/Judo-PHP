@@ -66,10 +66,11 @@ class Judopay
         }
 
         // Set up the model in the DI container
-        $this->container[$modelName] = $this->container->factory(function ($c) use ($modelName) {
+        $request = $this->get('request');
+        $this->container[$modelName] = $this->container->factory(function ($c) use ($modelName, $request) {
             $modelClassName = '\Judopay\Model\\'.ucfirst($modelName);
             $model = new $modelClassName(
-                $this->get('request')
+                $request
             );
 
             return $model;
