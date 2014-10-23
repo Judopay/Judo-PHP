@@ -25,7 +25,7 @@ Before you can send your user to the judo payment page, you'll need to tell us t
 // details from the application you created on our 
 $judopay = new \Judopay(
 	array(
-        'apiToken' => 'your-token,
+        'apiToken' => 'your-token',
         'apiSecret' => 'your-secret',
         'judoId' => 'your-judo-id'
 	)
