@@ -16,7 +16,8 @@ class Payment extends \Judopay\Model
         'amount' => DataType::TYPE_FLOAT,
         'partnerServiceFee' => DataType::TYPE_FLOAT,
         'clientIpAddress' => DataType::TYPE_STRING,
-        'clientUserAgent' => DataType::TYPE_STRING
+        'clientUserAgent' => DataType::TYPE_STRING,
+        'webPaymentOperation' => 'WebPaymentOperation'
     );
     protected $requiredAttributes = array(
         'yourConsumerReference',
