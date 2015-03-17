@@ -19,62 +19,63 @@ Before you can process web payments, you'll need to create an application on our
 Before you can send your user to the judo payment page, you'll need to tell us the details of the web payment using our JudoPay API. Support for this is built into our PHP SDK:
 
 
-```PHP
+	```PHP
 
-// Create the JudoPay client, populate the api token and api secret with the 
-// details from the application you created on our 
-$judopay = new \Judopay(
-	array(
-        'apiToken' => 'your-token',
-        'apiSecret' => 'your-secret',
-        'judoId' => 'your-judo-id'
-	)
-);
+	// Create the JudoPay client, populate the api token and api secret with the 
+	// details from the application you created on our 
+	$judopay = new \Judopay(
+		array(
+	        'apiToken' => 'your-token',
+	        'apiSecret' => 'your-secret',
+	        'judoId' => 'your-judo-id'
+		)
+	);
+	
+	// create an instance of the WebPayment Payment model (or you can use the Preauth model) 
+	// if you only want to process a pre-authorisation which you can collect later.
+	
+	$payment = $judopay->getModel('WebPayments\Payment');
+	
+	// populate the required data fields.
+	$payment->setAttributeValues(
+	    array(
+	        'judoId' => getenv('JUDO_ID'),
+	        'yourConsumerReference' => '12345',
+	        'yourPaymentReference' => '12345',
+	        'amount' => 1.01,
+			'currency' => 'GBP',
+	        'clientIpAddress' => '127.0.0.1',
+	        'clientUserAgent' => 'Their browser user agent/11.0',
+	    )
+	);
 
-// create an instance of the WebPayment Payment model (or you can use the Preauth model) 
-// if you only want to process a pre-authorisation which you can collect later.
-
-$payment = $judopay->getModel('WebPayments\Payment');
-
-// populate the required data fields.
-$payment->setAttributeValues(
-    array(
-        'judoId' => getenv('JUDO_ID'),
-        'yourConsumerReference' => '12345',
-        'yourPaymentReference' => '12345',
-        'amount' => 1.01,
-        'clientIpAddress' => '127.0.0.1',
-        'clientUserAgent' => 'Their browser user agent/11.0',
-    )
-);
-
-// Send the model to the JudoPay API, this provisions your webpayment and returns a unique reference along with the 
-// URL of the page you'll need to dispatch your users to.
-
-$webpaymentDetails = $payment->create();
-
-/*
-* Here's an example of the json returned, this is mapped into an Array.
-* {
-* postUrl: https://pay.judopay-sandbox.com/v1,
-* reference: "3gcAAAoAAAAXAAAACQAAAMYG6P4SW.....CCc3iT-3tn5_RyWnmArDZAwyEkwQ"
-* }
-*/
-
-$theWebPaymentReference = $webpaymentDetails["reference"]
-$formPostUrl = $webpaymentDetails["postUrl"]
-```
+	// Send the model to the JudoPay API, this provisions your webpayment and returns a unique reference along with the 
+	// URL of the page you'll need to dispatch your users to.
+	
+	$webpaymentDetails = $payment->create();
+	
+	/*
+	* Here's an example of the json returned, this is mapped into an Array.
+	* {
+	* postUrl: https://pay.judopay-sandbox.com/v1,
+	* reference: "3gcAAAoAAAAXAAAACQAAAMYG6P4SW.....CCc3iT-3tn5_RyWnmArDZAwyEkwQ"
+	* }
+	*/
+	
+	$theWebPaymentReference = $webpaymentDetails["reference"]
+	$formPostUrl = $webpaymentDetails["postUrl"]
+	```
 ## Dispatching your user to judo  
 
 You should then dispatch your user to our server using a POST request, this can be done easily by wrapping your "Pay Now" button in a form as follows:
 
 
-```HTML+PHP
-<form action="<?php echo $formPostUrl;?>" method="post">
-<input  id="Reference" name="Reference" type="hidden" value="<?php echo $theWebPaymentReference;?>">
-<input type="submit" value="Pay now">
-</form>
-```
+	```HTML+PHP
+	<form action="<?php echo $formPostUrl;?>" method="post">
+	<input  id="Reference" name="Reference" type="hidden" value="<?php echo $theWebPaymentReference;?>">
+	<input type="submit" value="Pay now">
+	</form>
+	```
 
 ## Capturing the returned information
 
@@ -90,23 +91,23 @@ If the user's payment was successful we'll return them to your success url (agai
 
 Finally you should always verify the payment outcome using the JudoPay API, this protects you from request tampering.
 
-```PHP
-
-// Create an instance of the WebPayment Transaction model (as web payments can either be payments or preauths we have a superclass called transaction). 
-
-$existingTransactionRequest = $judopay->getModel('WebPayments\Transaction');
-
-
-// invoke the find method passing in the reference you obtained above. 
-$transactionDetails = $existingTransactionRequest->find($theWebPaymentReference);
-
-// check the value of the "status" array key to confirm the payment was successful
-$webpaymentStatus = $transactionDetails["status"];
-
-// webpaymentStatus should be "Paid"
-
-// you can also access a copy of our receipt object using the "receipt" entry.
-
-$receipt = $transactionDetails["receipt"];
-
-```
+	```PHP
+	
+	// Create an instance of the WebPayment Transaction model (as web payments can either be payments or preauths we have a superclass called transaction). 
+	
+	$existingTransactionRequest = $judopay->getModel('WebPayments\Transaction');
+	
+	
+	// invoke the find method passing in the reference you obtained above. 
+	$transactionDetails = $existingTransactionRequest->find($theWebPaymentReference);
+	
+	// check the value of the "status" array key to confirm the payment was successful
+	$webpaymentStatus = $transactionDetails["status"];
+	
+	// webpaymentStatus should be "Paid"
+	
+	// you can also access a copy of our receipt object using the "receipt" entry.
+	
+	$receipt = $transactionDetails["receipt"];
+	
+	```

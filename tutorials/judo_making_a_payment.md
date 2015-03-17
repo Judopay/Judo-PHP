@@ -12,13 +12,14 @@ $judopay = new \Judopay(
 
 To make a new payment with full card details:
 
-$payment = $judopay->getModel('CardPayment');
+$payment = $judopay->getModel('Payment');
 $payment->setAttributeValues(
     array(
         'judoId' => getenv('JUDO_ID'),
         'yourConsumerReference' => '12345',
         'yourPaymentReference' => '12345',
         'amount' => 1.01,
+		'currency' => 'GBP',
         'cardNumber' => '4976000000003436',
         'expiryDate' => '12/15',
         'cv2' => 452
@@ -29,7 +30,7 @@ You can check on the required fields and the format of each field in the _Judopa
 
 To send the request to the API, call:
 
-$response = $payment->create();
+	$response = $payment->create();
 
 If the payment is successful, you'll receive a response array like this:
 
