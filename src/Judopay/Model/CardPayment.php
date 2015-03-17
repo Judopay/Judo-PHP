@@ -15,6 +15,7 @@ class CardPayment extends \Judopay\Model
         'judoId' => DataType::TYPE_STRING,
         'amount' => DataType::TYPE_FLOAT,
         'cardNumber' => DataType::TYPE_STRING,
+		'currency' => DataType::TYPE_STRING,
         'expiryDate' => DataType::TYPE_STRING,
         'cv2' => DataType::TYPE_STRING,
         'cardAddress' => DataType::TYPE_ARRAY,
@@ -27,6 +28,7 @@ class CardPayment extends \Judopay\Model
         'yourPaymentReference',
         'judoId',
         'amount',
+		'currency',
         'cardNumber',
         'expiryDate'
     );
