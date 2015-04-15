@@ -69,17 +69,14 @@ Before you can send your user to the judo payment page, you'll need to tell us t
 
 You should then dispatch your user to our server using a POST request, this can be done easily by wrapping your "Pay Now" button in a form as follows:
 
-
-	```HTML+PHP
 	<form action="<?php echo $formPostUrl;?>" method="post">
 	<input  id="Reference" name="Reference" type="hidden" value="<?php echo $theWebPaymentReference;?>">
 	<input type="submit" value="Pay now">
 	</form>
-	```
 
 ## Capturing the returned information
 
-If the user's payment was successful we'll return them to your success url (again using a POST request), along with some additional form fields you should capture. These are:
+If the user's payment was successful we'll return them to your success url using a POST request. Included in this POST request are the following form fields :
 
 **Reference** - this is our reference for the web payment.
 
@@ -87,12 +84,12 @@ If the user's payment was successful we'll return them to your success url (agai
 
 **CardToken** - this is the unique reference for your user's card. If you want to process further payments on their card (either as a "saved card" feature, or a reoccuring subscription payment), you must capture this card token.
 
+Please note that you **cannot** retreive the CardToken later, if you wish to use this card in a future payment (i.e. Pay with your saved card) you will need to capture and store this value.
+
 ## Verifying the payment
 
 Finally you should always verify the payment outcome using the JudoPay API, this protects you from request tampering.
 
-	```PHP
-	
 	// Create an instance of the WebPayment Transaction model (as web payments can either be payments or preauths we have a superclass called transaction). 
 	
 	$existingTransactionRequest = $judopay->getModel('WebPayments\Transaction');
@@ -110,4 +107,3 @@ Finally you should always verify the payment outcome using the JudoPay API, this
 	
 	$receipt = $transactionDetails["receipt"];
 	
-	```
