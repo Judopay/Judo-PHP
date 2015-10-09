@@ -31,7 +31,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
         );
 
         // Use CA cert bundle to verify SSL connection
-        $this->client->setSslVerification(__DIR__.'/../../cert/rapidssl_ca.crt');
+        $this->client->setSslVerification(__DIR__.'/../../cert/digicert_sha256_ca.pem');
 
         // Set up logging
         $adapter = new \Guzzle\Log\PsrLogAdapter(
