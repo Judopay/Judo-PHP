@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/JudoPay/PhpSdk.svg?branch=master)](https://travis-ci.org/JudoPay/PhpSdk)
 
+The judopay php SDK is not actively supported by judo, but it is available here for anyone who wish to use it as a platform to develop upon.
+
 ## Installation
 
 The Judopay PHP SDK supports PHP 5.3.3 and above. You'll need the PHP cURL extension installed.
