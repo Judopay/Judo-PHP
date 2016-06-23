@@ -21,7 +21,8 @@ class CardPayment extends \Judopay\Model
         'cardAddress' => DataType::TYPE_ARRAY,
         'consumerLocation' => DataType::TYPE_ARRAY,
         'mobileNumber' => DataType::TYPE_STRING,
-        'emailAddress' => DataType::TYPE_STRING
+        'emailAddress' => DataType::TYPE_STRING,
+        'clientDetails' => DataType::TYPE_ARRAY,
     );
     protected $requiredAttributes = array(
         'yourConsumerReference',
