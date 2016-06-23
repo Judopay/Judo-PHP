@@ -66,13 +66,13 @@ class CardPaymentSpec extends ModelObjectBehavior
     public function it_coerces_attributes_into_the_correct_data_type()
     {
         $input = array(
-            'yourPaymentMetaData' => 'an unexpected string',
+            'yourPaymentMetaData' => (object)array('val' => 'an unexpected string'),
             'judoId' => 'judo123',
             'amount' => '123.23'
         );
 
         $expectedOutput = array(
-            'yourPaymentMetaData' => array('an unexpected string'),
+            'yourPaymentMetaData' => (object)array('val' => 'an unexpected string'),
             'judoId' => 'judo123',
             'amount' => 123.23
         );
