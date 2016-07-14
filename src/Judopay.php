@@ -11,7 +11,7 @@ use Pimple\Container;
  */
 class Judopay
 {
-    const VERSION = '4.0.0';
+    const VERSION = '5.2.0';
 
     /**
      * Pimple DI container
