@@ -3,6 +3,7 @@
 namespace Judopay;
 
 use Guzzle\Plugin\Log\LogPlugin;
+use Judopay\Exception\ApiException;
 
 class Request implements \Psr\Log\LoggerAwareInterface
 {
@@ -119,8 +120,7 @@ class Request implements \Psr\Log\LoggerAwareInterface
         } catch (\Guzzle\Http\Exception\BadResponseException $e) {
             // Guzzle throws an exception when it encounters a 4xx or 5xx error
             // Rethrow the exception so we can raise our custom exception classes
-            $responseValidator = new \Judopay\ResponseValidator($e->getResponse());
-            $responseValidator->check();
+            throw ApiException::factory($e->getResponse());
         }
 
         return $guzzleResponse;
