@@ -4,54 +4,43 @@ namespace spec\Judopay\Exception;
 
 require_once __DIR__.'/../../SpecHelper.php';
 
+use Judopay\SpecHelper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 
 class ApiExceptionSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function it_is_initializable_with_right_variables()
     {
-        $this->beConstructedWith('OK', \Judopay\SpecHelper::getMockResponse(200));
+        // Random 20 char long hexdec string
+        $message = bin2hex(openssl_random_pseudo_bytes(10));
+        $code = mt_rand(0, 100);
+        $statusCode = mt_rand(0, 500);
+        $category = mt_rand(0, 5);
+
+        $this->beConstructedWith($message, $code, $statusCode, $category);
         $this->shouldHaveType('Judopay\Exception\ApiException');
-    }
-
-    public function it_should_return_the_http_status_code()
-    {
-        $statusCode = 400;
-        $response = \Judopay\SpecHelper::getMockResponse($statusCode);
-        $this->beConstructedWith('Bad Request', $response);
+        $this->getMessage()->shouldEqual($message);
+        $this->getCode()->shouldEqual($code);
         $this->getHttpStatusCode()->shouldEqual($statusCode);
+        $this->getCategory()->shouldEqual($category);
     }
 
-    public function it_should_return_the_http_response_body()
+    public function factory_should_return_right_variables()
     {
-        $responseBody = 'judo judo judo';
-        $response = \Judopay\SpecHelper::getMockResponse(200, $responseBody);
-        $this->beConstructedWith('OK', $response);
-        $this->getHttpBody()->shouldEqual($responseBody);
+        $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_api_version.json');
+        $this->beConstructedThrough('factory', [$response]);
+        $this->getHttpStatusCode()->shouldEqual(400);
+        $this->getMessage()->shouldEqual("API-Version not supported");
+        $this->getCode()->shouldEqual(39);
+        $this->getCategory()->shouldEqual(1);
     }
 
-    public function it_should_return_the_model_errors_if_applicable()
+    public function factory_should_return_the_model_errors_if_applicable()
     {
-        $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
-        $this->beConstructedWith('Bad Request', $response);
-        $this->getModelErrors()->shouldEqual(array('Something went pear-shaped'));
-    }
-
-    public function it_should_return_a_summary_message()
-    {
-        $expectedReturn = 'Please check the card token. (Something went pear-shaped)';
-        $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
-        $this->beConstructedWith('Bad Request', $response);
-        $this->__toString()->shouldEqual($expectedReturn);
-        $this->getSummary()->shouldEqual($expectedReturn);
-    }
-
-    public function it_should_return_the_error_type_in_get_message()
-    {
-        $response = \Judopay\SpecHelper::getMockResponseFromFixture(400, 'card_payments/create_bad_request.json');
-        $this->beConstructedWith('Bad Request', $response);
-        $this->getMessage()->shouldEqual('Bad Request');
+        $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_currency_field.json');
+        $this->beConstructedThrough('factory', [$response]);
+        $this->getFieldErrors()->shouldHaveCount(3);
     }
 }

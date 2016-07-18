@@ -2,43 +2,57 @@
 
 namespace Judopay;
 
+use Guzzle\Http\Client;
+use Guzzle\Http\Exception\BadResponseException;
+use Guzzle\Http\Message\Request as GuzzleRequest;
+use Guzzle\Http\Message\Response;
+use Guzzle\Log\PsrLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
 use Judopay\Exception\ApiException;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
-class Request implements \Psr\Log\LoggerAwareInterface
+class Request implements LoggerAwareInterface
 {
+    /** @var Configuration */
     protected $configuration;
+
+    /** @var  Client */
     protected $client;
+
+    /** @var LoggerInterface */
     protected $logger;
 
-    public function __construct(\Judopay\Configuration $configuration)
+    public function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;
         $this->logger = $this->configuration->get('logger');
     }
 
-    public function setClient(\Guzzle\Http\Client $client)
+    public function setClient(Client $client)
     {
         $this->client = $client;
 
         // Set headers
         $this->client->setDefaultOption(
             'headers',
-            array(
-                'API-Version' => $this->configuration->get('apiVersion'),
-                'Accept' => 'application/json; charset=utf-8',
-                'Content-Type' => 'application/json'
-            )
+            [
+                'API-Version'  => $this->configuration->get('apiVersion'),
+                'Accept'       => 'application/json; charset=utf-8',
+                'Content-Type' => 'application/json',
+            ]
         );
 
         // Use CA cert bundle to verify SSL connection
-        $this->client->setSslVerification(__DIR__.'/../../cert/digicert_sha256_ca.pem');
+        $this->client->setSslVerification(__DIR__
+            .'/../../cert/digicert_sha256_ca.pem');
 
         // Set up logging
-        $adapter = new \Guzzle\Log\PsrLogAdapter(
+        $adapter = new PsrLogAdapter(
             $this->logger
         );
-        $logPlugin = new LogPlugin($adapter, $this->configuration->get('httpLogFormat'));
+        $logPlugin = new LogPlugin($adapter,
+            $this->configuration->get('httpLogFormat'));
 
         // Set user agent
         $this->client->setUserAgent($this->configuration->get('userAgent'));
@@ -50,9 +64,9 @@ class Request implements \Psr\Log\LoggerAwareInterface
 
     /**
      * Make a GET request to the specified resource path
-     *
      * @param string $resourcePath
-     **/
+     * @return array|Response
+     */
     public function get($resourcePath)
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
@@ -65,23 +79,23 @@ class Request implements \Psr\Log\LoggerAwareInterface
 
     /**
      * Make a POST request to the specified resource path
-     *
      * @param string $resourcePath
      * @param array  $data
-     **/
+     * @return array|Response
+     */
     public function post($resourcePath, $data)
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
         $guzzleRequest = $this->client->post(
             $endpointUrl.'/'.$resourcePath,
-            array(),
+            [],
             $data
         );
 
         return $this->send($guzzleRequest);
     }
 
-    public function setRequestAuthentication(\Guzzle\Http\Message\Request $request)
+    public function setRequestAuthentication(GuzzleRequest $request)
     {
         $oauthAccessToken = $this->configuration->get('oauthAccessToken');
 
@@ -99,25 +113,36 @@ class Request implements \Psr\Log\LoggerAwareInterface
         return $request;
     }
 
-    /* PSR-3 */
-    public function setLogger(\Psr\Log\LoggerInterface $logger)
+    /**
+     * @inheritdoc
+     */
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    // @todo Ideally, configuration should be a separate dependency
+    /**
+     * Configuration getter
+     * @todo Ideally, configuration should be a separate dependency
+     * @return Configuration
+     */
     public function getConfiguration()
     {
         return $this->configuration;
     }
 
-    protected function send(\Guzzle\Http\Message\Request $guzzleRequest)
+    /**
+     * @param GuzzleRequest $guzzleRequest
+     * @throws ApiException
+     * @return array|Response
+     */
+    protected function send(GuzzleRequest $guzzleRequest)
     {
         $guzzleRequest = $this->setRequestAuthentication($guzzleRequest);
 
         try {
             $guzzleResponse = $guzzleRequest->send();
-        } catch (\Guzzle\Http\Exception\BadResponseException $e) {
+        } catch (BadResponseException $e) {
             // Guzzle throws an exception when it encounters a 4xx or 5xx error
             // Rethrow the exception so we can raise our custom exception classes
             throw ApiException::factory($e->getResponse());

@@ -15,7 +15,7 @@ class ApiException extends \RuntimeException
     const CATEGORY_EXCEPTION = 5;
 
     /** @var FieldError[] */
-    protected $details = [];
+    protected $fieldErrors = [];
 
     /** @var int */
     protected $statusCode;
@@ -64,24 +64,24 @@ class ApiException extends \RuntimeException
 
     /**
      * ApiException constructor.
-     * @param string       $message
-     * @param int          $code
-     * @param int          $statusCode
-     * @param int          $category
-     * @param FieldError[] $details
+     * @param string       $message User message
+     * @param int          $code Error code
+     * @param int          $statusCode HTTP status code
+     * @param int          $category Error category
+     * @param FieldError[] $fieldErrors Fields errors
      */
     public function __construct(
         $message,
         $code = 0,
         $statusCode = 0,
         $category = self::CATEGORY_UNKNOWN,
-        $details = []
+        $fieldErrors = []
     ) {
         $this->message = $message;
         $this->code = $code;
         $this->statusCode = $statusCode;
         $this->category = $category;
-        $this->details = $details;
+        $this->fieldErrors = $fieldErrors;
     }
 
     /**
@@ -124,5 +124,13 @@ class ApiException extends \RuntimeException
         return empty($this->details)
             ? ""
             : ' Fields errors: '.PHP_EOL.join(PHP_EOL, $this->details);
+    }
+
+    /**
+     * @return FieldError[]
+     */
+    public function getFieldErrors()
+    {
+        return $this->fieldErrors;
     }
 }
