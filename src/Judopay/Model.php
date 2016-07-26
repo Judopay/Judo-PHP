@@ -99,8 +99,10 @@ class Model
         $this->checkJudoId();
         $this->checkRequiredAttributes($this->attributeValues);
 
-        return $this->request->post($this->resourcePath,
-            json_encode($this->attributeValues))->json();
+        return $this->request->post(
+            $this->resourcePath,
+            json_encode($this->attributeValues)
+        )->json();
     }
 
     /**
@@ -114,8 +116,10 @@ class Model
 
         $validateResourcePath = $this->resourcePath.'/validate';
 
-        return $this->request->post($validateResourcePath,
-            json_encode($this->attributeValues))->json();
+        return $this->request->post(
+            $validateResourcePath,
+            json_encode($this->attributeValues)
+        )->json();
     }
 
     /**
@@ -156,8 +160,10 @@ class Model
 
             // Coerce to the right type if required
             $targetDataType = $this->attributes[$key];
-            $this->attributeValues[$key] = DataType::coerce($targetDataType,
-                $value);
+            $this->attributeValues[$key] = DataType::coerce(
+                $targetDataType,
+                $value
+            );
         }
     }
 

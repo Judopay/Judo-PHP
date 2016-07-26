@@ -4,6 +4,6 @@ namespace Judopay\Model\WebPayments;
 
 abstract class WebPaymentOperation
 {
-    const Payment = 0;
-    const Register = 1;
+    const PAYMENT = 0;
+    const REGISTER = 1;
 }

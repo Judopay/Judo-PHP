@@ -44,15 +44,19 @@ class Request implements LoggerAwareInterface
         );
 
         // Use CA cert bundle to verify SSL connection
-        $this->client->setSslVerification(__DIR__
-            .'/../../cert/digicert_sha256_ca.pem');
+        $this->client->setSslVerification(
+            __DIR__
+            .'/../../cert/digicert_sha256_ca.pem'
+        );
 
         // Set up logging
         $adapter = new PsrLogAdapter(
             $this->logger
         );
-        $logPlugin = new LogPlugin($adapter,
-            $this->configuration->get('httpLogFormat'));
+        $logPlugin = new LogPlugin(
+            $adapter,
+            $this->configuration->get('httpLogFormat')
+        );
 
         // Set user agent
         $this->client->setUserAgent($this->configuration->get('userAgent'));

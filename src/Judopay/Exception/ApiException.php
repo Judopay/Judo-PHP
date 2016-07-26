@@ -7,6 +7,7 @@ use Judopay\Helper\ArrayHelper;
 
 class ApiException extends \RuntimeException
 {
+    const MESSAGE = 'JudoPay ApiException (status code %d, error code %d, category %d) %s%s';
     const CATEGORY_UNKNOWN = 0;
     const CATEGORY_REQUEST = 1;
     const CATEGORY_MODEL = 2;
@@ -32,8 +33,11 @@ class ApiException extends \RuntimeException
     {
         $parsedBody = $response->json();
 
-        $category = ArrayHelper::get($parsedBody, 'category',
-            self::CATEGORY_UNKNOWN);
+        $category = ArrayHelper::get(
+            $parsedBody,
+            'category',
+            self::CATEGORY_UNKNOWN
+        );
 
         $message = ArrayHelper::get($parsedBody, 'message', get_called_class());
 
@@ -64,10 +68,10 @@ class ApiException extends \RuntimeException
 
     /**
      * ApiException constructor.
-     * @param string       $message User message
-     * @param int          $code Error code
-     * @param int          $statusCode HTTP status code
-     * @param int          $category Error category
+     * @param string       $message     User message
+     * @param int          $code        Error code
+     * @param int          $statusCode  HTTP status code
+     * @param int          $category    Error category
      * @param FieldError[] $fieldErrors Fields errors
      */
     public function __construct(
@@ -90,7 +94,14 @@ class ApiException extends \RuntimeException
      */
     public function getSummary()
     {
-        return "JudoPay ApiException (status code {$this->getHttpStatusCode()}, error code {$this->getCode()}, category {$this->getCategory()}) {$this->getMessage()}{$this->getDetailsSummary()}";
+        return sprintf(
+            self::MESSAGE,
+            $this->getHttpStatusCode(),
+            $this->getCode(),
+            $this->getCategory(),
+            $this->getMessage(),
+            $this->getDetailsSummary()
+        );
     }
 
     /**
