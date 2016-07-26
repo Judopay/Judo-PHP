@@ -1,0 +1,28 @@
+{
+  "receiptId": "123123123",
+  "yourPaymentReference": "Judo_RegisterCard_636051228548063948",
+  "type": "Register",
+  "createdAt": "2016-07-26T09:40:54.9313+01:00",
+  "result": "Success",
+  "message": "Register Card",
+  "judoId": 323123123,
+  "merchantName": "SomeMerch",
+  "appearsOnStatementAs": "APL123",
+  "originalAmount": "0.00",
+  "netAmount": "0.00",
+  "amount": "0.00",
+  "currency": "GBP",
+  "cardDetails": {
+    "cardLastfour": "3436",
+    "endDate": "1220",
+    "cardToken": "abc",
+    "cardType": 1
+  },
+  "consumer": {
+    "consumerToken": "abc",
+    "yourConsumerReference": "12345"
+  },
+  "risks": {
+    "postCodeCheck": "UNKNOWN"
+  }
+}
