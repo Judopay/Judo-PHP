@@ -24,7 +24,8 @@
     "require-dev": {
         "phpspec/phpspec": "^3.0",
         "bossa/phpspec2-expect": "~1.0",
-        "squizlabs/php_codesniffer": "^2.0"
+        "squizlabs/php_codesniffer": "^2.0",
+        "phpunit/phpunit": "^5.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -36,5 +37,10 @@
         "files": [
             "src/Judopay.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     }
 }
