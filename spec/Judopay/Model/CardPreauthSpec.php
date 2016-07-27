@@ -2,6 +2,9 @@
 
 namespace spec\Judopay\Model;
 
+use Judopay\Model\CardPreauth;
+use Tests\Builders\CardPaymentBuilder;
+
 require_once 'ModelObjectBehavior.php';
 
 class CardPreauthSpec extends ModelObjectBehavior
@@ -13,9 +16,12 @@ class CardPreauthSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_preauth()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+        $modelBuilder = new CardPaymentBuilder();
+        /** @var CardPreauth|CardPreauthSpec $this */
         $this->setAttributeValues(
             $modelBuilder->getAttributeValues()
         );

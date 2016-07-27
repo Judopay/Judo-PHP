@@ -2,7 +2,9 @@
 
 namespace spec\Judopay\Model;
 
+use Judopay\Model\SaveCard;
 use Judopay\Request;
+use Tests\Builders\SaveCardBuilder;
 
 require_once 'ModelObjectBehavior.php';
 
@@ -16,15 +18,14 @@ class SaveCardSpec extends ModelObjectBehavior
 
     public function it_should_save_new_card()
     {
-        $this->beConstructedWith($this->concoctRequest('transactions/save_card.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('transactions/save_card.json')
+        );
 
+        $modelBuilder = new SaveCardBuilder();
+        /** @var SaveCard|SaveCardSpec $this */
         $this->setAttributeValues(
-            [
-                'yourConsumerReference' => '12345',
-                'cardNumber'            => '4976000000003436',
-                'expiryDate'            => '12/20',
-                'cv2'                   => 452,
-            ]
+            $modelBuilder->getAttributeValues()
         );
 
         $output = $this->create();
