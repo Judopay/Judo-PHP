@@ -5,8 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Model\Refund;
 use Tests\Builders\RefundBuilder;
 
-require_once 'ModelObjectBehavior.php';
-
 class RefundSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()

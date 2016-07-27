@@ -6,8 +6,6 @@ use Judopay\Model\SaveCard;
 use Judopay\Request;
 use Tests\Builders\SaveCardBuilder;
 
-require_once 'ModelObjectBehavior.php';
-
 class SaveCardSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()

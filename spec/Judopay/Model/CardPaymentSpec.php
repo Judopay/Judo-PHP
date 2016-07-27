@@ -5,8 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Model\CardPayment;
 use Tests\Builders\CardPaymentBuilder;
 
-require_once 'ModelObjectBehavior.php';
-
 class CardPaymentSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
@@ -58,8 +56,7 @@ class CardPaymentSpec extends ModelObjectBehavior
         $output['errorMessage']->shouldContain('good to go');
     }
 
-    public function it_should_use_the_configured_judo_id_if_one_is_not_provided(
-    )
+    public function it_should_use_the_configured_judo_id_if_one_is_not_provided()
     {
         $this->beConstructedWith(
             $this->concoctRequest('card_payments/create.json')
@@ -104,8 +101,7 @@ class CardPaymentSpec extends ModelObjectBehavior
             'amount' => '123.23GBP',
         ];
 
-        $this->shouldThrow('\OutOfBoundsException')->during(
-            'setAttributeValues', [$input]
-        );
+        $this->shouldThrow('\OutOfBoundsException')
+            ->during('setAttributeValues', [$input]);
     }
 }

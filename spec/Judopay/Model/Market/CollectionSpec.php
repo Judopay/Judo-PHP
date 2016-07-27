@@ -6,8 +6,6 @@ use Judopay\Model\Market\Collection;
 use spec\Judopay\Model\ModelObjectBehavior;
 use Tests\Builders\RefundBuilder;
 
-require_once __DIR__.'/../ModelObjectBehavior.php';
-
 class CollectionSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
@@ -43,5 +41,4 @@ class CollectionSpec extends ModelObjectBehavior
         $output->shouldBeArray();
         $output['results'][0]['amount']->shouldEqual(1.01);
     }
-
 }

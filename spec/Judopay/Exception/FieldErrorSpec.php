@@ -2,11 +2,9 @@
 
 namespace spec\Judopay\Exception;
 
-require_once __DIR__.'/../../SpecHelper.php';
-
+use Judopay\Exception\FieldError;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-
 
 class FieldErrorSpec extends ObjectBehavior
 {
@@ -16,10 +14,11 @@ class FieldErrorSpec extends ObjectBehavior
         $message = bin2hex(openssl_random_pseudo_bytes(10));
         $fieldName = bin2hex(openssl_random_pseudo_bytes(10));
         $details = bin2hex(openssl_random_pseudo_bytes(10));
-        $code = mt_rand(0,100);
+        $code = mt_rand(0, 100);
 
         $this->beConstructedWith($message, $code, $fieldName, $details);
         $this->shouldHaveType('Judopay\Exception\FieldError');
+        /** @var FieldError|FieldErrorSpec $this */
         $this->getMessage()->shouldEqual($message);
         $this->getCode()->shouldEqual($code);
         $this->getFieldName()->shouldEqual($fieldName);

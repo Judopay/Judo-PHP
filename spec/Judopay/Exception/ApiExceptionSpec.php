@@ -2,12 +2,10 @@
 
 namespace spec\Judopay\Exception;
 
-require_once __DIR__.'/../../SpecHelper.php';
-
-use Judopay\SpecHelper;
+use Judopay\Exception\ApiException;
+use spec\SpecHelper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-
 
 class ApiExceptionSpec extends ObjectBehavior
 {
@@ -21,6 +19,7 @@ class ApiExceptionSpec extends ObjectBehavior
 
         $this->beConstructedWith($message, $code, $statusCode, $category);
         $this->shouldHaveType('Judopay\Exception\ApiException');
+        /** @var ApiException|ApiExceptionSpec $this */
         $this->getMessage()->shouldEqual($message);
         $this->getCode()->shouldEqual($code);
         $this->getHttpStatusCode()->shouldEqual($statusCode);
@@ -31,6 +30,7 @@ class ApiExceptionSpec extends ObjectBehavior
     {
         $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_api_version.json');
         $this->beConstructedThrough('factory', [$response]);
+        /** @var ApiException|ApiExceptionSpec $this */
         $this->getHttpStatusCode()->shouldEqual(400);
         $this->getMessage()->shouldEqual("API-Version not supported");
         $this->getCode()->shouldEqual(39);
@@ -41,6 +41,7 @@ class ApiExceptionSpec extends ObjectBehavior
     {
         $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_currency_field.json');
         $this->beConstructedThrough('factory', [$response]);
+        /** @var ApiException|ApiExceptionSpec $this */
         $this->getFieldErrors()->shouldHaveCount(3);
     }
 }

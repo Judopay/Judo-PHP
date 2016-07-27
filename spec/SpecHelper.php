@@ -1,12 +1,18 @@
 <?php
 
-namespace Judopay;
+namespace spec;
+
+use Guzzle\Http\Client;
+use Guzzle\Http\Message\Response;
+use Guzzle\Plugin\Mock\MockPlugin;
+use Judopay\Configuration;
 
 class SpecHelper
 {
     public static function getMockResponse($responseCode, $responseBody = null)
     {
-        $mockResponse = new \Guzzle\Http\Message\Response($responseCode, null, $responseBody);
+        $mockResponse = new Response($responseCode, null, $responseBody);
+
         return $mockResponse;
     }
 
@@ -17,15 +23,19 @@ class SpecHelper
             $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
         }
 
-        $mockResponse = new \Guzzle\Http\Message\Response($responseCode, null, $fixtureContent);
+        $mockResponse = new Response(
+            $responseCode,
+            null,
+            $fixtureContent
+        );
 
         return $mockResponse;
     }
 
     public static function getMockResponseClient($responseCode, $fixtureFile)
     {
-        $client = new \Guzzle\Http\Client();
-        $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
+        $client = new Client();
+        $plugin = new MockPlugin();
 
         $mockResponse = SpecHelper::getMockResponseFromFixture($responseCode, $fixtureFile);
         $plugin->addResponse($mockResponse);
@@ -36,11 +46,12 @@ class SpecHelper
 
     public static function getConfiguration()
     {
-        $configuration = new \Judopay\Configuration(array(
-                'apiToken' => 'token',
+        $configuration = new Configuration(
+            [
+                'apiToken'  => 'token',
                 'apiSecret' => 'secret',
-                'judoId' => '123-456'
-            )
+                'judoId'    => '123-456',
+            ]
         );
 
         return $configuration;

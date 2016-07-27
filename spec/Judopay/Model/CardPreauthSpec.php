@@ -5,8 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Model\CardPreauth;
 use Tests\Builders\CardPaymentBuilder;
 
-require_once 'ModelObjectBehavior.php';
-
 class CardPreauthSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()

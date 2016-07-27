@@ -2,13 +2,14 @@
 
 namespace spec\Judopay\Model;
 
-require_once 'ModelObjectBehavior.php';
+use Judopay\Model\Transaction;
+use Judopay\Request;
 
 class TransactionSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->beConstructedWith(new \Judopay\Request($this->configuration));
+        $this->beConstructedWith(new Request($this->configuration));
         $this->shouldHaveType('Judopay\Model\Transaction');
     }
 
@@ -17,6 +18,7 @@ class TransactionSpec extends ModelObjectBehavior
         $request = $this->concoctRequest('transactions/all.json');
         $this->beConstructedWith($request);
 
+        /** @var Transaction|TransactionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
         $output['results'][0]['amount']->shouldEqual(1.01);
@@ -28,8 +30,9 @@ class TransactionSpec extends ModelObjectBehavior
         $this->beConstructedWith($request);
 
         $receiptId = 439539;
+        /** @var Transaction|TransactionSpec $this */
         $output = $this->find($receiptId);
         $output->shouldBeArray();
-        $output['receiptId']->shouldBeLike($receiptId);        
+        $output['receiptId']->shouldBeLike($receiptId);
     }
 }

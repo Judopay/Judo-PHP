@@ -5,8 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Model\TokenPayment;
 use Tests\Builders\TokenPaymentBuilder;
 
-require_once 'ModelObjectBehavior.php';
-
 class TokenPaymentSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()

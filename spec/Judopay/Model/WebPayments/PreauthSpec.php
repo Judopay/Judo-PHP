@@ -7,8 +7,6 @@ use Judopay\Request;
 use spec\Judopay\Model\ModelObjectBehavior;
 use Tests\Builders\WebPayments\PaymentBuilder;
 
-require_once __DIR__.'/../ModelObjectBehavior.php';
-
 class PreauthSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
