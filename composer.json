@@ -22,10 +22,15 @@
         "pimple/pimple": "~2.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0",
+        "phpspec/phpspec": "^2.0",
         "bossa/phpspec2-expect": "~1.0",
         "squizlabs/php_codesniffer": "^2.0",
-        "phpunit/phpunit": "^5.0"
+        "phpunit/phpunit": "4.8",
+        "symfony/finder": "~2.1",
+        "symfony/console": "~2.3",
+        "symfony/process": "^2.6",
+        "symfony/yaml": "~2.1",
+        "phpdocumentor/reflection-docblock": "^2.0"
     },
     "config": {
         "bin-dir": "bin"

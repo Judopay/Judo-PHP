@@ -3,12 +3,11 @@
  * @author Oleg Fetisov <ofetisov@corevalue.net>
  */
 
-use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class AuthenticationTest extends TestCase
+class AuthenticationTest extends PHPUnit_Framework_TestCase
 {
     public function testPaymentWithInvalidJudoId()
     {
