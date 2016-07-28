@@ -2,7 +2,9 @@
 
 namespace Judopay\Model\Market;
 
-class Preauth extends \Judopay\Model
+use Judopay\Model;
+
+class Preauth extends Model
 {
     protected $resourcePath = 'market/transactions/preauths';
     protected $validApiMethods = array('all');

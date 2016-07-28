@@ -8,9 +8,9 @@ use Judopay\Model;
 class SaveCard extends Model
 {
     protected $resourcePath = 'transactions/savecard';
-    protected $validApiMethods = ['create'];
+    protected $validApiMethods = array('create');
     protected $attributes
-        = [
+        = array(
             'yourConsumerReference' => DataType::TYPE_STRING,
             'cardNumber'            => DataType::TYPE_STRING,
             'startDate'             => DataType::TYPE_STRING,
@@ -20,12 +20,12 @@ class SaveCard extends Model
             'cardAddress'           => DataType::TYPE_ARRAY,
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
-        ];
+        );
     protected $requiredAttributes
-        = [
+        = array(
             'yourConsumerReference',
             'cardNumber',
             'cv2',
             'expiryDate',
-        ];
+        );
 }

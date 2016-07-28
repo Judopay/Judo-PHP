@@ -30,7 +30,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
 
     public function testPaymentWithInvalidToken()
     {
-        $config = ConfigHelper::getConfig(['apiToken' => 'Bad_token']);
+        $config = ConfigHelper::getConfig(array('apiToken' => 'Bad_token'));
 
         $builder = new CardPaymentBuilder();
         $cardPayment = $builder->build($config);
@@ -48,7 +48,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
 
     public function testPaymentWithInvalidSecret()
     {
-        $config = ConfigHelper::getConfig(['apiSecret' => 'Bad_secret']);
+        $config = ConfigHelper::getConfig(array('apiSecret' => 'Bad_secret'));
 
         $builder = new CardPaymentBuilder();
         $cardPayment = $builder->build($config);

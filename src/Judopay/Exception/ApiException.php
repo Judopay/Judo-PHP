@@ -14,13 +14,10 @@ class ApiException extends \RuntimeException
     const CATEGORY_CONFIG = 3;
     const CATEGORY_PROCESSING = 4;
     const CATEGORY_EXCEPTION = 5;
-
     /** @var FieldError[] */
-    protected $fieldErrors = [];
-
+    protected $fieldErrors = array();
     /** @var int */
     protected $statusCode;
-
     /** @var int */
     protected $category;
 
@@ -43,7 +40,7 @@ class ApiException extends \RuntimeException
 
         $errorCode = ArrayHelper::get($parsedBody, 'code', 0);
 
-        $fieldErrors = [];
+        $fieldErrors = array();
         if (isset($parsedBody['details'])) {
             foreach ($parsedBody['details'] as $rawFieldError) {
                 $fieldErrors[] = new FieldError(
@@ -79,7 +76,7 @@ class ApiException extends \RuntimeException
         $code = 0,
         $statusCode = 0,
         $category = self::CATEGORY_UNKNOWN,
-        $fieldErrors = []
+        $fieldErrors = array()
     ) {
         $this->message = $message;
         $this->code = $code;

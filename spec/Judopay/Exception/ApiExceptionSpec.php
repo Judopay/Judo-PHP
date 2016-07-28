@@ -29,7 +29,7 @@ class ApiExceptionSpec extends ObjectBehavior
     public function factory_should_return_right_variables()
     {
         $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_api_version.json');
-        $this->beConstructedThrough('factory', [$response]);
+        $this->beConstructedThrough('factory', array($response));
         /** @var ApiException|ApiExceptionSpec $this */
         $this->getHttpStatusCode()->shouldEqual(400);
         $this->getMessage()->shouldEqual("API-Version not supported");
@@ -40,7 +40,7 @@ class ApiExceptionSpec extends ObjectBehavior
     public function factory_should_return_the_model_errors_if_applicable()
     {
         $response = SpecHelper::getMockResponseFromFixture(400, 'errors/bad_currency_field.json');
-        $this->beConstructedThrough('factory', [$response]);
+        $this->beConstructedThrough('factory', array($response));
         /** @var ApiException|ApiExceptionSpec $this */
         $this->getFieldErrors()->shouldHaveCount(3);
     }

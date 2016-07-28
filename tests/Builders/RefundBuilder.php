@@ -6,10 +6,10 @@ class RefundBuilder extends AbstractModelBuilder
 {
     public function __construct()
     {
-        $this->attributeValues = [
+        $this->attributeValues = array(
             'receiptId'            => 1234,
             'yourPaymentReference' => '12345',
             'amount'               => 1.01,
-        ];
+        );
     }
 }

@@ -6,7 +6,7 @@ class TokenPaymentBuilder extends AbstractModelBuilder
 {
     public function __construct()
     {
-        $this->attributeValues = [
+        $this->attributeValues = array(
             'yourConsumerReference' => '12345',
             'yourPaymentReference'  => '12345',
             'judoId'                => '123-456-789',
@@ -14,6 +14,6 @@ class TokenPaymentBuilder extends AbstractModelBuilder
             'consumerToken'         => '3UW4DV9wI0oKkMFS',
             'cardToken'             => 'SXw4hnv1vJuEujQR',
             'cv2'                   => 452,
-        ];
+        );
     }
 }

@@ -16,10 +16,8 @@ class Request implements LoggerAwareInterface
 {
     /** @var Configuration */
     protected $configuration;
-
     /** @var  Client */
     protected $client;
-
     /** @var LoggerInterface */
     protected $logger;
 
@@ -36,11 +34,11 @@ class Request implements LoggerAwareInterface
         // Set headers
         $this->client->setDefaultOption(
             'headers',
-            [
+            array(
                 'API-Version'  => $this->configuration->get('apiVersion'),
                 'Accept'       => 'application/json; charset=utf-8',
                 'Content-Type' => 'application/json',
-            ]
+            )
         );
 
         // Use CA cert bundle to verify SSL connection
@@ -92,7 +90,7 @@ class Request implements LoggerAwareInterface
         $endpointUrl = $this->configuration->get('endpointUrl');
         $guzzleRequest = $this->client->post(
             $endpointUrl.'/'.$resourcePath,
-            [],
+            array(),
             $data
         );
 

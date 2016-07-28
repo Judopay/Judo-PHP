@@ -15,40 +15,35 @@ class Model
      * @var Request
      **/
     protected $request;
-
     /**
      * Resource path (e.g. /transactions/payments)
      * @var string
      **/
     protected $resourcePath;
-
     /**
      * Valid API methods for this model
      * e.g. array('all', 'create')
      * @var array
      **/
     protected $validApiMethods;
-
     /**
      * Attributes with expected data types
      * e.g. array('yourConsumerReference' => DataType::TYPE_STRING)
      * @var array
      **/
-    protected $attributes = [];
-
+    protected $attributes = array();
     /**
      * Attributes with values
      * e.g. array('yourConsumerReference' => '123456')
      * @var array
      **/
-    protected $attributeValues = [];
-
+    protected $attributeValues = array();
     /**
      * Attributes that must be present before submission to the API
      * e.g. array('yourConsumerReference', 'judoId')
      * @var array
      **/
-    protected $requiredAttributes = [];
+    protected $requiredAttributes = array();
 
     public function __construct(Request $request)
     {
@@ -65,11 +60,11 @@ class Model
     public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
-        $pagingOptions = [
+        $pagingOptions = array(
             'offset'   => $offset,
             'pageSize' => $pageSize,
             'sort'     => $sort,
-        ];
+        );
         $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
 
         return $this->request->get($uri)->json();
@@ -189,7 +184,7 @@ class Model
     protected function checkRequiredAttributes($data)
     {
         $existingAttributes = array_keys($data);
-        $errors = [];
+        $errors = array();
         foreach ($this->requiredAttributes as $requiredAttribute) {
             if (!in_array($requiredAttribute, $existingAttributes)) {
                 $errors[] = $requiredAttribute.' is missing';

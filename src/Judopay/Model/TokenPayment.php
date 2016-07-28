@@ -2,9 +2,10 @@
 
 namespace Judopay\Model;
 
-use \Judopay\DataType;
+use Judopay\DataType;
+use Judopay\Model;
 
-class TokenPayment extends \Judopay\Model
+class TokenPayment extends Model
 {
     protected $resourcePath = 'transactions/payments';
     protected $validApiMethods = array('create');

@@ -15,11 +15,11 @@ class JudopaySpec extends ObjectBehavior
     public function it_should_set_config_values_on_initialisation()
     {
         $this->beConstructedWith(
-            [
+            array(
                 'apiToken'  => 'token',
                 'apiSecret' => 'secret',
                 'dodgy_key' => 'dodgy value',
-            ]
+            )
         );
 
         /** @var $this JudopaySpec|\Judopay */
@@ -37,10 +37,10 @@ class JudopaySpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return [
+        return array(
             'notHaveKey' => function ($subject, $key) {
                 return !array_key_exists($key, $subject);
             },
-        ];
+        );
     }
 }

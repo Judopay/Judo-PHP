@@ -8,9 +8,9 @@ use Judopay\Model;
 class CardPayment extends Model
 {
     protected $resourcePath = 'transactions/payments';
-    protected $validApiMethods = ['create', 'validate'];
+    protected $validApiMethods = array('create', 'validate');
     protected $attributes
-        = [
+        = array(
             'yourConsumerReference' => DataType::TYPE_STRING,
             'yourPaymentReference'  => DataType::TYPE_STRING,
             'yourPaymentMetaData'   => DataType::TYPE_ARRAY,
@@ -24,9 +24,9 @@ class CardPayment extends Model
             'consumerLocation'      => DataType::TYPE_ARRAY,
             'mobileNumber'          => DataType::TYPE_STRING,
             'emailAddress'          => DataType::TYPE_STRING,
-        ];
+        );
     protected $requiredAttributes
-        = [
+        = array(
             'yourConsumerReference',
             'yourPaymentReference',
             'judoId',
@@ -34,5 +34,5 @@ class CardPayment extends Model
             'currency',
             'cardNumber',
             'expiryDate',
-        ];
+        );
 }

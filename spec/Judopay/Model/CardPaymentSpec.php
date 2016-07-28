@@ -78,17 +78,17 @@ class CardPaymentSpec extends ModelObjectBehavior
     // Generic model methods
     public function it_coerces_attributes_into_the_correct_data_type()
     {
-        $input = [
+        $input = array(
             'yourPaymentMetaData' => 'an unexpected string',
             'judoId'              => 'judo123',
             'amount'              => '123.23',
-        ];
+        );
 
-        $expectedOutput = [
-            'yourPaymentMetaData' => ['an unexpected string'],
+        $expectedOutput = array(
+            'yourPaymentMetaData' => array('an unexpected string'),
             'judoId'              => 'judo123',
             'amount'              => 123.23,
-        ];
+        );
 
         /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues($input);
@@ -97,11 +97,11 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_baulk_at_very_unusual_float_values()
     {
-        $input = [
+        $input = array(
             'amount' => '123.23GBP',
-        ];
+        );
 
         $this->shouldThrow('\OutOfBoundsException')
-            ->during('setAttributeValues', [$input]);
+            ->during('setAttributeValues', array($input));
     }
 }

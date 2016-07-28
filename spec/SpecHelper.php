@@ -47,11 +47,11 @@ class SpecHelper
     public static function getConfiguration()
     {
         $configuration = new Configuration(
-            [
+            array(
                 'apiToken'  => 'token',
                 'apiSecret' => 'secret',
                 'judoId'    => '123-456',
-            ]
+            )
         );
 
         return $configuration;
