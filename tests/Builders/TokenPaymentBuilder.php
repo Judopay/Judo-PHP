@@ -4,15 +4,17 @@ namespace Tests\Builders;
 
 class TokenPaymentBuilder extends AbstractModelBuilder
 {
-    public function __construct()
-    {
+    public function __construct(
+        $yourConsumerReference = '12345',
+        $consumerToken = '3UW4DV9wI0oKkMFS',
+        $cardToken = 'SXw4hnv1vJuEujQR'
+    ) {
         $this->attributeValues = array(
-            'yourConsumerReference' => '12345',
+            'yourConsumerReference' => $yourConsumerReference,
             'yourPaymentReference'  => '12345',
-            'judoId'                => '123-456-789',
             'amount'                => 1.01,
-            'consumerToken'         => '3UW4DV9wI0oKkMFS',
-            'cardToken'             => 'SXw4hnv1vJuEujQR',
+            'consumerToken'         => $consumerToken,
+            'cardToken'             => $cardToken,
             'cv2'                   => 452,
         );
     }

@@ -31,4 +31,18 @@ class AssertionHelper
         Assert::assertEquals($statusCode, $apiException->getHttpStatusCode());
         Assert::assertEquals($errorCategory, $apiException->getCategory());
     }
+
+    public static function assertSuccessfulPayment($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertEquals('Success', $result['result']);
+        Assert::assertGreaterThan(0, $result['receiptId']);
+    }
+
+    public static function assertDeclinedPayment($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertEquals('Declined', $result['result']);
+        Assert::assertGreaterThan(0, $result['receiptId']);
+    }
 }

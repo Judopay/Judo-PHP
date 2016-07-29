@@ -186,8 +186,11 @@ class Model
         $existingAttributes = array_keys($data);
         $errors = array();
         foreach ($this->requiredAttributes as $requiredAttribute) {
-            if (!in_array($requiredAttribute, $existingAttributes)) {
-                $errors[] = $requiredAttribute.' is missing';
+            if (!in_array($requiredAttribute, $existingAttributes)
+                || $data[$requiredAttribute] === ''
+                || $data[$requiredAttribute] = null
+            ) {
+                $errors[] = $requiredAttribute.' is missing or empty';
             }
         }
 

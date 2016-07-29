@@ -21,7 +21,7 @@ class CardPreauthSpec extends ModelObjectBehavior
         $modelBuilder = new CardPaymentBuilder();
         /** @var CardPreauth|CardPreauthSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

@@ -21,7 +21,7 @@ class CardPaymentSpec extends ModelObjectBehavior
         $modelBuilder = new CardPaymentBuilder();
         /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 
@@ -48,7 +48,7 @@ class CardPaymentSpec extends ModelObjectBehavior
         $modelBuilder = new CardPaymentBuilder();
         /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->setAttribute('judoId', '12345')->getAttributeValues()
         );
         $output = $this->validate();
 
@@ -65,10 +65,10 @@ class CardPaymentSpec extends ModelObjectBehavior
         $modelBuilder = new CardPaymentBuilder();
 
         // Set an empty Judo ID to make sure the config value is used
-        $modelBuilder->setJudoId(null);
+        $modelBuilder->unsetAttribute('judoId');
         /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $this->create();
 

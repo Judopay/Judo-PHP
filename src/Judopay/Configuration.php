@@ -2,34 +2,35 @@
 
 namespace Judopay;
 
+use Judopay\Exception\ValidationError;
 use Psr\Log\NullLogger;
 
 class Configuration
 {
     protected $settings = array();
-
-    protected $valid_config_keys = array(
-        'apiVersion',
-        'apiToken',
-        'apiSecret',
-        'oauthAccessToken',
-        'format',
-        'endpointUrl',
-        'userAgent',
-        'judoId',
-        'useProduction',
-        'logger',
-        'httpLogFormat'
-    );
+    protected $valid_config_keys
+        = array(
+            'apiVersion',
+            'apiToken',
+            'apiSecret',
+            'oauthAccessToken',
+            'format',
+            'endpointUrl',
+            'userAgent',
+            'judoId',
+            'useProduction',
+            'logger',
+            'httpLogFormat',
+        );
 
     public function __construct($settings = null)
     {
         // Set sensible defaults
         $this->settings['apiVersion'] = \Judopay::VERSION;
         $this->settings['logger'] = new NullLogger();
-        $this->settings['userAgent'] = 'Judopay PHP v' . phpversion() . ' SDK v' . \Judopay::VERSION;
+        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.\Judopay::VERSION;
         $this->settings['httpLogFormat'] = "\"{method} {resource} {protocol}/{version}\" ".
-                                           "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
+            "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
 
         // Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);
@@ -90,5 +91,18 @@ class Configuration
         } else {
             $this->settings['endpointUrl'] = 'https://gw1.judopay-sandbox.com';
         }
+    }
+
+    public function validate()
+    {
+        $judoId = $this->get('judoId');
+        $apiToken = $this->get('apiToken');
+        $apiSecret = $this->get('apiSecret');
+
+        if (empty($judoId) || empty($apiToken) || empty($apiSecret)) {
+            throw new ValidationError('SDK configuration variables missing');
+        }
+
+        return true;
     }
 }

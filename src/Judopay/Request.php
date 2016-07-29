@@ -99,6 +99,7 @@ class Request implements LoggerAwareInterface
 
     public function setRequestAuthentication(GuzzleRequest $request)
     {
+        $this->configuration->validate();
         $oauthAccessToken = $this->configuration->get('oauthAccessToken');
 
         // Do we have an oAuth2 access token?

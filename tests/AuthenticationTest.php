@@ -3,6 +3,9 @@
  * @author Oleg Fetisov <ofetisov@corevalue.net>
  */
 
+namespace Tests;
+
+use PHPUnit_Framework_TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
@@ -14,7 +17,7 @@ class AuthenticationTest extends PHPUnit_Framework_TestCase
         $config = ConfigHelper::getConfig();
 
         $builder = new CardPaymentBuilder();
-        $builder->setJudoId('123');
+        $builder->setAttribute('judoId', '123');
         $cardPayment = $builder->build($config);
 
         try {

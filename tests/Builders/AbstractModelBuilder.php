@@ -26,6 +26,7 @@ abstract class AbstractModelBuilder
      */
     public function build(Configuration $configuration = null)
     {
+        $this->compile();
         $request = new Request($configuration ?: new Configuration());
         $request->setClient(new Client());
 
@@ -46,5 +47,24 @@ abstract class AbstractModelBuilder
     public function getAttributeValues()
     {
         return $this->attributeValues;
+    }
+
+    public function setAttribute($attribute, $value)
+    {
+        $this->attributeValues[$attribute] = $value;
+
+        return $this;
+    }
+
+    public function unsetAttribute($attribute)
+    {
+        unset($this->attributeValues[$attribute]);
+
+        return $this;
+    }
+
+    public function compile()
+    {
+        return $this;
     }
 }

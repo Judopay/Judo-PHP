@@ -21,4 +21,21 @@ class ConfigHelper
             )
         );
     }
+
+    /**
+     * Returns Configuration from settings array
+     * @param array $settings [judoId, apiToken, apiSecret]
+     * @return Configuration
+     */
+    public static function getConfigFromList(array $settings)
+    {
+        return new Configuration(
+            array(
+                'judoId'        => $settings[0],
+                'apiToken'      => $settings[1],
+                'apiSecret'     => $settings[2],
+                'useProduction' => false,
+            )
+        );
+    }
 }

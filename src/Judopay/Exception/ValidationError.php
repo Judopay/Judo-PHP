@@ -12,7 +12,7 @@ class ValidationError extends \RuntimeException
      * @param string $message
      * @param array  $modelErrors
      */
-    public function __construct($message, $modelErrors)
+    public function __construct($message, $modelErrors = array())
     {
         $this->message = $message;
         $this->modelErrors = $modelErrors;
