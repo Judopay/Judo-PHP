@@ -5,9 +5,10 @@
 
 namespace Tests;
 
+use Tests\Base\PaymentTests;
 use Tests\Builders\CardPreauthBuilder;
 
-class PreauthTest extends BasePaymentTests
+class PreauthTest extends PaymentTests
 {
     protected function getBuilder()
     {

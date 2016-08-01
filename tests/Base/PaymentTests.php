@@ -3,7 +3,7 @@
  * @author Oleg Fetisov <ofetisov@corevalue.net>
  */
 
-namespace Tests;
+namespace Tests\Base;
 
 use PHPUnit_Framework_TestCase;
 use Tests\Builders\CardPaymentBuilder;
@@ -11,7 +11,7 @@ use Tests\Builders\CardPreauthBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-abstract class BasePaymentTests extends PHPUnit_Framework_TestCase
+abstract class PaymentTests extends PHPUnit_Framework_TestCase
 {
     /**
      * @return CardPaymentBuilder|CardPreauthBuilder

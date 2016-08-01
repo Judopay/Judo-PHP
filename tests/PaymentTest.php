@@ -5,9 +5,10 @@
 
 namespace Tests;
 
+use Tests\Base\PaymentTests;
 use Tests\Builders\CardPaymentBuilder;
 
-class PaymentTest extends BasePaymentTests
+class PaymentTest extends PaymentTests
 {
     protected function getBuilder()
     {
