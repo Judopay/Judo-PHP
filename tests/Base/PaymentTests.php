@@ -20,9 +20,8 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
 
     public function testValidPayment()
     {
-        $config = ConfigHelper::getConfig();
-
-        $cardPayment = $this->getBuilder()->build($config);
+        $cardPayment = $this->getBuilder()
+            ->build(ConfigHelper::getConfig());
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
@@ -30,11 +29,9 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
 
     public function testDeclinedPayment()
     {
-        $config = ConfigHelper::getConfig();
-
         $cardPayment = $this->getBuilder()
             ->setType(CardPaymentBuilder::INVALID_VISA_CARD)
-            ->build($config);
+            ->build(ConfigHelper::getConfig());
         $result = $cardPayment->create();
 
         AssertionHelper::assertDeclinedPayment($result);
@@ -42,11 +39,9 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
 
     public function testPaymentWithNegativeAmount()
     {
-        $config = ConfigHelper::getConfig();
-
         $cardPayment = $this->getBuilder()
             ->setAttribute('amount', -1)
-            ->build($config);
+            ->build(ConfigHelper::getConfig());
 
         try {
             $cardPayment->create();
@@ -61,11 +56,9 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
 
     public function testPaymentWithZeroAmount()
     {
-        $config = ConfigHelper::getConfig();
-
         $cardPayment = $this->getBuilder()
             ->setAttribute('amount', 0)
-            ->build($config);
+            ->build(ConfigHelper::getConfig());
 
         try {
             $cardPayment->create();
@@ -81,22 +74,19 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
     public function testPaymentWithoutCurrency()
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
-        $config = ConfigHelper::getConfig();
 
         $cardPayment = $this->getBuilder()
             ->setAttribute('currency', '')
-            ->build($config);
+            ->build(ConfigHelper::getConfig());
 
         $cardPayment->create();
     }
 
     public function testPaymentWithUnknownCurrency()
     {
-        $config = ConfigHelper::getConfig();
-
         $cardPayment = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build($config);
+            ->build(ConfigHelper::getConfig());
 
         try {
             $cardPayment->create();
@@ -112,11 +102,10 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
     public function testPaymentWithoutReference()
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
-        $config = ConfigHelper::getConfig();
 
         $cardPayment = $this->getBuilder()
-            ->setAttribute('yourConsumerReference', '')
-            ->build($config);
+            ->unsetAttribute('yourConsumerReference')
+            ->build(ConfigHelper::getConfig());
 
         $cardPayment->create();
     }
