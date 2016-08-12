@@ -129,9 +129,9 @@ class ApiException extends \RuntimeException
 
     protected function getDetailsSummary()
     {
-        return empty($this->details)
+        return empty($this->fieldErrors)
             ? ""
-            : ' Fields errors: '.PHP_EOL.join(PHP_EOL, $this->details);
+            : ' Fields errors: '.PHP_EOL.join(PHP_EOL, $this->fieldErrors);
     }
 
     /**
