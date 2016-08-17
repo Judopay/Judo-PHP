@@ -27,7 +27,6 @@ class TokenPayment extends Model
         'yourPaymentReference',
         'judoId',
         'amount',
-        'consumerToken',
         'cardToken'
     );
 }

@@ -62,7 +62,7 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
         $tokenPayment = $this->getBuilder()
-            ->unsetAttribute('consumerToken')
+            ->unsetAttribute('cardToken')
             ->build(ConfigHelper::getConfig());
 
         $tokenPayment->create();
@@ -73,7 +73,7 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
         $tokenPayment = $this->getBuilder()
-            ->unsetAttribute('consumerToken')
+            ->unsetAttribute('cardToken')
             ->unsetAttribute('cv2')
             ->build(ConfigHelper::getConfig());
 

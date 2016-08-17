@@ -26,10 +26,8 @@ class RegisterCard extends Model
             'yourConsumerReference',
             'yourPaymentReference',
             'judoId',
-            'amount',
             'cardNumber',
             'expiryDate',
             'cv2',
-            'currency'
         );
 }

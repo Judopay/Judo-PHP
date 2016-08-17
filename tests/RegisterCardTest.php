@@ -19,12 +19,12 @@ class RegisterCardTest extends PaymentTests
 
     public function testPaymentWithUnknownCurrency()
     {
-        $cardPayment = $this->getBuilder()
+        $registerCard = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
             ->build(ConfigHelper::getConfig());
 
         try {
-            $cardPayment->create();
+            $registerCard->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 72, 409, 3);
 
@@ -36,11 +36,11 @@ class RegisterCardTest extends PaymentTests
 
     public function testPaymentChangedAmount()
     {
-        $cardPayment = $this->getBuilder()
+        $registerCard = $this->getBuilder()
             ->setAttribute('amount', 100500)
             ->build(ConfigHelper::getConfig());
 
-        $result = $cardPayment->create();
+        $result = $registerCard->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
         $this->assertEquals(1.01, $result['amount']);
@@ -57,5 +57,16 @@ class RegisterCardTest extends PaymentTests
     {
         //Unneeded test
         $this->assertTrue(true);
+    }
+
+    public function testPaymentWithoutCurrency()
+    {
+        $registerCard = $this->getBuilder()
+            ->unsetAttribute('currency')
+            ->build(ConfigHelper::getConfig());
+
+        $result = $registerCard->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
     }
 }

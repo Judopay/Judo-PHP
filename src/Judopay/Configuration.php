@@ -86,10 +86,13 @@ class Configuration
 
     protected function setEndpointUrl()
     {
-        if (isset($this->settings['useProduction']) && $this->settings['useProduction'] === true) {
-            $this->settings['endpointUrl'] = 'https://gw1.judopay.com';
+        if (isset($this->settings['endpointUrl'])) {
+            return; //allow custom endpoint
         } else {
-            $this->settings['endpointUrl'] = 'https://gw1.judopay-sandbox.com';
+            $this->settings['endpointUrl'] = isset($this->settings['useProduction'])
+            && $this->settings['useProduction'] === true
+                ? 'https://gw1.judopay.com'
+                : 'https://gw1.judopay-sandbox.com';
         }
     }
 
