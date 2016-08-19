@@ -8,7 +8,7 @@ use Judopay\Model;
 class Void extends Model
 {
     protected $resourcePath = 'transactions/voids';
-    protected $validApiMethods = array('create', 'validate');
+    protected $validApiMethods = array('create');
     protected $attributes
         = array(
             'judoId'                => DataType::TYPE_STRING,

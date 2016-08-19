@@ -57,7 +57,7 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
         AssertionHelper::assertDeclinedPayment($result);
     }
 
-    public function testTokenPaymentAndWithoutToken()
+    public function testTokenPaymentWithoutToken()
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
