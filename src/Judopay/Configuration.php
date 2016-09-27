@@ -26,9 +26,9 @@ class Configuration
     public function __construct($settings = null)
     {
         // Set sensible defaults
-        $this->settings['apiVersion'] = \Judopay::VERSION;
+        $this->settings['apiVersion'] = \Judopay::API_VERSION;
         $this->settings['logger'] = new NullLogger();
-        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.\Judopay::VERSION;
+        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.\Judopay::SDK_VERSION;
         $this->settings['httpLogFormat'] = "\"{method} {resource} {protocol}/{version}\" ".
             "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
 

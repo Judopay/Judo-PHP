@@ -34,5 +34,6 @@ class CardPayment extends Model
             'currency',
             'cardNumber',
             'expiryDate',
+            'cv2',
         );
 }

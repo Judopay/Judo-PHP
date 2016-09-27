@@ -7,7 +7,6 @@ namespace Tests;
 
 use PHPUnit_Framework_TestCase;
 use Tests\Builders\CardPaymentBuilder;
-use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
 class CardDetailsTest extends PHPUnit_Framework_TestCase
@@ -27,6 +26,8 @@ class CardDetailsTest extends PHPUnit_Framework_TestCase
 
     public function testPaymentWithMissingCv2()
     {
+        $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
+
         $config = ConfigHelper::getConfig();
 
         $builder = new CardPaymentBuilder();
@@ -34,15 +35,7 @@ class CardDetailsTest extends PHPUnit_Framework_TestCase
 
         $cardPayment = $builder->build($config);
 
-        try {
-            $cardPayment->create();
-        } catch (\Exception $e) {
-            AssertionHelper::assertApiExceptionWithModelErrors($e, 1, 1);
-
-            return;
-        }
-
-        $this->fail('An expected ApiException has not been raised.');
+        $cardPayment->create();
     }
 
     public function testPaymentWithMissingExpiryDate()

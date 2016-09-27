@@ -10,7 +10,8 @@ use Pimple\Container;
  */
 class Judopay
 {
-    const VERSION = '5.2.0';
+    const SDK_VERSION = '2.0.0';
+    const API_VERSION = '5.2.0';
     /**
      * Pimple DI container
      * @var object Pimple\Container

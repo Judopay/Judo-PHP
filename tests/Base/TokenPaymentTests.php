@@ -93,6 +93,8 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
 
             return;
         }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithZeroAmount()
@@ -108,6 +110,8 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
 
             return;
         }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCurrency()
@@ -127,9 +131,15 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
             ->setAttribute('currency', 'ZZZ')
             ->build(ConfigHelper::getConfig());
 
-        $result = $tokenPayment->create();
+        try {
+            $tokenPayment->create();
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 2, 1);
 
-        AssertionHelper::assertSuccessfulPayment($result);
+            return;
+        }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutReference()
@@ -168,6 +178,8 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
 
             return;
         }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCv2AndWithZeroAmount()
@@ -184,6 +196,8 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
 
             return;
         }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCv2AndWithoutCurrency()
@@ -205,9 +219,15 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
             ->unsetAttribute('cv2')
             ->build(ConfigHelper::getConfig());
 
-        $result = $tokenPayment->create();
+        try {
+            $tokenPayment->create();
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 2, 1);
 
-        AssertionHelper::assertDeclinedPayment($result);
+            return;
+        }
+
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCv2AndWithoutReference()
