@@ -1,7 +1,4 @@
 <?php
-/**
- * @author Oleg Fetisov <ofetisov@corevalue.net>
- */
 
 namespace Tests\Helpers;
 

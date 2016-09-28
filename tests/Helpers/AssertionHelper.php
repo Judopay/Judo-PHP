@@ -4,9 +4,6 @@ namespace Tests\Helpers;
 
 use PHPUnit_Framework_Assert as Assert;
 
-/**
- * @author Oleg Fetisov <ofetisov@corevalue.net>
- */
 class AssertionHelper
 {
     public static function assertApiExceptionWithModelErrors(
