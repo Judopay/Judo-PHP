@@ -1,0 +1,27 @@
+{
+  "receiptId": "XXXXXX",
+  "originalReceiptId": "12345",
+  "yourPaymentReference": "12345",
+  "type": "VOID",
+  "createdAt": "2016-08-11T13:30:38.1849+01:00",
+  "result": "Success",
+  "message": "Void successful",
+  "judoId": 123123123,
+  "merchantName": "xxxx",
+  "appearsOnStatementAs": "xxxxxxx",
+  "originalAmount": "1.02",
+  "amountCollected": "0.00",
+  "netAmount": "1.02",
+  "amount": "1.02",
+  "currency": "GBP",
+  "cardDetails": {
+    "cardLastfour": "3436",
+    "endDate": "1220",
+    "cardToken": "xxxxxxxxxxxxxxxxxxxx",
+    "cardType": 1
+  },
+  "consumer": {
+    "consumerToken": "xxxxxxxxxxxxxxxx",
+    "yourConsumerReference": "12345"
+  }
+}

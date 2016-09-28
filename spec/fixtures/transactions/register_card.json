@@ -1,0 +1,29 @@
+{
+  "receiptId": "5050240",
+  "yourPaymentReference": "Judo_RegisterCardPreAuth_636059257945294942",
+  "type": "PreAuth",
+  "createdAt": "2016-08-04T16:43:14.7482+01:00",
+  "result": "Success",
+  "message": "AuthCode: 910333",
+  "judoId": 100435197,
+  "merchantName": "Oleg",
+  "appearsOnStatementAs": "APL\/Oleg    ",
+  "originalAmount": "1.01",
+  "amountCollected": "0.00",
+  "netAmount": "1.01",
+  "amount": "1.01",
+  "currency": "GBP",
+  "cardDetails": {
+    "cardLastfour": "3436",
+    "endDate": "1220",
+    "cardToken": "123123123",
+    "cardType": 1
+  },
+  "consumer": {
+    "consumerToken": "123123123",
+    "yourConsumerReference": "12345"
+  },
+  "risks": {
+    "postCodeCheck": "UNKNOWN"
+  }
+}

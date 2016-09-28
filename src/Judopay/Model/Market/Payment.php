@@ -2,7 +2,9 @@
 
 namespace Judopay\Model\Market;
 
-class Payment extends \Judopay\Model
+use Judopay\Model;
+
+class Payment extends Model
 {
     protected $resourcePath = 'market/transactions/payments';
     protected $validApiMethods = array('all');

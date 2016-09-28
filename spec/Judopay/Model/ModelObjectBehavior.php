@@ -2,8 +2,8 @@
 
 namespace spec\Judopay\Model;
 
-require_once __DIR__.'/../../SpecHelper.php';
-
+use Judopay\Request;
+use spec\SpecHelper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -13,17 +13,15 @@ abstract class ModelObjectBehavior extends ObjectBehavior
 
     public function let()
     {
-        $this->configuration = \Judopay\SpecHelper::getConfiguration();
-        $this->beConstructedWith(
-            new \Judopay\Request($this->configuration)
-        );
+        $this->configuration = SpecHelper::getConfiguration();
+        $this->beConstructedWith(new Request($this->configuration));
     }
 
     protected function concoctRequest($fixtureFile)
     {
-        $request = new \Judopay\Request($this->configuration);
+        $request = new Request($this->configuration);
         $request->setClient(
-            \Judopay\SpecHelper::getMockResponseClient(
+            SpecHelper::getMockResponseClient(
                 200,
                 $fixtureFile
             )
@@ -35,9 +33,9 @@ abstract class ModelObjectBehavior extends ObjectBehavior
     public function getMatchers()
     {
         return array(
-            'contain' => function($subject, $key) {
+            'contain' => function ($subject, $key) {
                 return (strpos($subject, $key) !== false);
-            }
+            },
         );
     }
 }

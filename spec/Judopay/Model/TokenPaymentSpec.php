@@ -2,7 +2,8 @@
 
 namespace spec\Judopay\Model;
 
-require_once 'ModelObjectBehavior.php';
+use Judopay\Model\TokenPayment;
+use Tests\Builders\TokenPaymentBuilder;
 
 class TokenPaymentSpec extends ModelObjectBehavior
 {
@@ -13,9 +14,12 @@ class TokenPaymentSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_payment()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\TokenPaymentBuilder;
+        $modelBuilder = new TokenPaymentBuilder();
+        /** @var TokenPayment|TokenPaymentSpec $this */
         $this->setAttributeValues(
             $modelBuilder->getAttributeValues()
         );

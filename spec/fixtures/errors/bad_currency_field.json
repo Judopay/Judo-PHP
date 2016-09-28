@@ -1,0 +1,25 @@
+{
+  "details": [
+    {
+      "code": 25,
+      "fieldName": "Currency",
+      "message": "Sorry, but you'll need to supply your currency as a three-letter abbreviation.",
+      "detail": "Sorry, we're currently unable to process this request."
+    },
+    {
+      "code": 26,
+      "fieldName": "Currency",
+      "message": "Sorry, but it looks like the currency you've specified is not currently supported on your account.",
+      "detail": "Sorry, we're currently unable to process this request."
+    },
+    {
+      "code": 6,
+      "fieldName": "Amount",
+      "message": "Sorry, but the amount submitted does not match the decimal place requirements for the currency submitted. Please amend the format to meet the currency requirements.",
+      "detail": "Sorry, we're currently unable to process this request."
+    }
+  ],
+  "message": "Sorry, we're unable to process your request. Please check your details and try again.",
+  "code": 1,
+  "category": 2
+}
