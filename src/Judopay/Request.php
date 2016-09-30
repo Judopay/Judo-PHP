@@ -126,7 +126,6 @@ class Request implements LoggerAwareInterface
 
     /**
      * Configuration getter
-     * @todo Ideally, configuration should be a separate dependency
      * @return Configuration
      */
     public function getConfiguration()

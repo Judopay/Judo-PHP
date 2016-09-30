@@ -10,6 +10,7 @@ use Judopay\Exception\ValidationError;
  **/
 class Model
 {
+    const JUDO_ID = 'judoId';
     /**
      * Request object
      * @var Request
@@ -172,7 +173,7 @@ class Model
         if (empty($this->validApiMethods)
             || !in_array($methodName, $this->validApiMethods)
         ) {
-            throw new \RuntimeException('API method is not supported');
+            throw new ValidationError('API method is not supported');
         }
     }
 
@@ -207,12 +208,12 @@ class Model
      **/
     protected function checkJudoId()
     {
-        $judoId = $this->getAttributeValue('judoId');
+        $judoId = $this->getAttributeValue(static::JUDO_ID);
         if (!empty($judoId)) {
             return;
         }
 
         $configuration = $this->request->getConfiguration();
-        $this->attributeValues['judoId'] = $configuration->get('judoId');
+        $this->attributeValues[static::JUDO_ID] = $configuration->get(static::JUDO_ID);
     }
 }
