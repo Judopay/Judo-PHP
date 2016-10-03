@@ -27,7 +27,7 @@ class Judopay
         $this->container = new Container();
 
         // Create config object
-        $this->container['configuration'] = function ($c) use ($settings) {
+        $this->container['configuration'] = function () use ($settings) {
             return new Configuration($settings);
         };
 
@@ -70,13 +70,10 @@ class Judopay
         // Set up the model in the DI container
         $request = $this->get('request');
         $this->container[$modelName] = $this->container->factory(
-            function ($c) use ($modelName, $request) {
+            function () use ($modelName, $request) {
                 $modelClassName = '\Judopay\Model\\'.ucfirst($modelName);
-                $model = new $modelClassName(
-                    $request
-                );
 
-                return $model;
+                return new $modelClassName($request);
             }
         );
 

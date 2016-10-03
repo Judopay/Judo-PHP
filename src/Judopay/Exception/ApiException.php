@@ -33,7 +33,7 @@ class ApiException extends \RuntimeException
         $category = ArrayHelper::get(
             $parsedBody,
             'category',
-            self::CATEGORY_UNKNOWN
+            static::CATEGORY_UNKNOWN
         );
 
         $message = ArrayHelper::get($parsedBody, 'message', get_called_class());
@@ -92,7 +92,7 @@ class ApiException extends \RuntimeException
     public function getSummary()
     {
         return sprintf(
-            self::MESSAGE,
+            static::MESSAGE,
             $this->getHttpStatusCode(),
             $this->getCode(),
             $this->getCategory(),

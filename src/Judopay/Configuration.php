@@ -7,6 +7,8 @@ use Psr\Log\NullLogger;
 
 class Configuration
 {
+    const ENDPOINT_URL = 'endpointUrl';
+    const USE_PRODUCTION = 'useProduction';
     protected $settings = array();
     protected $valid_config_keys
         = array(
@@ -15,10 +17,10 @@ class Configuration
             'apiSecret',
             'oauthAccessToken',
             'format',
-            'endpointUrl',
+            self::ENDPOINT_URL,
             'userAgent',
             'judoId',
-            'useProduction',
+            self::USE_PRODUCTION,
             'logger',
             'httpLogFormat',
         );
@@ -86,11 +88,12 @@ class Configuration
 
     protected function setEndpointUrl()
     {
-        if (isset($this->settings['endpointUrl'])) {
-            return; //allow custom endpoint
+        if (isset($this->settings[static::ENDPOINT_URL])) {
+            //allow custom endpoint
+            return;
         } else {
-            $this->settings['endpointUrl'] = isset($this->settings['useProduction'])
-            && $this->settings['useProduction'] === true
+            $this->settings[static::ENDPOINT_URL] = isset($this->settings[static::USE_PRODUCTION])
+            && $this->settings[static::USE_PRODUCTION] === true
                 ? 'https://gw1.judopay.com'
                 : 'https://gw1.judopay-sandbox.com';
         }
