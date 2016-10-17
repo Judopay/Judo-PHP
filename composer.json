@@ -19,7 +19,7 @@
         "php": ">=5.3.3",
         "guzzle/guzzle": ">=3.7.0,<=3.9.9",
         "monolog/monolog": "~1.10",
-        "pimple/pimple": "~2.1"
+        "pimple/pimple": "~3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",
