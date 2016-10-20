@@ -65,6 +65,8 @@ abstract class AbstractModelBuilder
 
     public function compile()
     {
+        $this->attributeValues['yourPaymentReference'] = md5(time()).mt_rand(0, 100);
+
         return $this;
     }
 }
