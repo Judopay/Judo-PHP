@@ -22,7 +22,7 @@ class CollectionSpec extends ModelObjectBehavior
         $modelBuilder = new RefundBuilder();
         /** @var Collection|CollectionSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

@@ -24,7 +24,7 @@ class PreauthSpec extends ModelObjectBehavior
         $modelBuilder = new PaymentBuilder();
         /** @var Preauth|PreauthSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

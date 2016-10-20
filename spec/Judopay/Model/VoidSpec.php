@@ -20,7 +20,7 @@ class VoidSpec extends ModelObjectBehavior
         $modelBuilder = new VoidBuilder();
         /** @var \Judopay\Model\Void|VoidSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 
