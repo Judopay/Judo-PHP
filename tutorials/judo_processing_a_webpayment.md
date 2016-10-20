@@ -105,7 +105,7 @@ $transactionDetails = $existingTransactionRequest->find($theWebPaymentReference)
 // check the value of the "status" array key to confirm the payment was successful
 $webpaymentStatus = $transactionDetails["status"];
 
-// webpaymentStatus should be "Paid"
+// webpaymentStatus should be "Success"
 
 // you can also access a copy of our receipt object using the "receipt" entry.
 

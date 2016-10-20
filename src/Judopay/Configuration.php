@@ -2,32 +2,37 @@
 
 namespace Judopay;
 
+use Judopay\Exception\ValidationError;
+use Psr\Log\NullLogger;
+
 class Configuration
 {
+    const ENDPOINT_URL = 'endpointUrl';
+    const USE_PRODUCTION = 'useProduction';
     protected $settings = array();
-
-    protected $valid_config_keys = array(
-        'apiVersion',
-        'apiToken',
-        'apiSecret',
-        'oauthAccessToken',
-        'format',
-        'endpointUrl',
-        'userAgent',
-        'judoId',
-        'useProduction',
-        'logger',
-        'httpLogFormat'
-    );
+    protected $valid_config_keys
+        = array(
+            'apiVersion',
+            'apiToken',
+            'apiSecret',
+            'oauthAccessToken',
+            'format',
+            self::ENDPOINT_URL,
+            'userAgent',
+            'judoId',
+            self::USE_PRODUCTION,
+            'logger',
+            'httpLogFormat',
+        );
 
     public function __construct($settings = null)
     {
         // Set sensible defaults
-        $this->settings['apiVersion'] = '4.0.0';
-        $this->settings['logger'] = new \Psr\Log\NullLogger();
-        $this->settings['userAgent'] = 'Judopay PHP SDK v'.\Judopay::VERSION;
+        $this->settings['apiVersion'] = \Judopay::API_VERSION;
+        $this->settings['logger'] = new NullLogger();
+        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.\Judopay::SDK_VERSION;
         $this->settings['httpLogFormat'] = "\"{method} {resource} {protocol}/{version}\" ".
-                                           "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
+            "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
 
         // Override defaults with user settings
         $newSettings = $this->removeInvalidConfigKeys($settings);
@@ -83,10 +88,34 @@ class Configuration
 
     protected function setEndpointUrl()
     {
-        if (isset($this->settings['useProduction']) && $this->settings['useProduction'] === true) {
-            $this->settings['endpointUrl'] = 'https://gw1.judopay.com';
+        if (isset($this->settings[static::ENDPOINT_URL])) {
+            //allow custom endpoint
+            return;
         } else {
-            $this->settings['endpointUrl'] = 'https://gw1.judopay-sandbox.com';
+            $this->settings[static::ENDPOINT_URL] = isset($this->settings[static::USE_PRODUCTION])
+            && $this->settings[static::USE_PRODUCTION] === true
+                ? 'https://gw1.judopay.com'
+                : 'https://gw1.judopay-sandbox.com';
         }
+    }
+
+    public function validate()
+    {
+        $judoId = $this->get('judoId');
+        $apiToken = $this->get('apiToken');
+        $apiSecret = $this->get('apiSecret');
+        $oauthAccessToken = $this->get('oauthAccessToken');
+
+        if ((empty($judoId) || empty($apiToken) || empty($apiSecret)) && empty($oauthAccessToken)) {
+            throw new ValidationError('SDK configuration variables missing');
+        }
+
+        $apiVersion = $this->get('apiVersion');
+
+        if (version_compare($apiVersion, '5.0.0') < 0) {
+            throw new ValidationError('Partner API under v5.0.0 is abandoned');
+        }
+
+        return true;
     }
 }

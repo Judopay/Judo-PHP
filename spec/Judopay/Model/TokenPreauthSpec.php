@@ -2,7 +2,8 @@
 
 namespace spec\Judopay\Model;
 
-require_once 'ModelObjectBehavior.php';
+use Judopay\Model\TokenPreauth;
+use Tests\Builders\TokenPaymentBuilder;
 
 class TokenPreauthSpec extends ModelObjectBehavior
 {
@@ -13,11 +14,14 @@ class TokenPreauthSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_payment()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\TokenPaymentBuilder;
+        $modelBuilder = new TokenPaymentBuilder();
+        /** @var TokenPreauth|TokenPreauthSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

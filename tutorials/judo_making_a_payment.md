@@ -67,28 +67,26 @@ If the payment is successful, you'll receive a response array like this:
 
 ## Error handling
 
-When making a payment, there are a number of different scenarios that can arise. It is important to handle all of the different exceptions in your code.
+When making a payment, there are two different scenarios that can arise. 
+1) ValidationError can happen when you haven’t filled in all required fields in the model.
+2) ApiException can happen if you request is sent to the partner’s API and returns unsuccessful response. See [API error messages](https://www.judopay.com/docs/v5/api-reference/api-error-messages/).
+It is important to handle all of the different exceptions in your code.
 
+```php
 	try {
 		$response = $payment->create();
 	} catch (\Judopay\Exception\ValidationError $e) {
 		// There were missing or invalid fields
 		echo $e->getSummary();
 		print_r($e->getModelErrors()); // Array of model errors
-	} catch (\Judopay\Exception\BadRequest $e) {
-	  // Invalid parameters were supplied to Judopay's API
+	} catch (\Judopay\Exception\ApiException $e) {
+	    // Judo API exception
 		echo $e->getSummary();
-		print_r($e->getModelErrors()); // Array of model errors
-	} catch (\Judopay\Exception\	NotAuthorized $e) {
-		// You're not authorized to make the request - check credentials and permissions in the Judopay portal
-	} catch (\Judopay\Exception\NotFound $e) {
-		// The resource was not found
-	} catch (\Judopay\Exception\Conflict $e) {
-		// Rate limiting - you have made too many requests to the Judopay API
+		print_r($e->getFieldErrors()); // Array of field errors if they are
 	} catch (\Exception $e) {
-	  // A problem occurred outside the Judopay SDK
+	    // A problem occurred outside the Judopay SDK
 	}
-
+```
 ## Logging
 
 To help you debug your Judopay integration, you can attach a logger to the SDK. You can use any library that is compatible with the PSR-3 logging standard:
@@ -101,6 +99,7 @@ https://github.com/Seldaek/monolog
 
 For example, to log debug messages to the file 'judopay.log' using Monolog:
 
+```php
 	use Monolog\Logger;
 	use Monolog\Handler\StreamHandler;
 	
@@ -114,3 +113,4 @@ For example, to log debug messages to the file 'judopay.log' using Monolog:
 					'logger' => $logger
 		)
 	);
+```

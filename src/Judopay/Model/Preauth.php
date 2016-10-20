@@ -2,10 +2,8 @@
 
 namespace Judopay\Model;
 
-use \Judopay\DataType;
-
-class Preauth extends \Judopay\Model\CardPayment
+class Preauth extends CardPayment
 {
     protected $resourcePath = 'transactions/preauths';
-    protected $validApiMethods = array('all','create');
+    protected $validApiMethods = array('all','create', 'validate');
 }

@@ -2,7 +2,8 @@
 
 namespace spec\Judopay\Model;
 
-require_once 'ModelObjectBehavior.php';
+use Judopay\Model\CardPayment;
+use Tests\Builders\CardPaymentBuilder;
 
 class CardPaymentSpec extends ModelObjectBehavior
 {
@@ -13,11 +14,14 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_payment()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+        $modelBuilder = new CardPaymentBuilder();
+        /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 
@@ -27,17 +31,24 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_raise_an_error_when_required_fields_are_missing()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
-        $this->shouldThrow('\Judopay\Exception\ValidationError')->during('create');
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
+        $this->shouldThrow('\Judopay\Exception\ValidationError')->during(
+            'create'
+        );
     }
 
     public function it_should_validate_a_new_payment_given_valid_card_details()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/validate.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/validate.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+        $modelBuilder = new CardPaymentBuilder();
+        /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->setAttribute('judoId', '12345')->getAttributeValues()
         );
         $output = $this->validate();
 
@@ -47,17 +58,19 @@ class CardPaymentSpec extends ModelObjectBehavior
 
     public function it_should_use_the_configured_judo_id_if_one_is_not_provided()
     {
-        $this->beConstructedWith($this->concoctRequest('card_payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('card_payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\CardPaymentBuilder;
+        $modelBuilder = new CardPaymentBuilder();
 
         // Set an empty Judo ID to make sure the config value is used
-        $modelBuilder->setJudoId(null);
-
+        $modelBuilder->unsetAttribute('judoId');
+        /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
-        $output = $this->create();
+        $this->create();
 
         $this->getAttributeValue('judoId')->shouldEqual('123-456');
     }
@@ -67,16 +80,17 @@ class CardPaymentSpec extends ModelObjectBehavior
     {
         $input = array(
             'yourPaymentMetaData' => (object)array('val' => 'an unexpected string'),
-            'judoId' => 'judo123',
-            'amount' => '123.23'
+            'judoId'              => 'judo123',
+            'amount'              => '123.23',
         );
 
         $expectedOutput = array(
             'yourPaymentMetaData' => (object)array('val' => 'an unexpected string'),
-            'judoId' => 'judo123',
-            'amount' => 123.23
+            'judoId'              => 'judo123',
+            'amount'              => 123.23,
         );
 
+        /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues($input);
         $this->getAttributeValues()->shouldEqual($expectedOutput);
     }
@@ -84,9 +98,10 @@ class CardPaymentSpec extends ModelObjectBehavior
     public function it_should_baulk_at_very_unusual_float_values()
     {
         $input = array(
-            'amount' => '123.23GBP'
+            'amount' => '123.23GBP',
         );
 
-        $this->shouldThrow('\OutOfBoundsException')->during('setAttributeValues', array($input));
+        $this->shouldThrow('\OutOfBoundsException')
+            ->during('setAttributeValues', array($input));
     }
 }

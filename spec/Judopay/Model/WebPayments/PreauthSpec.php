@@ -2,23 +2,29 @@
 
 namespace spec\Judopay\Model\WebPayments;
 
-require_once __DIR__.'/../ModelObjectBehavior.php';
+use Judopay\Model\WebPayments\Preauth;
+use Judopay\Request;
+use spec\Judopay\Model\ModelObjectBehavior;
+use Tests\Builders\WebPayments\PaymentBuilder;
 
-class PreauthSpec extends \spec\Judopay\Model\ModelObjectBehavior
+class PreauthSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->beConstructedWith(new \Judopay\Request($this->configuration));
+        $this->beConstructedWith(new Request($this->configuration));
         $this->shouldHaveType('Judopay\Model\WebPayments\Preauth');
     }
 
     public function it_should_create_a_new_payment()
     {
-        $this->beConstructedWith($this->concoctRequest('web_payments/payments/create.json'));
+        $this->beConstructedWith(
+            $this->concoctRequest('web_payments/payments/create.json')
+        );
 
-        $modelBuilder = new \Judopay\Test\WebPayments\PaymentBuilder;
+        $modelBuilder = new PaymentBuilder();
+        /** @var Preauth|PreauthSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 
