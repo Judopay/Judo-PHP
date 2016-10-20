@@ -8,7 +8,6 @@ class RefundBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             'receiptId'            => 1234,
-            'yourPaymentReference' => '12345',
             'amount'               => 1.01,
         );
     }

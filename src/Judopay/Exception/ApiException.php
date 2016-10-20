@@ -41,7 +41,12 @@ class ApiException extends \RuntimeException
         $errorCode = ArrayHelper::get($parsedBody, 'code', 0);
 
         $fieldErrors = array();
-        if (isset($parsedBody['details'])) {
+        //TODO: Done due to nonstandard de-deduplicate format. Fix this dirty solution after API fix
+        if (isset($parsedBody['details']['receiptId'])) {
+            //De-deduplicate format
+            $message .= ' Duplicate receipt id: '.$parsedBody['details']['receiptId'];
+        } elseif (isset($parsedBody['details']) && is_array($parsedBody['details'])) {
+            //Regular 'model errors' format
             foreach ($parsedBody['details'] as $rawFieldError) {
                 $fieldErrors[] = new FieldError(
                     ArrayHelper::get($rawFieldError, 'message', ''),

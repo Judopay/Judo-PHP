@@ -21,7 +21,7 @@ class TokenPreauthSpec extends ModelObjectBehavior
         $modelBuilder = new TokenPaymentBuilder();
         /** @var TokenPreauth|TokenPreauthSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

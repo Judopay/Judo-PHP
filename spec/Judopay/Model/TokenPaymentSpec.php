@@ -21,7 +21,7 @@ class TokenPaymentSpec extends ModelObjectBehavior
         $modelBuilder = new TokenPaymentBuilder();
         /** @var TokenPayment|TokenPaymentSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 

@@ -10,7 +10,6 @@ class PaymentBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             'yourConsumerReference' => '12345',
-            'yourPaymentReference'  => '12345',
             'judoId'                => '123-456-789',
             'amount'                => 1.01,
             'partnerServiceFee'     => 0.01,

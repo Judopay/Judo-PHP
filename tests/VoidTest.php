@@ -79,7 +79,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
         AssertionHelper::assertSuccessfulPayment($void->create());
 
         try {
-            $void->create();
+            $builder->build(ConfigHelper::getConfig())->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 51);
 
