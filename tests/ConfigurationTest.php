@@ -39,9 +39,20 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testLowApiVersion()
+    {
+        $this->setExpectedException('\Judopay\Exception\ValidationError', 'Partner API under v5.0.0 is abandoned');
+
+        $config = ConfigHelper::getConfigFromList(
+            array('MYJUDOID', 'MYTOKEN', 'MYSECRET'),
+            array('apiVersion' => '4.9.0')
+        );
+        $this->assertTrue($config->validate());
+    }
+
     public function testValidConfiguration()
     {
-        $config = ConfigHelper::getConfigFromList(array('MYJUDOID', "MYTOKEN", 'MYSECRET'));
+        $config = ConfigHelper::getConfigFromList(array('MYJUDOID', 'MYTOKEN', 'MYSECRET'));
         $this->assertTrue($config->validate());
     }
 }
