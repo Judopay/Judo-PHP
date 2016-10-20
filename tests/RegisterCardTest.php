@@ -43,6 +43,16 @@ class RegisterCardTest extends PaymentTests
         $this->assertEquals(1.01, $result['amount']);
     }
 
+    public function testPaymentWithoutCurrency()
+    {
+        $registerCard = $this->getBuilder()
+            ->unsetAttribute('currency')
+            ->build(ConfigHelper::getConfig());
+
+        $result = $registerCard->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
+    }
 
     public function testPaymentWithNegativeAmount()
     {
@@ -56,14 +66,9 @@ class RegisterCardTest extends PaymentTests
         $this->assertTrue(true);
     }
 
-    public function testPaymentWithoutCurrency()
+    public function testDuplicatePayment()
     {
-        $registerCard = $this->getBuilder()
-            ->unsetAttribute('currency')
-            ->build(ConfigHelper::getConfig());
-
-        $result = $registerCard->create();
-
-        AssertionHelper::assertSuccessfulPayment($result);
+        //Unneeded test
+        $this->assertTrue(true);
     }
 }
