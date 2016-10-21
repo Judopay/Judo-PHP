@@ -19,7 +19,7 @@ class RegisterCard extends Model
             'amount'                => DataType::TYPE_FLOAT,
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
-            'yourPaymentMetaData'   => DataType::TYPE_ARRAY,
+            'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
         );
     protected $requiredAttributes
         = array(

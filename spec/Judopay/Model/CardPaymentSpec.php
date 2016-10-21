@@ -92,7 +92,7 @@ class CardPaymentSpec extends ModelObjectBehavior
 
         /** @var CardPayment|CardPaymentSpec $this */
         $this->setAttributeValues($input);
-        $this->getAttributeValues()->shouldEqual($expectedOutput);
+        $this->getAttributeValues()->shouldBeLike($expectedOutput);
     }
 
     public function it_should_baulk_at_very_unusual_float_values()
