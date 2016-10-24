@@ -21,7 +21,6 @@ class CardPayment extends Model
             'expiryDate'            => DataType::TYPE_STRING,
             'cv2'                   => DataType::TYPE_STRING,
             'cardAddress'           => DataType::TYPE_ARRAY,
-            'consumerLocation'      => DataType::TYPE_ARRAY,
             'mobileNumber'          => DataType::TYPE_STRING,
             'emailAddress'          => DataType::TYPE_STRING,
             'clientDetails'         => DataType::TYPE_OBJECT,
