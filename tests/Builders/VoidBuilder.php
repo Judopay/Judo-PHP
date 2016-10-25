@@ -8,7 +8,6 @@ class VoidBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             'receiptId'            => $receiptId,
-            'yourPaymentReference' => '12345',
             'amount'               => $amount,
             'currency'             => 'GBP',
         );

@@ -12,7 +12,6 @@ class CardPaymentBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             'yourConsumerReference' => '12345',
-            'yourPaymentReference'  => '12345',
             'amount'                => 1.02,
             'currency'              => 'GBP',
         );
@@ -27,6 +26,8 @@ class CardPaymentBuilder extends AbstractModelBuilder
 
     public function compile()
     {
+        parent::compile();
+
         switch ($this->type) {
             case self::VALID_VISA_CARD:
                 $this->attributeValues += array(

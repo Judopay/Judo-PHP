@@ -23,7 +23,7 @@ class SaveCardSpec extends ModelObjectBehavior
         $modelBuilder = new SaveCardBuilder();
         /** @var SaveCard|SaveCardSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
 
         $output = $this->create();

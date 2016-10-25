@@ -106,4 +106,22 @@ abstract class PaymentTests extends PHPUnit_Framework_TestCase
 
         $cardPayment->create();
     }
+
+    public function testDuplicatePayment()
+    {
+        $cardPayment = $this->getBuilder()
+            ->build(ConfigHelper::getConfig());
+        $successfulResult = $cardPayment->create();
+
+        try {
+            $cardPayment->create();
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 86, 409, 4);
+            $this->assertContains($successfulResult['receiptId'], $e->getMessage());
+
+            return;
+        }
+
+        $this->fail('An expected ApiException has not been raised.');
+    }
 }

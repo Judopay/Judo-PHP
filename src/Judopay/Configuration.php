@@ -104,9 +104,16 @@ class Configuration
         $judoId = $this->get('judoId');
         $apiToken = $this->get('apiToken');
         $apiSecret = $this->get('apiSecret');
+        $oauthAccessToken = $this->get('oauthAccessToken');
 
-        if (empty($judoId) || empty($apiToken) || empty($apiSecret)) {
+        if ((empty($judoId) || empty($apiToken) || empty($apiSecret)) && empty($oauthAccessToken)) {
             throw new ValidationError('SDK configuration variables missing');
+        }
+
+        $apiVersion = $this->get('apiVersion');
+
+        if (version_compare($apiVersion, '5.0.0') < 0) {
+            throw new ValidationError('Partner API under v5.0.0 is abandoned');
         }
 
         return true;

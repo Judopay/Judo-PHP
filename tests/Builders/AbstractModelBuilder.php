@@ -65,6 +65,8 @@ abstract class AbstractModelBuilder
 
     public function compile()
     {
+        $this->attributeValues['yourPaymentReference'] = sha1(time().mt_rand(0, 10000));
+
         return $this;
     }
 }

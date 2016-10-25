@@ -11,7 +11,6 @@ class TokenPaymentBuilder extends AbstractModelBuilder
     ) {
         $this->attributeValues = array(
             'yourConsumerReference' => $yourConsumerReference,
-            'yourPaymentReference'  => '12345',
             'amount'                => 1.01,
             'consumerToken'         => $consumerToken,
             'cardToken'             => $cardToken,

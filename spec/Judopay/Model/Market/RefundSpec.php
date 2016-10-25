@@ -22,7 +22,7 @@ class RefundSpec extends ModelObjectBehavior
         $modelBuilder = new RefundBuilder();
         /** @var Refund|RefundSpec $this */
         $this->setAttributeValues(
-            $modelBuilder->getAttributeValues()
+            $modelBuilder->compile()->getAttributeValues()
         );
         $output = $this->create();
 
