@@ -8,6 +8,7 @@ class DataType
     const TYPE_FLOAT = 'float';
     const TYPE_INTEGER = 'int';
     const TYPE_ARRAY = 'array';
+    const TYPE_OBJECT = 'object';
 
     public static function coerce($targetDataType, $value)
     {
@@ -23,6 +24,13 @@ class DataType
             case DataType::TYPE_ARRAY:
                 if (!is_array($value)) {
                     $value = array($value);
+                }
+
+                return $value;
+
+            case DataType::TYPE_OBJECT:
+                if (!is_object($value)) {
+                    $value = (object)$value;
                 }
 
                 return $value;

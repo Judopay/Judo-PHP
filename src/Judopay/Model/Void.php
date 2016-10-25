@@ -11,12 +11,12 @@ class Void extends Model
     protected $validApiMethods = array('create');
     protected $attributes
         = array(
-            'judoId'                => DataType::TYPE_STRING,
-            'amount'                => DataType::TYPE_FLOAT,
+            'judoId'               => DataType::TYPE_STRING,
+            'amount'               => DataType::TYPE_FLOAT,
             'receiptId'            => DataType::TYPE_STRING,
-            'yourPaymentReference'  => DataType::TYPE_STRING,
-            'currency'              => DataType::TYPE_STRING,
-            'yourPaymentMetaData'   => DataType::TYPE_ARRAY,
+            'yourPaymentReference' => DataType::TYPE_STRING,
+            'currency'             => DataType::TYPE_STRING,
+            'yourPaymentMetaData'  => DataType::TYPE_OBJECT,
         );
     protected $requiredAttributes
         = array(
