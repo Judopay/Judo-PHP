@@ -1,0 +1,26 @@
+{
+  "receiptId": "someReceipt",
+  "yourPaymentReference": "NEW_PR_123123123",
+  "type": "Payment",
+  "createdAt": "2016-10-31T10:09:10.4378+00:00",
+  "result": "Success",
+  "message": "AuthCode: xxxxxx",
+  "judoId": "someId",
+  "merchantName": "PiePay Project",
+  "appearsOnStatementAs": "APL*\/PiePayProject      ",
+  "originalAmount": "0.02",
+  "netAmount": "0.02",
+  "amount": "0.02",
+  "currency": "GBP",
+  "cardDetails": {
+    "cardLastfour": "xxxx",
+    "endDate": "xxxx",
+    "cardToken": "xxxxxxxxxxxxxx",
+    "cardType": 1
+  },
+  "consumer": {
+    "consumerToken": "xxxxxxxxx",
+    "yourConsumerReference": "Myconsumerref"
+  },
+  "walletType": 1
+}

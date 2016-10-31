@@ -2,6 +2,9 @@
 
 namespace Judopay;
 
+use Judopay\Exception\ValidationError;
+use Judopay\Model\Inner\PkPayment;
+
 class DataType
 {
     const TYPE_STRING = 'string';
@@ -9,34 +12,40 @@ class DataType
     const TYPE_INTEGER = 'int';
     const TYPE_ARRAY = 'array';
     const TYPE_OBJECT = 'object';
+    const TYPE_PK_PAYMENT = 'pk_payment';
 
     public static function coerce($targetDataType, $value)
     {
         switch ($targetDataType) {
-            case DataType::TYPE_FLOAT:
+            case static::TYPE_FLOAT:
                 // Check that the provided value appears numeric
                 if (!is_numeric($value)) {
-                    throw new \OutOfBoundsException('Invalid float value');
+                    throw new ValidationError('Invalid float value');
                 }
 
-                return (float) $value;
+                return (float)$value;
 
-            case DataType::TYPE_ARRAY:
+            case static::TYPE_ARRAY:
                 if (!is_array($value)) {
                     $value = array($value);
                 }
 
                 return $value;
 
-            case DataType::TYPE_OBJECT:
+            case static::TYPE_OBJECT:
                 if (!is_object($value)) {
                     $value = (object)$value;
                 }
 
                 return $value;
 
-            case DataType::TYPE_INTEGER:
-                return (int) $value;
+            case static::TYPE_PK_PAYMENT:
+                $pkPayment = PkPayment::factory($value);
+
+                return $pkPayment->toObject();
+
+            case static::TYPE_INTEGER:
+                return (int)$value;
         }
 
         return $value;
