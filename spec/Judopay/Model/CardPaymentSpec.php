@@ -101,7 +101,7 @@ class CardPaymentSpec extends ModelObjectBehavior
             'amount' => '123.23GBP',
         );
 
-        $this->shouldThrow('\OutOfBoundsException')
+        $this->shouldThrow('Judopay\Exception\ValidationError')
             ->during('setAttributeValues', array($input));
     }
 }
