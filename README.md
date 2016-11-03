@@ -1,4 +1,4 @@
-# Judopay PHP SDK [![Build Status](https://travis-ci.org/JudoPay/Judo-PHP.svg?branch=master)](https://travis-ci.org/JudoPay/Judo-PHP)
+# Judopay PHP SDK [![Build Status](https://travis-ci.org/Judopay/Judo-PHP.svg?branch=master)](https://travis-ci.org/Judopay/Judo-PHP)
 The JudoPay SDK provides you with ability to integrate card payments into your PHP project. Judo's SDK enables a faster, simpler and more secure payment experience within your app.
 ##### **\*\*\*Due to industry-wide security updates, versions below 2.0 of this SDK will no longer be supported after 1st Oct 2016. For more information regarding these updates, please read our blog [here](http://hub.judopay.com/pci31-security-updates/).*****
 
