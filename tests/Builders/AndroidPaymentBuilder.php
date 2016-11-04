@@ -22,18 +22,8 @@ class AndroidPaymentBuilder extends AbstractModelBuilder
             "amount"                => 0.10,
             "currency"              => "GBP",
             "clientDetails"         => array(
-                "key"               => "someKey",
-                "value"             => "somevalue",
-                "OS"                => "Android v1.0.2",
-                "DeviceModel"       => "someOldPhone",
-                "CultureLocale"     => "GB",
-                "Serial"            => null,
-                "SslPinningEnabled" => false,
-                "IsRoaming"         => false,
-                "NetworkName"       => null,
-                "Rooted"            => false,
-                "KDeviceId"         => "someId",
-                "VDeviceId"         => "someId",
+                "key"   => "someKey",
+                "value" => "somevalue",
             ),
         );
     }
