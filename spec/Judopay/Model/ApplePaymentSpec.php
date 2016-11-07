@@ -100,16 +100,35 @@ class ApplePaymentSpec extends ModelObjectBehavior
     public function it_should_raise_an_error_when_bad_pk_payment_passed()
     {
         /** @var ApplePayment|ApplePaymentSpec $this */
-        $this->shouldThrow(new ValidationError(PkPayment::ERROR_MESSAGE_INVALID_JSON))
+        $this->shouldThrow(
+            new ValidationError(sprintf(PkPayment::ERROR_MESSAGE_INVALID_JSON, 'Judopay\Model\Inner\PkPayment'))
+        )
             ->during(
                 'setAttributeValues',
                 array(array('pkPayment' => '{"someInvalidJson}}'))
             );
 
-        $this->shouldThrow(new ValidationError(PkPayment::ERROR_MESSAGE_INVALID_DATA))
+        $this->shouldThrow(
+            new ValidationError(sprintf(PkPayment::ERROR_MESSAGE_CORRUPTED_OBJECT, 'Judopay\Model\Inner\PkPayment'))
+        )
             ->during(
                 'setAttributeValues',
-                array(array('pkPayment' => '{"valid_json":"Without token field"}'))
+                array(array('pkPayment' => 1))
+            );
+
+        $this->shouldThrow(
+            new ValidationError(
+                'Judopay\Model\Inner\PkPayment object misses required fields',
+                array(
+                    'token.paymentInstrumentName is missing or empty',
+                    'token.paymentNetwork is missing or empty',
+                    'token.paymentData is missing or empty',
+                )
+            )
+        )
+            ->during(
+                'setAttributeValues',
+                array(array('pkPayment' => '{"pkPayment":{"token":{}}}'))
             );
     }
 }

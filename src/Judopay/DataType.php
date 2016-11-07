@@ -4,6 +4,7 @@ namespace Judopay;
 
 use Judopay\Exception\ValidationError;
 use Judopay\Model\Inner\PkPayment;
+use Judopay\Model\Inner\Wallet;
 
 class DataType
 {
@@ -13,6 +14,7 @@ class DataType
     const TYPE_ARRAY = 'array';
     const TYPE_OBJECT = 'object';
     const TYPE_PK_PAYMENT = 'pk_payment';
+    const TYPE_WALLET = 'wallet';
 
     public static function coerce($targetDataType, $value)
     {
@@ -43,6 +45,11 @@ class DataType
                 $pkPayment = PkPayment::factory($value);
 
                 return $pkPayment->toObject();
+
+            case static::TYPE_WALLET:
+                $wallet = Wallet::factory($value);
+
+                return $wallet->toObject();
 
             case static::TYPE_INTEGER:
                 return (int)$value;
