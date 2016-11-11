@@ -108,6 +108,7 @@ class Model
     public function validate()
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
+        $this->checkJudoId();
         $this->checkRequiredAttributes($this->attributeValues);
 
         $validateResourcePath = $this->resourcePath.'/validate';
