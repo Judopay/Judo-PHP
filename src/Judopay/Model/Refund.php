@@ -8,7 +8,7 @@ use Judopay\Model;
 class Refund extends Model
 {
     protected $resourcePath = 'transactions/refunds';
-    protected $validApiMethods = array('all', 'create', 'validate');
+    protected $validApiMethods = array('all', 'create');
     protected $attributes
         = array(
             'receiptId'            => DataType::TYPE_STRING,
