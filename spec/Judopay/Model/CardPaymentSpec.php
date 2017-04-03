@@ -39,23 +39,6 @@ class CardPaymentSpec extends ModelObjectBehavior
         );
     }
 
-    public function it_should_validate_a_new_payment_given_valid_card_details()
-    {
-        $this->beConstructedWith(
-            $this->concoctRequest('card_payments/validate.json')
-        );
-
-        $modelBuilder = new CardPaymentBuilder();
-        /** @var CardPayment|CardPaymentSpec $this */
-        $this->setAttributeValues(
-            $modelBuilder->compile()->setAttribute('judoId', '12345')->getAttributeValues()
-        );
-        $output = $this->validate();
-
-        $output->shouldBeArray();
-        $output['errorMessage']->shouldContain('good to go');
-    }
-
     public function it_should_use_the_configured_judo_id_if_one_is_not_provided()
     {
         $this->beConstructedWith(
