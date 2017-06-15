@@ -8,7 +8,7 @@ use Judopay\Model;
 class CardPayment extends Model
 {
     protected $resourcePath = 'transactions/payments';
-    protected $validApiMethods = array('create', 'validate');
+    protected $validApiMethods = array('create');
     protected $attributes
         = array(
             'yourConsumerReference' => DataType::TYPE_STRING,
