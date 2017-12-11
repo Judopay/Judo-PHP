@@ -2,8 +2,10 @@
 
 namespace Tests;
 
-use Tests\Base\PaymentTests;
+use PHPUnit_Framework_TestCase;
 use Tests\Builders\SaveCardBuilder;
+use Tests\Helpers\AssertionHelper;
+use Tests\Helpers\ConfigHelper;
 
 abstract class SaveCardTests extends PHPUnit_Framework_TestCase
 {
