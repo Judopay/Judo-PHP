@@ -25,7 +25,6 @@ class SaveCard extends Model
         = array(
             'yourConsumerReference',
             'cardNumber',
-            'cv2',
             'expiryDate',
         );
 }
