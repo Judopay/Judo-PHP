@@ -10,7 +10,8 @@ use Tests\Helpers\ConfigHelper;
 class AdditionsPaymentTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testOneUseTokenPayment() {
+    public function testOneUseTokenPayment()
+    {
         $encryptDetails = $this->getBuilder()
             ->build(ConfigHelper::getConfig());
 
@@ -23,5 +24,4 @@ class AdditionsPaymentTest extends \PHPUnit_Framework_TestCase
     {
         return new EncryptDetailsBuilder();
     }
-
 }
