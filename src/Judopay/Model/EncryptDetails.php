@@ -5,7 +5,6 @@ namespace Judopay\Model;
 use Judopay\DataType;
 use Judopay\Model;
 
-
 class EncryptDetails extends Model
 {
     protected $resourcePath = 'encryptions/paymentDetails';
