@@ -5,7 +5,7 @@ namespace Judopay\Model;
 use Judopay\DataType;
 use Judopay\Model;
 
-class Void extends Model
+class VoidTransaction extends Model
 {
     protected $resourcePath = 'transactions/voids';
     protected $validApiMethods = array('create');
