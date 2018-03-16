@@ -5,7 +5,7 @@ namespace Tests\Base;
 use PHPUnit_Framework_TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\CardPreauthBuilder;
-use Tests\Builders\VoidTransactionBuilder;
+use Tests\Builders\VoidBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
@@ -28,7 +28,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
     public function testValidPreauthVoid()
     {
         $receiptId = $this->makePreauthPayment();
-        $builder = new VoidTransactionBuilder($receiptId);
+        $builder = new VoidBuilder($receiptId);
 
         $result = $builder->build(ConfigHelper::getConfig())
             ->create();
@@ -39,7 +39,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
     public function testDeclinedPaymentVoid()
     {
         $receiptId = $this->makePreauthPayment(false);
-        $builder = new VoidTransactionBuilder($receiptId);
+        $builder = new VoidBuilder($receiptId);
 
         try {
             $builder->build(ConfigHelper::getConfig())
@@ -55,7 +55,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
 
     public function testWrongReceiptId()
     {
-        $builder = new VoidTransactionBuilder();
+        $builder = new VoidBuilder();
 
         try {
             $builder->build(ConfigHelper::getConfig())
@@ -72,7 +72,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
     public function testDoubleVoid()
     {
         $receiptId = $this->makePreauthPayment();
-        $builder = new VoidTransactionBuilder($receiptId);
+        $builder = new VoidBuilder($receiptId);
 
         $void = $builder->build(ConfigHelper::getConfig());
 
@@ -92,7 +92,7 @@ class VoidTest extends PHPUnit_Framework_TestCase
     public function testVoidWithInvalidAmount()
     {
         $receiptId = $this->makePreauthPayment();
-        $builder = new VoidTransactionBuilder($receiptId);
+        $builder = new VoidBuilder($receiptId);
 
         $void = $builder->setAttribute('amount', 100)
             ->build(ConfigHelper::getConfig());
