@@ -2,13 +2,13 @@
 
 namespace spec\Judopay\Model;
 
-use Tests\Builders\VoidBuilder;
+use Tests\Builders\VoidTransactionBuilder;
 
 class VoidSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Judopay\Model\Void');
+        $this->shouldHaveType('Judopay\Model\VoidTransaction');
     }
 
     public function it_should_create_a_new_refund()
@@ -17,8 +17,8 @@ class VoidSpec extends ModelObjectBehavior
             $this->concoctRequest('transactions/void.json')
         );
 
-        $modelBuilder = new VoidBuilder();
-        /** @var \Judopay\Model\Void|VoidSpec $this */
+        $modelBuilder = new VoidTransactionBuilder();
+        /** @var \Judopay\Model\VoidTransaction|VoidSpec $this */
         $this->setAttributeValues(
             $modelBuilder->compile()->getAttributeValues()
         );
