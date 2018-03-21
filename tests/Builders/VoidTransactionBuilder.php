@@ -2,7 +2,7 @@
 
 namespace Tests\Builders;
 
-class VoidBuilder extends AbstractModelBuilder
+class VoidTransactionBuilder extends AbstractModelBuilder
 {
     public function __construct($receiptId = '12345', $amount = 1.02)
     {
