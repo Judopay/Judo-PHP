@@ -29,7 +29,7 @@ To start using the SDK, create a new Judopay object with your API credentials:
 ```php
     $judopay = new \Judopay(
         array(
-            'apiToken' => 'your-token,
+            'apiToken' => 'your-token',
             'apiSecret' => 'your-secret',
             'judoId' => 'your-judo-id'
         )
