@@ -16,8 +16,8 @@
     "repositories": [
     ],
     "require": {
-        "php": ">=5.3.3",
-        "guzzle/guzzle": ">=3.7.0,<=3.9.9",
+        "php": ">=5.4",
+        "guzzlehttp/guzzle": ">=5.0",
         "monolog/monolog": "~1.10",
         "pimple/pimple": "~3.0"
     },
