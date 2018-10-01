@@ -2,9 +2,9 @@
 
 namespace spec\Judopay\Model;
 
-use Judopay\Model\RegisterCard;
+use Judopay\Model\CheckCard;
 use Judopay\Request;
-use Tests\Builders\RegisterCardBuilder;
+use Tests\Builders\CheckCardBuilder;
 
 class RegisterCardSpec extends ModelObjectBehavior
 {
@@ -17,11 +17,11 @@ class RegisterCardSpec extends ModelObjectBehavior
     public function it_should_save_new_card()
     {
         $this->beConstructedWith(
-            $this->concoctRequest('transactions/register_card.json')
+            $this->concoctRequest('transactions/check_card.json')
         );
 
-        $modelBuilder = new RegisterCardBuilder();
-        /** @var RegisterCard|RegisterCardSpec $this */
+        $modelBuilder = new CheckCardBuilder();
+        /** @var CheckCard|CheckCardSpec $this */
         $this->setAttributeValues(
             $modelBuilder->compile()->getAttributeValues()
         );
@@ -30,7 +30,7 @@ class RegisterCardSpec extends ModelObjectBehavior
 
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');
-        $output['type']->shouldEqual('PreAuth');
-        $output['amount']->shouldEqual("1.01");
+        $output['type']->shouldEqual('CheckCard');
+        $output['amount']->shouldEqual("0.00");
     }
 }
