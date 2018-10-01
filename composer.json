@@ -17,11 +17,9 @@
     ],
     "require": {
         "php": ">=5.4",
-        "guzzlehttp/guzzle": "5.0",
+        "guzzlehttp/guzzle": "^5.0",
         "monolog/monolog": "~1.10",
-        "pimple/pimple": "~3.0",
-        "doctrine/instantiator": ">=1.0.5",
-        "phpunit/php-timer": ">=1.0.9"
+        "pimple/pimple": "~3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",
@@ -32,9 +30,7 @@
         "symfony/console": "~2.3",
         "symfony/process": "^2.6",
         "symfony/yaml": "~2.1",
-        "phpdocumentor/reflection-docblock": "^2.0",
-        "doctrine/instantiator": ">=1.0.5",
-        "phpunit/php-timer": ">=1.0.9"
+        "phpdocumentor/reflection-docblock": "^2.0"
     },
     "config": {
         "bin-dir": "bin"
