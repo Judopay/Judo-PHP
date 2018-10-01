@@ -2,8 +2,8 @@
 
 namespace spec;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Judopay\Configuration;
 

@@ -2,12 +2,13 @@
 
 namespace Judopay;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\Message\Request as GuzzleRequest;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Message\Request as GuzzleRequest;
+use GuzzleHttp\Message\Response;
 use Guzzle\Log\PsrLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
+
 use Judopay\Exception\ApiException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
