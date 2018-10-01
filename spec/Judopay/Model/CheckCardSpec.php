@@ -6,12 +6,12 @@ use Judopay\Model\CheckCard;
 use Judopay\Request;
 use Tests\Builders\CheckCardBuilder;
 
-class RegisterCardSpec extends ModelObjectBehavior
+class CheckCardSpec extends ModelObjectBehavior
 {
     public function it_is_initializable()
     {
         $this->beConstructedWith(new Request($this->configuration));
-        $this->shouldHaveType('Judopay\Model\RegisterCard');
+        $this->shouldHaveType('Judopay\Model\CheckCard');
     }
 
     public function it_should_save_new_card()
