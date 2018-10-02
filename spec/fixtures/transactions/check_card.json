@@ -1,7 +1,7 @@
 {
   "receiptId": "5050240",
-  "yourPaymentReference": "Judo_RegisterCardPreAuth_636059257945294942",
-  "type": "PreAuth",
+  "yourPaymentReference": "Judo_CheckCard_636059257945294942",
+  "type": "CheckCard",
   "createdAt": "2016-08-04T16:43:14.7482+01:00",
   "result": "Success",
   "message": "AuthCode: 910333",
