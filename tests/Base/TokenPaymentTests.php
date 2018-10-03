@@ -249,10 +249,16 @@ abstract class TokenPaymentTests extends TestCase
             $tokenPayment->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors(
-                $e, 0, 86, 409, 4);
-                $this->assertContains($successfulResult['receiptId'],
-                $e->getMessage()
+                $e,
+                0,
+                86,
+                409,
+                4
             );
+                $this->assertContains(
+                    $successfulResult['receiptId'],
+                    $e->getMessage()
+                );
 
             return;
         }
