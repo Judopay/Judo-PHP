@@ -2,14 +2,14 @@
 
 namespace Tests\Base;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\TokenPaymentBuilder;
 use Tests\Builders\TokenPreauthBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
+abstract class TokenPaymentTests extends TestCase
 {
     const CONSUMER_REFERENCE = '1234512345';
     protected $cardToken;
@@ -248,8 +248,11 @@ abstract class TokenPaymentTests extends PHPUnit_Framework_TestCase
         try {
             $tokenPayment->create();
         } catch (\Exception $e) {
-            AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 86, 409, 4);
-            $this->assertContains($successfulResult['receiptId'], $e->getMessage());
+            AssertionHelper::assertApiExceptionWithModelErrors(
+                $e, 0, 86, 409, 4);
+                $this->assertContains($successfulResult['receiptId'],
+                $e->getMessage()
+            );
 
             return;
         }

@@ -2,11 +2,11 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Helpers\ConfigHelper;
 
-class CardDetailsTest extends PHPUnit_Framework_TestCase
+class CardDetailsTest extends TestCase
 {
     public function testPaymentWithMissingCardNumber()
     {

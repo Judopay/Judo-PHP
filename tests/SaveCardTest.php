@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\SaveCardBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-abstract class SaveCardTests extends PHPUnit_Framework_TestCase
+abstract class SaveCardTests extends TestCase
 {
     public function testValidSaveCard()
     {

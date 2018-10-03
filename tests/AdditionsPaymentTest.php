@@ -2,13 +2,13 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\EncryptDetailsBuilder;
 use Tests\Builders\OneUseTokenPaymentBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class AdditionsPaymentTest extends PHPUnit_Framework_TestCase
+class AdditionsPaymentTest extends TestCase
 {
 
     public function testOneUseTokenPayment()
@@ -36,6 +36,7 @@ class AdditionsPaymentTest extends PHPUnit_Framework_TestCase
     {
         $encryptDetails = $this->encryptDetailsRequestBuilder()
             ->build(ConfigHelper::getConfig());
+        $cpnfig = ConfigHelper::getConfig();
         return $encryptDetails->create();
     }
 

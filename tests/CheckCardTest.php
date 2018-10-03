@@ -14,11 +14,20 @@ class CheckCardTest extends PaymentTests
         return new CheckCardBuilder();
     }
 
+    public function testValidPayment()
+    {
+        $cardPayment = $this->getBuilder()
+            ->build(ConfigHelper::getConfigAlt());
+        $result = $cardPayment->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
+    }
+
     public function testPaymentWithUnknownCurrency()
     {
         $checkCard = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getConfigAlt());
 
         try {
             $checkCard->create();
@@ -35,7 +44,7 @@ class CheckCardTest extends PaymentTests
     {
         $checkCard = $this->getBuilder()
             ->setAttribute('amount', 100500)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getConfigAlt());
 
         $result = $checkCard->create();
 
@@ -47,11 +56,17 @@ class CheckCardTest extends PaymentTests
     {
         $checkCard = $this->getBuilder()
             ->unsetAttribute('currency')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getConfigAlt());
 
         $result = $checkCard->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
+    }
+
+    public function testDeclinedPayment()
+    {
+        //Unneeded test
+        $this->assertTrue(true);
     }
 
     public function testPaymentWithNegativeAmount()
@@ -69,12 +84,6 @@ class CheckCardTest extends PaymentTests
     public function testDuplicatePayment()
     {
         //Unneeded test
-        $this->assertTrue(true);
-    }
-
-    public function testDeclinedPayment()
-    {
-        //Not available for CheckCard
         $this->assertTrue(true);
     }
 }
