@@ -45,7 +45,7 @@ class ApiException extends \RuntimeException
         if (isset($parsedBody['details']['receiptId'])) {
             //Convert receiptId to a non scientific notation
             $fReceiptId = sprintf('%f', $parsedBody['details']['receiptId']);
-            $iReceiptId = rtrim($fReceiptId,'0');
+            $iReceiptId = rtrim($fReceiptId, '0');
             //De-deduplicate format
             $message .= ' Duplicate receipt id: '. $iReceiptId;
         } elseif (isset($parsedBody['details']) && is_array($parsedBody['details'])) {
