@@ -162,6 +162,4 @@ class AdditionsPaymentTest extends TestCase
             ->build(ConfigHelper::getConfigAlt());
         return $encryptedCheckCard->create();
     }
-
-
 }
