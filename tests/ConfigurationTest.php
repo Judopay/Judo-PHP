@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Helpers\ConfigHelper;
 
-class ConfigurationTest extends PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
     protected $data = array();
 

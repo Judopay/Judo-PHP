@@ -7,3 +7,4 @@ composer.phar
 .idea
 
 php-cs-fixer.phar
+/composer.lock

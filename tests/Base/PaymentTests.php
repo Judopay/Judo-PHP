@@ -2,13 +2,13 @@
 
 namespace Tests\Base;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\CardPreauthBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-abstract class PaymentTests extends PHPUnit_Framework_TestCase
+abstract class PaymentTests extends TestCase
 {
     /**
      * @return CardPaymentBuilder|CardPreauthBuilder

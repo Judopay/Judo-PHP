@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class AuthenticationTest extends PHPUnit_Framework_TestCase
+class AuthenticationTest extends TestCase
 {
     public function testPaymentWithInvalidJudoId()
     {

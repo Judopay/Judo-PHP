@@ -95,10 +95,12 @@ class Model
         $this->checkJudoId();
         $this->checkRequiredAttributes($this->attributeValues);
 
-        return $this->request->post(
+        $response = $this->request->post(
             $this->resourcePath,
             json_encode($this->attributeValues)
-        )->json();
+        );
+
+        return $response->json();
     }
 
     /**
@@ -113,10 +115,12 @@ class Model
 
         $validateResourcePath = $this->resourcePath.'/validate';
 
-        return $this->request->post(
+        $response = $this->request->post(
             $validateResourcePath,
             json_encode($this->attributeValues)
-        )->json();
+        );
+
+        return $response->json();
     }
 
     /**

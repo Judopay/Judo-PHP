@@ -2,14 +2,14 @@
 
 namespace Tests\Base;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\CardPreauthBuilder;
 use Tests\Builders\VoidTransactionBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class VoidTest extends PHPUnit_Framework_TestCase
+class VoidTest extends TestCase
 {
     protected function makePreauthPayment($preauth = true)
     {

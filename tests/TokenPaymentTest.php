@@ -10,6 +10,10 @@ class TokenPaymentTest extends TokenPaymentTests
     /** @inheritdoc */
     protected function getBuilder()
     {
-        return new TokenPaymentBuilder(self::CONSUMER_REFERENCE, $this->consumerToken, $this->cardToken);
+        return new TokenPaymentBuilder(
+            self::CONSUMER_REFERENCE,
+            $this->consumerToken,
+            $this->cardToken
+        );
     }
 }

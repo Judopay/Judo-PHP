@@ -8,6 +8,7 @@ use Guzzle\Http\Message\Request as GuzzleRequest;
 use Guzzle\Http\Message\Response;
 use Guzzle\Log\PsrLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
+
 use Judopay\Exception\ApiException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
