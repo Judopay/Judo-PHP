@@ -2,7 +2,7 @@
 
 namespace Judopay\Exception;
 
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Message\Response;
 use Judopay\Helper\ArrayHelper;
 
 class ApiException extends \RuntimeException

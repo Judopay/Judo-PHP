@@ -2,10 +2,10 @@
 
 namespace Judopay;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\Message\Request as GuzzleRequest;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Message\Request as GuzzleRequest;
+use GuzzleHttp\Message\Response;
 use Guzzle\Log\PsrLogAdapter;
 use Guzzle\Plugin\Log\LogPlugin;
 
@@ -106,7 +106,8 @@ class Request implements LoggerAwareInterface
         // Do we have an oAuth2 access token?
         if (!empty($oauthAccessToken)) {
             $request->setHeader('Authorization', 'Bearer '.$oauthAccessToken);
-        } else {
+        }
+        else {
             // Otherwise, use basic authentication
             $request->setAuth(
                 $this->configuration->get('apiToken'),
