@@ -2,7 +2,9 @@
 
 namespace Judopay;
 
-class Client extends \GuzzleHttp\Client
+use GuzzleHttp\Client as GuzzleClient;
+
+class Client extends GuzzleClient
 {
 
 }

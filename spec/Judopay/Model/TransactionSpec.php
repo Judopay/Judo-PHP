@@ -4,6 +4,7 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\Transaction;
 use Judopay\Request;
+use PHPUnit\Framework\Assert;
 
 class TransactionSpec extends ModelObjectBehavior
 {
@@ -21,7 +22,7 @@ class TransactionSpec extends ModelObjectBehavior
         /** @var Transaction|TransactionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
+        Assert::assertEquals(1.01, $output['results'][0]['amount']);
     }
 
     public function it_should_find_a_single_transaction()
@@ -33,6 +34,6 @@ class TransactionSpec extends ModelObjectBehavior
         /** @var Transaction|TransactionSpec $this */
         $output = $this->find($receiptId);
         $output->shouldBeArray();
-        $output['receiptId']->shouldBeLike($receiptId);
+        Assert::assertEquals($receiptId, $output['receiptId']);
     }
 }

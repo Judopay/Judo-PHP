@@ -2,7 +2,8 @@
 
 namespace spec\Judopay;
 
-use Guzzle\Http\Message\Request;
+use GuzzleHttp\Message\Request;
+use PHPUnit\Framework\Assert;
 use spec\SpecHelper;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -31,9 +32,7 @@ class RequestSpec extends ObjectBehavior
         $requestWithAuth = $this->setRequestAuthentication($request);
 
         // Make sure the Authorization header is correct
-        $requestWithAuth->getHeader('Authorization')
-            ->__toString()
-            ->shouldEqual('Bearer '.$oauthAccessToken);
+        Assert::assertEquals('Bearer '.$oauthAccessToken, $request->getHeader('Authorization'));
     }
 
     public function getMatchers()

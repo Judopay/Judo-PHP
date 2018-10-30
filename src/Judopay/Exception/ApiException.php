@@ -2,7 +2,7 @@
 
 namespace Judopay\Exception;
 
-use GuzzleHttp\Message\Response;
+use GuzzleHttp\Message\ResponseInterface;
 use Judopay\Helper\ArrayHelper;
 
 class ApiException extends \RuntimeException
@@ -23,10 +23,10 @@ class ApiException extends \RuntimeException
 
     /**
      * Factory method
-     * @param Response $response
+     * @param ResponseInterface $response
      * @return static
      */
-    public static function factory(Response $response)
+    public static function factory(ResponseInterface $response)
     {
         $parsedBody = $response->json();
 

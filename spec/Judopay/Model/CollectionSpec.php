@@ -3,6 +3,7 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\Collection;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\RefundBuilder;
 
 class CollectionSpec extends ModelObjectBehavior
@@ -26,7 +27,8 @@ class CollectionSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
+        Assert::assertEquals('Success', $output['result']);
+
     }
 
     public function it_should_list_all_collections()
@@ -38,6 +40,6 @@ class CollectionSpec extends ModelObjectBehavior
         /** @var Collection|CollectionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
+        Assert::assertEquals(1.01, $output['results'][0]['amount']);
     }
 }

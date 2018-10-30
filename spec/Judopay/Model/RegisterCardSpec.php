@@ -4,6 +4,7 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\RegisterCard;
 use Judopay\Request;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\RegisterCardBuilder;
 
 class RegisterCardSpec extends ModelObjectBehavior
@@ -29,8 +30,8 @@ class RegisterCardSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
-        $output['type']->shouldEqual('PreAuth');
-        $output['amount']->shouldEqual("1.01");
+        Assert::assertEquals('Success', $output['result']);
+        Assert::assertEquals('PreAuth', $output['type']);
+        Assert::assertEquals("1.01", $output['amount']);
     }
 }

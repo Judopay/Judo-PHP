@@ -3,6 +3,7 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\TokenPayment;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\TokenPaymentBuilder;
 
 class TokenPaymentSpec extends ModelObjectBehavior
@@ -26,6 +27,6 @@ class TokenPaymentSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
+        Assert::assertEquals('Success', $output['result']);
     }
 }

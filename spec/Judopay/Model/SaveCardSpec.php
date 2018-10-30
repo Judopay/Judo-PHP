@@ -4,6 +4,7 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\SaveCard;
 use Judopay\Request;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\SaveCardBuilder;
 
 class SaveCardSpec extends ModelObjectBehavior
@@ -29,7 +30,7 @@ class SaveCardSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
-        $output['type']->shouldEqual('Register');
+        Assert::assertEquals('Success', $output['result']);
+        Assert::assertEquals('Register', $output['type']);
     }
 }

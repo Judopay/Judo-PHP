@@ -4,6 +4,7 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\CheckCard;
 use Judopay\Request;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\CheckCardBuilder;
 
 class CheckCardSpec extends ModelObjectBehavior
@@ -29,8 +30,8 @@ class CheckCardSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
-        $output['type']->shouldEqual('CheckCard');
-        $output['amount']->shouldEqual("0.00");
+        Assert::assertEquals('Success', $output['result']);
+        Assert::assertEquals('CheckCard', $output['type']);
+        Assert::assertEquals('0.00', $output['amount']);
     }
 }

@@ -5,6 +5,7 @@ namespace spec\Judopay\Model;
 use Judopay\Exception\ValidationError;
 use Judopay\Model\AndroidPayment;
 use Judopay\Model\Inner\Wallet;
+use PHPUnit\Framework\Assert;
 use Tests\Builders\AndroidPaymentBuilder;
 
 class AndroidPaymentSpec extends ModelObjectBehavior
@@ -28,7 +29,8 @@ class AndroidPaymentSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['result']->shouldEqual('Success');
+
+        Assert::assertEquals('Success', $output['result']);
     }
 
     public function it_should_raise_an_error_when_required_fields_are_missing()

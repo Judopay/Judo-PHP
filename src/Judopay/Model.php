@@ -97,7 +97,7 @@ class Model
 
         $response = $this->request->post(
             $this->resourcePath,
-            json_encode($this->attributeValues)
+            $this->attributeValues
         );
 
         return $response->json();
@@ -117,7 +117,7 @@ class Model
 
         $response = $this->request->post(
             $validateResourcePath,
-            json_encode($this->attributeValues)
+            $this->attributeValues
         );
 
         return $response->json();

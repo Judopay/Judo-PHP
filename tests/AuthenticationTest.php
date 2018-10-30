@@ -20,7 +20,11 @@ class AuthenticationTest extends TestCase
         try {
             $cardPayment->create();
         } catch (\Exception $e) {
-            AssertionHelper::assertApiExceptionWithModelErrors($e, 1, 1);
+            AssertionHelper::assertApiExceptionWithModelErrors(
+                $e,
+                1,
+                1
+            );
 
             return;
         }

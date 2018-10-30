@@ -4,6 +4,7 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\Payment;
 use Judopay\Request;
+use PHPUnit\Framework\Assert;
 
 class PaymentSpec extends ModelObjectBehavior
 {
@@ -21,6 +22,7 @@ class PaymentSpec extends ModelObjectBehavior
         /** @var Payment|PaymentSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
+        Assert::assertEquals(1.01, $output['results'][0]['amount']);
+
     }
 }
