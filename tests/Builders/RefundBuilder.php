@@ -4,11 +4,12 @@ namespace Tests\Builders;
 
 class RefundBuilder extends AbstractModelBuilder
 {
-    public function __construct()
+    public function __construct($judoId, $receiptId = '12345', $amount = 1.02)
     {
         $this->attributeValues = array(
-            'receiptId'            => 1234,
-            'amount'               => 1.01,
+            'receiptId'            => $receiptId,
+            'amount'               => $amount,
+            'judoId'               => $judoId
         );
     }
 }

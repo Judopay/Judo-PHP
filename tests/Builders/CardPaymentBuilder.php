@@ -8,11 +8,11 @@ class CardPaymentBuilder extends AbstractModelBuilder
     const INVALID_VISA_CARD = 1;
     protected $type = self::VALID_VISA_CARD;
 
-    public function __construct()
+    public function __construct($amount = 1.02)
     {
         $this->attributeValues = array(
             'yourConsumerReference' => '12345',
-            'amount'                => 1.02,
+            'amount'                => $amount,
             'currency'              => 'GBP',
         );
     }
