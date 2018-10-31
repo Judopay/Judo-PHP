@@ -32,7 +32,6 @@ class RefundTest extends TestCase
 
         // Prepare a refund for the payment
         $builder = new RefundBuilder(
-            ConfigHelper::getConfig()->get('judoId'),
             $receiptId,
             $transactionAmount
         );
