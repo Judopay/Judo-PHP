@@ -23,6 +23,5 @@ class PaymentSpec extends ModelObjectBehavior
         $output = $this->all();
         $output->shouldBeArray();
         Assert::assertEquals(1.01, $output['results'][0]['amount']);
-
     }
 }

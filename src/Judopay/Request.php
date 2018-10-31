@@ -28,7 +28,8 @@ class Request
 
         // Set SSL connection
         $this->client->setDefaultOption(
-            'verify', __DIR__.'\..\..\cert\digicert_sha256_ca.pem'
+            'verify',
+            __DIR__.'\..\..\cert\digicert_sha256_ca.pem'
         );
     }
 
@@ -71,10 +72,11 @@ class Request
         return $this->send($request);
     }
 
-    public function setRequestHeaders(GuzzleRequest $request) {
+    public function setRequestHeaders(GuzzleRequest $request)
+    {
         $request->setHeader('api-version', $this->configuration->get('apiVersion'));
         $request->setHeader('Accept', 'application/json; charset=utf-8');
-        $request->setHeader('Content-Type','application/json');
+        $request->setHeader('Content-Type', 'application/json');
         $request->setHeader('User-Agent', $this->configuration->get('userAgent'));
     }
 
@@ -85,9 +87,8 @@ class Request
 
         // Do we have an oAuth2 access token?
         if (!empty($oauthAccessToken)) {
-            $request->setHeader('Authorization','Bearer ' . $oauthAccessToken);
-        }
-        else {
+            $request->setHeader('Authorization', 'Bearer ' . $oauthAccessToken);
+        } else {
             // Otherwise, use basic authentication
             $basicAuth =  $this->configuration->get('apiToken'). ":" . $this->configuration->get('apiSecret');
             $request->setHeader('Authorization', 'Basic ' . base64_encode($basicAuth));

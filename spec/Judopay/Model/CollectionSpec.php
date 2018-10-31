@@ -28,7 +28,6 @@ class CollectionSpec extends ModelObjectBehavior
 
         $output->shouldBeArray();
         Assert::assertEquals('Success', $output['result']);
-
     }
 
     public function it_should_list_all_collections()
