@@ -4,7 +4,7 @@ namespace spec;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
-use Guzzle\Plugin\Mock\MockPlugin;
+use GuzzleHttp\Subscriber\Mock;
 use Judopay\Configuration;
 
 class SpecHelper
@@ -35,11 +35,12 @@ class SpecHelper
     public static function getMockResponseClient($responseCode, $fixtureFile)
     {
         $client = new Client();
-        $plugin = new MockPlugin();
+        $plugin = new Mock();
 
         $mockResponse = SpecHelper::getMockResponseFromFixture($responseCode, $fixtureFile);
+
         $plugin->addResponse($mockResponse);
-        $client->addSubscriber($plugin);
+        $client->setDefaultOption('subscribers', $plugin);
 
         return $client;
     }
