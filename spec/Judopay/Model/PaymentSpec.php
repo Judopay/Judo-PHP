@@ -21,6 +21,6 @@ class PaymentSpec extends ModelObjectBehavior
         /** @var Payment|PaymentSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['result'][0]['amount']->shouldEqual(1.01);
+        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 }
