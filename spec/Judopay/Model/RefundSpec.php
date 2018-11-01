@@ -3,7 +3,6 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\Refund;
-use PHPUnit\Framework\Assert;
 use Tests\Builders\RefundBuilder;
 
 class RefundSpec extends ModelObjectBehavior
@@ -27,7 +26,7 @@ class RefundSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        Assert::assertEquals('Success', $output['result']);
+        $output['result']->shouldEqual('Success');
     }
 
     public function it_should_list_all_refunds()
@@ -39,6 +38,6 @@ class RefundSpec extends ModelObjectBehavior
         /** @var Refund|RefundSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        Assert::assertEquals(1.01, $output['results'][0]['amount']);
+        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 }

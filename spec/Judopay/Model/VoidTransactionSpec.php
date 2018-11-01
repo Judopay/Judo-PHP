@@ -2,7 +2,6 @@
 
 namespace spec\Judopay\Model;
 
-use PHPUnit\Framework\Assert;
 use Tests\Builders\VoidTransactionBuilder;
 
 class VoidTransactionSpec extends ModelObjectBehavior
@@ -26,9 +25,9 @@ class VoidTransactionSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        Assert::assertEquals('Success', $output['result']);
-        Assert::assertEquals('VOID', $output['type']);
-        Assert::assertEquals('12345', $output['originalReceiptId']);
-        Assert::assertEquals('1.02', $output['originalAmount']);
+        $output['result']->shouldEqual('Success');
+        $output['type']->shouldEqual('VOID');
+        $output['originalReceiptId']->shouldEqual('12345');
+        $output['originalAmount']->shouldEqual('1.02');
     }
 }

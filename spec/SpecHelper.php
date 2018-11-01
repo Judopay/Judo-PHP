@@ -5,7 +5,10 @@ namespace spec;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Subscriber\Prepare;
 use Judopay\Configuration;
+use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\History;
 
 class SpecHelper
 {
@@ -23,10 +26,14 @@ class SpecHelper
             $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
         }
 
+
+        $stream = Stream::factory($fixtureContent);
+
+
         $mockResponse = new Response(
-            $responseCode,
-            null,
-            $fixtureContent
+            $responseCode,  // statusCode
+            [],   // headers
+            $stream // StreamInterface body
         );
 
         return $mockResponse;
@@ -35,12 +42,13 @@ class SpecHelper
     public static function getMockResponseClient($responseCode, $fixtureFile)
     {
         $client = new Client();
-        $plugin = new Mock();
+        $history = new History();
 
+        $mock = new Mock();
         $mockResponse = SpecHelper::getMockResponseFromFixture($responseCode, $fixtureFile);
+        $mock->addResponse($mockResponse);
 
-        $plugin->addResponse($mockResponse);
-        $client->setDefaultOption('subscribers', $plugin);
+        $client->setDefaultOption('subscribers', [$history, $mock]);  // Is that the way to set the mock?
 
         return $client;
     }

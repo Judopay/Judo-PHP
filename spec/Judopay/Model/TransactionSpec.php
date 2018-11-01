@@ -22,7 +22,7 @@ class TransactionSpec extends ModelObjectBehavior
         /** @var Transaction|TransactionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        Assert::assertEquals(1.01, $output['results'][0]['amount']);
+        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 
     public function it_should_find_a_single_transaction()
@@ -34,6 +34,6 @@ class TransactionSpec extends ModelObjectBehavior
         /** @var Transaction|TransactionSpec $this */
         $output = $this->find($receiptId);
         $output->shouldBeArray();
-        Assert::assertEquals($receiptId, $output['receiptId']);
+        $output['receiptId']->shouldBeLike($receiptId);
     }
 }

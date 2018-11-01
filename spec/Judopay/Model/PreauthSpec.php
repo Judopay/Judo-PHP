@@ -4,7 +4,6 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\Preauth;
 use Judopay\Request;
-use PHPUnit\Framework\Assert;
 
 class PreauthSpec extends ModelObjectBehavior
 {
@@ -22,6 +21,6 @@ class PreauthSpec extends ModelObjectBehavior
         /** @var Preauth|PreauthSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        Assert::assertEquals(1.01, $output['results'][0]['amount']);
+        $output['results'][0]['amount']->shouldEqual(1.01);
     }
 }

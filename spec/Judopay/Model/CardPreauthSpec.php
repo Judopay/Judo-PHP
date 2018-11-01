@@ -3,7 +3,6 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\CardPreauth;
-use PHPUnit\Framework\Assert;
 use Tests\Builders\CardPaymentBuilder;
 
 class CardPreauthSpec extends ModelObjectBehavior
@@ -27,6 +26,6 @@ class CardPreauthSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        Assert::assertEquals('Success', $output['result']);
+        $output['result']->shouldEqual('Success');
     }
 }

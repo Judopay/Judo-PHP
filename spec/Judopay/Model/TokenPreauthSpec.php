@@ -3,7 +3,6 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\TokenPreauth;
-use PHPUnit\Framework\Assert;
 use Tests\Builders\TokenPaymentBuilder;
 
 class TokenPreauthSpec extends ModelObjectBehavior
@@ -27,6 +26,6 @@ class TokenPreauthSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        Assert::assertEquals('Success', $output['result']);
+        $output['results']->shouldEqual('Success');
     }
 }
