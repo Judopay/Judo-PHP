@@ -39,6 +39,6 @@ class CollectionSpec extends ModelObjectBehavior
         /** @var Collection|CollectionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
+        $output['result'][0]['amount']->shouldEqual(1.01);
     }
 }

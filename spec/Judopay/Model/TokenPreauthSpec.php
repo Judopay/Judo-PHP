@@ -26,6 +26,6 @@ class TokenPreauthSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['results']->shouldEqual('Success');
+        $output['result']->shouldEqual('Success');
     }
 }

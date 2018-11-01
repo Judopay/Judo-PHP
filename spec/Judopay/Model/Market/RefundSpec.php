@@ -27,7 +27,7 @@ class RefundSpec extends ModelObjectBehavior
         $output = $this->create();
 
         $output->shouldBeArray();
-        $output['results']->shouldEqual('Success');
+        $output['result']->shouldEqual('Success');
     }
 
     public function it_should_list_all_refund()
@@ -39,6 +39,6 @@ class RefundSpec extends ModelObjectBehavior
         /** @var Refund|RefundSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
-        $output['results'][0]['amount']->shouldEqual(1.01);
+        $output['result'][0]['amount']->shouldEqual(1.01);
     }
 }

@@ -68,7 +68,9 @@ class Model
         );
         $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
 
-        return $this->request->get($uri)->json();
+        return $this->request
+            ->get($uri)
+            ->json();
     }
 
     /**
@@ -81,7 +83,8 @@ class Model
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
 
-        return $this->request->get($this->resourcePath.'/'.(int)$resourceId)
+        return $this->request
+            ->get($this->resourcePath.'/'.(int)$resourceId)
             ->json();
     }
 
