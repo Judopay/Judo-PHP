@@ -194,7 +194,7 @@ class Model
         foreach ($this->requiredAttributes as $requiredAttribute) {
             if (!in_array($requiredAttribute, $existingAttributes)
                 || $data[$requiredAttribute] === ''
-                || $data[$requiredAttribute] = null
+                || $data[$requiredAttribute] === null
             ) {
                 $errors[] = $requiredAttribute.' is missing or empty';
             }
