@@ -4,7 +4,6 @@ namespace spec\Judopay\Model;
 
 use Judopay\Model\Transaction;
 use Judopay\Request;
-use PHPUnit\Framework\Assert;
 
 class TransactionSpec extends ModelObjectBehavior
 {

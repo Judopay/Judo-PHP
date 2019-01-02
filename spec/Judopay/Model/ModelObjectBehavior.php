@@ -5,8 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Request;
 use spec\SpecHelper;
 use PhpSpec\ObjectBehavior;
-use GuzzleHttp\Client;
-use Prophecy\Argument;
 
 abstract class ModelObjectBehavior extends ObjectBehavior
 {

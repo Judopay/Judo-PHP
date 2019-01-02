@@ -24,8 +24,8 @@ class RefundSpec extends ModelObjectBehavior
         $this->setAttributeValues(
             $modelBuilder->compile()->getAttributeValues()
         );
-        $output = $this->create();
 
+        $output = $this->create();
         $output->shouldBeArray();
         $output['result']->shouldEqual('Success');
     }

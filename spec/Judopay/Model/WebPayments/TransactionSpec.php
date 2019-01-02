@@ -19,8 +19,8 @@ class TransactionSpec extends ModelObjectBehavior
         $request = $this->concoctRequest('web_payments/payments/find.json');
         $this->beConstructedWith($request);
 
-        $reference
-            = '4gcBAAMAGAASAAAADA66kRor6ofknGqU3A6i-759FprFGPH3ecVcW5ChMQK0f3pLBQ';
+        $reference = '4gcBAAMAGAASAAAADA66kRor6ofknGqU3A6i-759FprFGPH3ecVcW5ChMQK0f3pLBQ';
+
         /** @var Transaction|TransactionSpec $this */
         $output = $this->find($reference);
         $output->shouldBeArray();

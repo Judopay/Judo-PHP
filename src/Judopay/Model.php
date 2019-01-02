@@ -56,7 +56,7 @@ class Model
      * @param  int    $offset   The start point in the sorted list of records from which the results set will start
      * @param  int    $pageSize The number of records to display per page
      * @param  string $sort     Determines how the list is sorted (time-descending or time-ascending)
-     * @return array
+     * @return array API response
      **/
     public function all($offset = 0, $pageSize = 10, $sort = 'time-descending')
     {
@@ -66,11 +66,16 @@ class Model
             'pageSize' => $pageSize,
             'sort'     => $sort,
         );
+
+        // Ressource Path with options
         $uri = $this->resourcePath.'?'.http_build_query($pagingOptions);
 
-        return $this->request
-            ->get($uri)
-            ->json();
+        $response = $this->request->get(
+            $uri
+            // No attributes
+        );
+
+        return $response->json();
     }
 
     /**

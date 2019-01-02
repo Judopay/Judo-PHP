@@ -3,9 +3,11 @@
 namespace spec;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Event\EmitterInterface;
+use GuzzleHttp\Event\SubscriberInterface;
 use GuzzleHttp\Message\Response;
+use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Subscriber\Mock;
-use GuzzleHttp\Subscriber\Prepare;
 use Judopay\Configuration;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\History;
@@ -26,14 +28,12 @@ class SpecHelper
             $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
         }
 
-
         $stream = Stream::factory($fixtureContent);
-
 
         $mockResponse = new Response(
             $responseCode,  // statusCode
-            [],   // headers
-            $stream // StreamInterface body
+            [],             // headers
+            $stream         // StreamInterface body
         );
 
         return $mockResponse;
@@ -42,13 +42,23 @@ class SpecHelper
     public static function getMockResponseClient($responseCode, $fixtureFile)
     {
         $client = new Client();
+
         $history = new History();
+        $client->getEmitter()->attach($history);
 
         $mock = new Mock();
+
+        // Preparing the response for the client
+        /* @var $mockResponse ResponseInterface */
         $mockResponse = SpecHelper::getMockResponseFromFixture($responseCode, $fixtureFile);
         $mock->addResponse($mockResponse);
 
-        $client->setDefaultOption('subscribers', [$history, $mock]);  // Is that the way to set the mock?
+        // Guzzle event emitter (onBefore)
+        /** @var EmitterInterface $emitter*/
+        $emitter = $client->getEmitter();
+
+        // Attach the mock to the emitter
+        $emitter->attach($mock);
 
         return $client;
     }

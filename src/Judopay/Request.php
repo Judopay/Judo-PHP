@@ -43,9 +43,12 @@ class Request
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
 
-        $request = new GuzzleRequest(
+        $request = $this->client->createRequest(
             'GET',
-            $endpointUrl.'/'.$resourcePath
+            $endpointUrl.'/'.$resourcePath,
+            [
+                'json' => null
+            ]
         );
 
         return $this->send($request);
