@@ -20,9 +20,9 @@
       "guzzlehttp/guzzle": "~5.0",
       "monolog/monolog": "~1.10",
       "pimple/pimple": "~3.0",
-      "curl/curl" : ">=7.0",
-      "ext-curl": "^0.0.0",
-      "ext-openssl": "^0.0.0"
+      "curl/curl" : ">=0.0.0",
+      "ext-curl": ">=0.0.0",
+      "ext-openssl": ">=0.0.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",
