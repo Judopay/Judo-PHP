@@ -3,6 +3,8 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\Collection;
+use Tests\Builders\CardPaymentBuilder;
+use Tests\Builders\GetTransactionBuilder;
 use Tests\Builders\RefundBuilder;
 
 class CollectionSpec extends ModelObjectBehavior
@@ -14,12 +16,11 @@ class CollectionSpec extends ModelObjectBehavior
 
     public function it_should_create_a_new_collection()
     {
-        $this->beConstructedWith(
-            $this->concoctRequest('card_payments/create.json')
-        );
-
+        // Mock of a POST
+        $mockRequest = $this->concoctRequest('card_payments/create.json');
+        $this->beConstructedWith($mockRequest);
         $modelBuilder = new RefundBuilder();
-        /** @var Collection|CollectionSpec $this */
+
         $this->setAttributeValues(
             $modelBuilder->compile()->getAttributeValues()
         );
@@ -31,12 +32,19 @@ class CollectionSpec extends ModelObjectBehavior
 
     public function it_should_list_all_collections()
     {
-        $this->beConstructedWith(
-            $this->concoctRequest('transactions/all.json')
+        // Mock of a GET
+        $mockRequest = $this->concoctRequest('transactions/all.json');
+        $this->beConstructedWith($mockRequest);
+        $modelBuilder = new GetTransactionBuilder();
+
+        /** @var Collection|CollectionSpec $this */
+        $this->setAttributeValues(
+            $modelBuilder->compile()->getAttributeValues()
         );
 
         /** @var Collection|CollectionSpec $this */
         $output = $this->all();
+
         $output->shouldBeArray();
         $output['results'][0]['amount']->shouldEqual(1.01);
     }

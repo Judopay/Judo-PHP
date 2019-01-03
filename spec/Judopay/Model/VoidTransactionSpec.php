@@ -28,7 +28,6 @@ class VoidTransactionSpec extends ModelObjectBehavior
         $output['result']->shouldEqual('Success');
         $output['type']->shouldEqual('VOID');
         $output['originalReceiptId']->shouldEqual('12345');
-        $output['originalReceiptId']->shouldEqual('12345');
         $output['originalAmount']->shouldEqual('1.02');
     }
 }

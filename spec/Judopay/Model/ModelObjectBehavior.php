@@ -5,7 +5,6 @@ namespace spec\Judopay\Model;
 use Judopay\Request;
 use spec\SpecHelper;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 abstract class ModelObjectBehavior extends ObjectBehavior
 {
@@ -20,12 +19,13 @@ abstract class ModelObjectBehavior extends ObjectBehavior
     protected function concoctRequest($fixtureFile)
     {
         $request = new Request($this->configuration);
-        $request->setClient(
-            SpecHelper::getMockResponseClient(
-                200,
-                $fixtureFile
-            )
+
+        $mockClient = SpecHelper::getMockResponseClient(
+            200,
+            $fixtureFile
         );
+
+        $request->setClient($mockClient);
 
         return $request;
     }

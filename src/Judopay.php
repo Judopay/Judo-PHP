@@ -38,7 +38,6 @@ class Judopay
                 $configuration = $c['configuration'];
                 $request = new \Judopay\Request($configuration);
                 $request->setClient(new \Judopay\Client());
-                $request->setLogger($configuration->get('logger'));
 
                 return $request;
             }
