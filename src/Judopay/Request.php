@@ -29,7 +29,7 @@ class Request
         // Set SSL connection
         $this->client->setDefaultOption(
             'verify',
-            __DIR__.'\..\..\cert\digicert_sha256_ca.pem'
+            __DIR__.'/../../cert/digicert_sha256_ca.pem'
         );
     }
 
