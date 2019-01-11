@@ -15,6 +15,7 @@ class DataType
     const TYPE_OBJECT = 'object';
     const TYPE_PK_PAYMENT = 'pk_payment';
     const TYPE_WALLET = 'wallet';
+    const TYPE_BOOLEAN = 'boolean';
 
     public static function coerce($targetDataType, $value)
     {
@@ -53,6 +54,9 @@ class DataType
 
             case static::TYPE_INTEGER:
                 return (int)$value;
+
+            case static::TYPE_BOOLEAN:
+                return (bool)$value;
         }
 
         return $value;
