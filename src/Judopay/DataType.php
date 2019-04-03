@@ -3,6 +3,7 @@
 namespace Judopay;
 
 use Judopay\Exception\ValidationError;
+use Judopay\Model\Inner\GooglePayWallet;
 use Judopay\Model\Inner\PkPayment;
 use Judopay\Model\Inner\Wallet;
 
@@ -15,6 +16,7 @@ class DataType
     const TYPE_OBJECT = 'object';
     const TYPE_PK_PAYMENT = 'pk_payment';
     const TYPE_WALLET = 'wallet';
+    const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
 
     public static function coerce($targetDataType, $value)
     {
@@ -50,6 +52,11 @@ class DataType
                 $wallet = Wallet::factory($value);
 
                 return $wallet->toObject();
+
+            case static::TYPE_GOOGLE_PAY_WALLET:
+                $googleWallet = GooglePayWallet::factory($value);
+
+                return $googleWallet->toObject();
 
             case static::TYPE_INTEGER:
                 return (int)$value;
