@@ -89,7 +89,10 @@ class GooglePaymentSpec extends ModelObjectBehavior
     {
         /** @var GooglePayment|GooglePaymentSpec $this */
         $this->shouldThrow(
-            new ValidationError(sprintf(GooglePayWallet::ERROR_MESSAGE_INVALID_JSON, 'Judopay\Model\Inner\GooglePayWallet'))
+            new ValidationError(sprintf(
+                GooglePayWallet::ERROR_MESSAGE_INVALID_JSON,
+                'Judopay\Model\Inner\GooglePayWallet')
+            )
         )
             ->during(
                 'setAttributeValues',
@@ -97,7 +100,10 @@ class GooglePaymentSpec extends ModelObjectBehavior
             );
 
         $this->shouldThrow(
-            new ValidationError(sprintf(GooglePayWallet::ERROR_MESSAGE_CORRUPTED_OBJECT, 'Judopay\Model\Inner\GooglePayWallet'))
+            new ValidationError(sprintf(
+                GooglePayWallet::ERROR_MESSAGE_CORRUPTED_OBJECT,
+                'Judopay\Model\Inner\GooglePayWallet')
+            )
         )
             ->during(
                 'setAttributeValues',
