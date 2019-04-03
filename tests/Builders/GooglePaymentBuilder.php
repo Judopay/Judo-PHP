@@ -8,7 +8,7 @@ class GooglePaymentBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             "googlePayWallet" => array(
-                "cardNetwork"       => "VISA==",
+                "cardNetwork"       => "VISA",
                 "cardDetails"       => "5236",
                 "token"             => "EncryptedGooglePayload",
             ),
