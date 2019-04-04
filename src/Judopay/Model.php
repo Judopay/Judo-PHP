@@ -75,7 +75,7 @@ class Model
             // No attributes
         );
 
-        return $response->json();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -88,9 +88,10 @@ class Model
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
 
-        return $this->request
-            ->get($this->resourcePath.'/'.(int)$resourceId)
-            ->json();
+        $response = $this->request
+            ->get($this->resourcePath.'/'.(int)$resourceId);
+
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -108,7 +109,7 @@ class Model
             $this->attributeValues
         );
 
-        return $response->json();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -128,7 +129,7 @@ class Model
             $this->attributeValues
         );
 
-        return $response->json();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
