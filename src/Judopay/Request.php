@@ -3,19 +3,16 @@
 namespace Judopay;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Message\FutureResponse;
-use GuzzleHttp\Message\Request as GuzzleRequest;
-use GuzzleHttp\Ring\Future\FutureArray;
+use GuzzleHttp\Exception\RequestException;
 use Judopay\Exception\ApiException;
 
 class Request
 {
     /** @var Configuration */
     protected $configuration;
+
     /** @var  Client */
     protected $client;
-
 
     public function __construct(Configuration $configuration)
     {
@@ -25,77 +22,36 @@ class Request
     public function setClient(Client $client)
     {
         $this->client = $client;
-
-        // Set SSL connection
-        $this->client->setDefaultOption(
-            'verify',
-            __DIR__.'/../../cert/digicert_sha256_ca.pem'
-        );
     }
 
     /**
      * Make a GET request to the specified resource path
+     *
      * @param string $resourcePath
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws ApiException
-     * @return FutureArray|FutureResponse
      */
     public function get($resourcePath)
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
 
-        $request = $this->client->createRequest(
-            'GET',
-            $endpointUrl.'/'.$resourcePath,
-            [
-                'json' => null
-            ]
-        );
-
-        return $this->send($request);
+        return $this->send('GET', $endpointUrl.'/'.$resourcePath);
     }
 
     /**
      * Make a POST request to the specified resource path
+     *
      * @param string $resourcePath
      * @param array  $data
-     * @return FutureArray|FutureResponse
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function post($resourcePath, $data)
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
 
-        $request = $this->client->createRequest(
-            'POST',
-            $endpointUrl.'/'.$resourcePath,
-            [
-                'json' => $data
-            ]
-        );
-
-        return $this->send($request);
-    }
-
-    public function setRequestHeaders(GuzzleRequest $request)
-    {
-        $request->setHeader('api-version', $this->configuration->get('apiVersion'));
-        $request->setHeader('Accept', 'application/json; charset=utf-8');
-        $request->setHeader('Content-Type', 'application/json');
-        $request->setHeader('User-Agent', $this->configuration->get('userAgent'));
-    }
-
-    public function setRequestAuthentication(GuzzleRequest $request)
-    {
-        $this->configuration->validate();
-        $oauthAccessToken = $this->configuration->get('oauthAccessToken');
-
-        // Do we have an oAuth2 access token?
-        if (!empty($oauthAccessToken)) {
-            $request->setHeader('Authorization', 'Bearer ' . $oauthAccessToken);
-        } else {
-            // Otherwise, use basic authentication
-            $basicAuth =  $this->configuration->get('apiToken'). ":" . $this->configuration->get('apiSecret');
-            $request->setHeader('Authorization', 'Basic ' . base64_encode($basicAuth));
-        }
+        return $this->send('POST', $endpointUrl.'/'.$resourcePath, $data);
     }
 
     /**
@@ -108,18 +64,19 @@ class Request
     }
 
     /**
-     * @param GuzzleRequest $guzzleRequest
-     * @throws ApiException
-     * @return FutureArray|FutureResponse
+     * @param                 $method
+     * @param string          $url
+     * @param array           $body
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    protected function send(GuzzleRequest $guzzleRequest)
+    protected function send($method, $url, array $body = [])
     {
-        $this->setRequestHeaders($guzzleRequest);
-        $this->setRequestAuthentication($guzzleRequest);
-
         try {
-            $guzzleResponse = $this->client->send($guzzleRequest);
-        } catch (BadResponseException $e) {
+            $guzzleResponse = $this->client->request($method, $url, [
+                'json' => $body,
+            ]);
+        } catch (RequestException $e) {
             // Guzzle throws an exception when it encounters a 4xx or 5xx error
             // Rethrow the exception so we can raise our custom exception classes
             throw ApiException::factory($e->getResponse());

@@ -118,4 +118,30 @@ class Configuration
 
         return true;
     }
+
+    public function getGuzzleConfig()
+    {
+        $guzzleConfig = [
+            'verify' => __DIR__.'/../../cert/digicert_sha256_ca.pem',
+            'headers' => [
+                'api-version' => $this->get('apiVersion'),
+                'Accept' => 'application/json; charset=utf-8',
+                'Content-Type' => 'application/json',
+                'User-Agent' => $this->get('userAgent'),
+            ]
+        ];
+
+        $oauthAccessToken = $this->get('oauthAccessToken');
+
+        // Do we have an oAuth2 access token?
+        if (!empty($oauthAccessToken)) {
+            $guzzleConfig['headers']['Authorization'] = 'Bearer ' . $oauthAccessToken;
+        } else {
+            // Otherwise, use basic authentication
+            $basicAuth =  $this->get('apiToken'). ":" . $this->get('apiSecret');
+            $guzzleConfig['headers']['Authorization'] = 'Basic ' . base64_encode($basicAuth);
+        }
+
+        return $guzzleConfig;
+    }
 }

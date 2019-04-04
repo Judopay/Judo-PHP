@@ -36,8 +36,10 @@ class Judopay
             function ($c) {
                 /** @var Configuration $configuration */
                 $configuration = $c['configuration'];
+                $configuration->validate();
+
                 $request = new \Judopay\Request($configuration);
-                $request->setClient(new \Judopay\Client());
+                $request->setClient(new \Judopay\Client($configuration->getGuzzleConfig()));
 
                 return $request;
             }

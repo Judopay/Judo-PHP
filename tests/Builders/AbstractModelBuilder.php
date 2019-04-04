@@ -27,8 +27,9 @@ abstract class AbstractModelBuilder
     public function build(Configuration $configuration = null)
     {
         $this->compile();
-        $request = new Request($configuration ?: new Configuration());
-        $request->setClient(new Client());
+        $configuration = $configuration ?: new Configuration();
+        $request = new Request($configuration);
+        $request->setClient(new Client($configuration->getGuzzleConfig()));
 
         $modelName = '\Judopay\Model\\'.substr(get_class($this), 15, -7);
 
