@@ -30,11 +30,16 @@ class ApiException extends \RuntimeException
     {
         $parsedBody = json_decode($response->getBody()->getContents(), true);
 
-        $category = ArrayHelper::get(
-            $parsedBody,
-            'category',
-            static::CATEGORY_UNKNOWN
-        );
+        try {
+            $category = ArrayHelper::get(
+                $parsedBody,
+                'category',
+                static::CATEGORY_UNKNOWN
+            );
+        } catch (\Exception $e) {
+            throw new \Exception($response->getBody()->getContents());
+        }
+
 
         $message = ArrayHelper::get($parsedBody, 'message', get_called_class());
 
