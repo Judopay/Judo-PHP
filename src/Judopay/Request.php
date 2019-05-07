@@ -51,7 +51,9 @@ class Request
     {
         $endpointUrl = $this->configuration->get('endpointUrl');
 
-        return $this->send('POST', $endpointUrl.'/'.$resourcePath, $data);
+        return $this->send('POST', $endpointUrl.'/'.$resourcePath, [
+            'json' => $data,
+        ]);
     }
 
     /**
@@ -73,9 +75,7 @@ class Request
     protected function send($method, $url, array $body = [])
     {
         try {
-            $guzzleResponse = $this->client->request($method, $url, [
-                'json' => $body,
-            ]);
+            $guzzleResponse = $this->client->request($method, $url, $body);
         } catch (RequestException $e) {
             // Guzzle throws an exception when it encounters a 4xx or 5xx error
             // Rethrow the exception so we can raise our custom exception classes
