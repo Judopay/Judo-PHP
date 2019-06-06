@@ -4,6 +4,7 @@ namespace Judopay;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
 use Judopay\Exception\ApiException;
 
 class Request
@@ -79,7 +80,7 @@ class Request
         } catch (RequestException $e) {
             // Guzzle throws an exception when it encounters a 4xx or 5xx error
             // Rethrow the exception so we can raise our custom exception classes
-            throw ApiException::factory($e->getResponse());
+            throw ApiException::factory($e->getResponse() ?: new Response(500));
         }
 
 
