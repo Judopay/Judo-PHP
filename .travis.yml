@@ -8,7 +8,7 @@ php:
 
 sudo: required
 
-dist: xenial
+dist: precise
 
 install: composer install
 
