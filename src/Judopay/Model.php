@@ -3,6 +3,7 @@
 namespace Judopay;
 
 use Judopay\Exception\ValidationError;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Base model class
@@ -52,6 +53,21 @@ class Model
     }
 
     /**
+     * Transforms the Guzzle Response to an Array
+     * @param Response $guzzleResponse
+     * @return array
+     **/
+    public function getResponseArray($guzzleResponse)
+    {
+        // Read the Psr7\Stream
+        $responseBody = $guzzleResponse->getBody();
+        $responseBodyAsString = $responseBody->getContents();
+
+        // Parse the response to Json
+        return json_decode($responseBodyAsString, true);
+    }
+
+    /**
      * Retrieve a list of records
      * @param  int    $offset   The start point in the sorted list of records from which the results set will start
      * @param  int    $pageSize The number of records to display per page
@@ -72,10 +88,9 @@ class Model
 
         $response = $this->request->get(
             $uri
-            // No attributes
         );
 
-        return $response->json();
+        return $this->getResponseArray($response);
     }
 
     /**
@@ -88,9 +103,11 @@ class Model
     {
         $this->checkApiMethodIsSupported(__FUNCTION__);
 
-        return $this->request
-            ->get($this->resourcePath.'/'.(int)$resourceId)
-            ->json();
+        $response = $this->request->get(
+            $this->resourcePath.'/'.(int)$resourceId
+        );
+
+        return $this->getResponseArray($response);
     }
 
     /**
@@ -108,7 +125,7 @@ class Model
             $this->attributeValues
         );
 
-        return $response->json();
+        return $this->getResponseArray($response);
     }
 
     /**
@@ -128,7 +145,7 @@ class Model
             $this->attributeValues
         );
 
-        return $response->json();
+        return $this->getResponseArray($response);
     }
 
     /**

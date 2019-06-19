@@ -3,7 +3,6 @@
 namespace spec;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class JudopaySpec extends ObjectBehavior
 {

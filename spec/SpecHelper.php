@@ -2,67 +2,25 @@
 
 namespace spec;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Event\EmitterInterface;
-use GuzzleHttp\Event\SubscriberInterface;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Subscriber\Mock;
 use Judopay\Configuration;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\History;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7;
 
+
+/*
+ * Test the client without sending the requests
+ */
 class SpecHelper
 {
-    public static function getMockResponse($responseCode, $responseBody = null)
-    {
-        $mockResponse = new Response($responseCode, null, $responseBody);
-
-        return $mockResponse;
-    }
-
-    public static function getMockResponseFromFixture($responseCode, $fixtureFile = null)
-    {
-        $fixtureContent = null;
-        if (!empty($fixtureFile)) {
-            $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
-        }
-
-        $stream = Stream::factory($fixtureContent);
-
-        $mockResponse = new Response(
-            $responseCode,  // statusCode
-            [],             // headers
-            $stream         // StreamInterface body
-        );
-
-        return $mockResponse;
-    }
-
-    public static function getMockResponseClient($responseCode, $fixtureFile)
-    {
-        $client = new Client();
-
-        $history = new History();
-        $client->getEmitter()->attach($history);
-
-        $mock = new Mock();
-
-        // Preparing the response for the client
-        /* @var $mockResponse ResponseInterface */
-        $mockResponse = SpecHelper::getMockResponseFromFixture($responseCode, $fixtureFile);
-        $mock->addResponse($mockResponse);
-
-        // Guzzle event emitter (onBefore)
-        /** @var EmitterInterface $emitter*/
-        $emitter = $client->getEmitter();
-
-        // Attach the mock to the emitter
-        $emitter->attach($mock);
-
-        return $client;
-    }
-
+    /**
+     * Returns a mock configuration
+     */
     public static function getConfiguration()
     {
         $configuration = new Configuration(
@@ -75,4 +33,93 @@ class SpecHelper
 
         return $configuration;
     }
+
+    /**
+     * Creates a mock Handler with a response in the queue
+     * @param $mockResponse
+     * @return HandlerStack
+     */
+    public static function getMockResponseHandler($mockResponse)
+    {
+        $mock = new MockHandler([$mockResponse]);
+        $handler = HandlerStack::create($mock);
+
+        return $handler;
+    }
+
+    /**
+     * Creates a mock client with the provided body
+     * @param $responseCode
+     * @param $responseBody
+     * @return Client
+     */
+    public static function getMockResponseClientFromBody($responseCode, $responseBody)
+    {
+        // Create the response
+        $mockResponse = SpecHelper::getBodyResponse($responseCode, $responseBody);
+
+        // Create the handler with a response
+        $handlerStack = SpecHelper::getMockResponseHandler($mockResponse);
+
+        $container = [];
+        $history = Middleware::history($container);
+
+        // Add the history middleware to the handler stack.
+        $handlerStack->push($history);
+
+        return new Client(['handler' => $handlerStack]);
+    }
+
+
+    public static function getBodyResponse($responseCode, $responseBody = null)
+    {
+        $mockResponse = new Response(
+            $responseCode,
+            $responseBody
+        );
+
+        return $mockResponse;
+    }
+
+    /**
+     * Creates a mock client with the provided fixture
+     * @param $responseCode
+     * @param $fixtureFile
+     * @return Client
+     */
+    public static function getMockResponseClientFromFixture($responseCode, $fixtureFile)
+    {
+        // Create the response
+        $mockResponse = SpecHelper::getFixtureResponse($responseCode, $fixtureFile);
+
+        // Create the handler with a response
+        $handlerStack = SpecHelper::getMockResponseHandler($mockResponse);
+
+        $container = [];
+        $history = Middleware::history($container);
+
+        // Add the history middleware to the handler stack.
+        $handlerStack->push($history);
+
+        return new Client(['handler' => $handlerStack]);
+    }
+
+    public static function getFixtureResponse($responseCode, $fixtureFile = null)
+    {
+        $fixtureContent = null;
+        if (!empty($fixtureFile)) {
+            $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
+        }
+
+        $stream = Psr7\stream_for($fixtureContent);
+
+        $mockResponse = new Response(
+            $responseCode,  // statusCode
+            [],             // headers
+            $stream         // StreamInterface body
+        );
+
+        return $mockResponse;
+    }
+
 }

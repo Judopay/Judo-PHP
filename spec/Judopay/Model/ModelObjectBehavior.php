@@ -20,7 +20,7 @@ abstract class ModelObjectBehavior extends ObjectBehavior
     {
         $request = new Request($this->configuration);
 
-        $mockClient = SpecHelper::getMockResponseClient(
+        $mockClient = SpecHelper::getMockResponseClientFromFixture(
             200,
             $fixtureFile
         );

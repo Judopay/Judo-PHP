@@ -16,13 +16,14 @@
     "repositories": [
     ],
     "require": {
-      "php": ">=5.4",
-      "guzzlehttp/guzzle": "~5.0",
+      "php": ">=5.5",
+      "guzzlehttp/guzzle": "~6.0",
       "monolog/monolog": "~1.10",
       "pimple/pimple": "~3.0",
       "curl/curl" : ">=0.0.0",
       "ext-curl": ">=0.0.0",
-      "ext-openssl": ">=0.0.0"
+      "ext-openssl": ">=0.0.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",

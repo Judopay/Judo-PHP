@@ -2,6 +2,7 @@
 
 namespace Judopay;
 
+use Judopay;
 use Judopay\Exception\ValidationError;
 use Psr\Log\NullLogger;
 
@@ -9,28 +10,28 @@ class Configuration
 {
     const ENDPOINT_URL = 'endpointUrl';
     const USE_PRODUCTION = 'useProduction';
+
     protected $settings = array();
-    protected $valid_config_keys
-        = array(
-            'apiVersion',
-            'apiToken',
-            'apiSecret',
-            'oauthAccessToken',
-            'format',
-            self::ENDPOINT_URL,
-            'userAgent',
-            'judoId',
-            self::USE_PRODUCTION,
-            'logger',
-            'httpLogFormat',
-        );
+    protected $valid_config_keys = array(
+        'apiVersion',
+        'apiToken',
+        'apiSecret',
+        'oauthAccessToken',
+        'format',
+        self::ENDPOINT_URL,
+        'userAgent',
+        'judoId',
+        self::USE_PRODUCTION,
+        'logger',
+        'httpLogFormat',
+    );
 
     public function __construct($settings = null)
     {
         // Set sensible defaults
-        $this->settings['apiVersion'] = \Judopay::API_VERSION;
+        $this->settings['apiVersion'] = Judopay::API_VERSION;
         $this->settings['logger'] = new NullLogger();
-        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.\Judopay::SDK_VERSION;
+        $this->settings['userAgent'] = 'Judopay PHP v'.phpversion().' SDK v'.Judopay::SDK_VERSION;
         $this->settings['httpLogFormat'] = "\"{method} {resource} {protocol}/{version}\" ".
             "{code} Content-Length: {res_header_Content-Length}\n| Response: {response}";
 
@@ -94,8 +95,8 @@ class Configuration
         } else {
             $this->settings[static::ENDPOINT_URL] = isset($this->settings[static::USE_PRODUCTION])
             && $this->settings[static::USE_PRODUCTION] === true
-                ? 'https://gw1.judopay.com'
-                : 'https://gw1.judopay-sandbox.com';
+                ? 'https://gw1.judopay.com/'
+                : 'https://gw1.judopay-sandbox.com/';
         }
     }
 

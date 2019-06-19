@@ -21,14 +21,22 @@ abstract class AbstractModelBuilder
 
     /**
      * Create a new model object with attributes set
-     * @param Configuration $configuration
+     * @param Configuration $configuration>
      * @return Model Model object
      */
     public function build(Configuration $configuration = null)
     {
+        // Token - Secret - JudoId part of the configuration
         $this->compile();
         $request = new Request($configuration ?: new Configuration());
-        $request->setClient(new Client());
+
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => $configuration->get("endpointUrl"),
+            'verify' =>  __DIR__.'/../../cert/digicert_sha256_ca.pem'
+        ]);
+
+        $request->setClient($client);
 
         $modelName = '\Judopay\Model\\'.substr(get_class($this), 15, -7);
 

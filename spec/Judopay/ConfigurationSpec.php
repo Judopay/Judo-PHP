@@ -18,7 +18,7 @@ class ConfigurationSpec extends ObjectBehavior
         $this->beConstructedWith(array('useProduction' => true));
 
         /** @var Configuration|ConfigurationSpec $this */
-        $this->get('endpointUrl')->shouldBe('https://gw1.judopay.com');
+        $this->get('endpointUrl')->shouldBe('https://gw1.judopay.com/');
     }
 
     public function it_should_allow_a_custom_api_version_to_be_set()
