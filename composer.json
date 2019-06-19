@@ -21,7 +21,8 @@
       "monolog/monolog": "~1.10",
       "pimple/pimple": "~3.0",
       "ext-openssl": ">=0.0.0",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",

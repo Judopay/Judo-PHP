@@ -4,6 +4,10 @@ namespace Tests\Helpers;
 
 use Judopay\Configuration;
 
+if (getenv('TRAVIS')) {
+    $options['curl'][CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_1;
+}
+
 class ConfigHelper
 {
     /**
