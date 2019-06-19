@@ -12,7 +12,6 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7;
 
-
 /*
  * Test the client without sending the requests
  */
@@ -121,5 +120,4 @@ class SpecHelper
 
         return $mockResponse;
     }
-
 }

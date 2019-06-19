@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Judopay\Exception\ApiException;
 
-
 class Request
 {
     /** @var Configuration */
@@ -59,11 +58,9 @@ class Request
                     'headers'       => $headers
                 ]
             );
-        }
-        catch (BadResponseException $e){
+        } catch (BadResponseException $e) {
             throw ApiException::factory($e);
-        }
-        catch (GuzzleException $e){
+        } catch (GuzzleException $e) {
             throw new ApiException($e->getMessage());
         }
 
@@ -89,11 +86,9 @@ class Request
                     'json'      => $data
                 ]
             );
-        }
-        catch (BadResponseException $e){
+        } catch (BadResponseException $e) {
             throw ApiException::factory($e);
-        }
-        catch (GuzzleException $e){
+        } catch (GuzzleException $e) {
             throw new ApiException($e->getMessage());
         }
 
