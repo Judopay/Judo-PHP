@@ -6,7 +6,7 @@ php:
   - 7.0
   - 7.2
 
-dist: trusty
+dist: xenial
 
 install: composer install
 
