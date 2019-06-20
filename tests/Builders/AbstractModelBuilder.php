@@ -21,7 +21,7 @@ abstract class AbstractModelBuilder
 
     /**
      * Create a new model object with attributes set
-     * @param Configuration $configuration>
+     * @param Configuration $configuration
      * @return Model Model object
      */
     public function build(Configuration $configuration = null)
