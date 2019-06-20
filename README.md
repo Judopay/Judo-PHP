@@ -5,8 +5,7 @@ The JudoPay SDK provides you with ability to integrate card payments into your P
 ## Requirements
 For the Judo PHP library in order to work correctly with your developer setup, please ensure the following requirements are met:
 
-- PHP 5.3.3 and above
-- PHP cURL extension
+- PHP 5.5 and above
 - [Composer](https://getcomposer.org/download/)
 
 ## Getting started
@@ -14,7 +13,7 @@ For the Judo PHP library in order to work correctly with your developer setup, p
 Installation of the SDK is implemented via the Composer package manager. Add the judopay package to your composer.json file:
 ```json
     "require": {
-        "judopay/judopay-sdk": "~2.6"
+        "judopay/judopay-sdk": "4.0.0"
     }
 ```
 And then execute:
