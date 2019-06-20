@@ -3,7 +3,6 @@
 namespace spec\Judopay\Model;
 
 use Judopay\Model\Collection;
-use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\GetTransactionBuilder;
 use Tests\Builders\RefundBuilder;
 

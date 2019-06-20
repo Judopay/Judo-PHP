@@ -2,11 +2,10 @@
 
 namespace Judopay;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Message\FutureResponse;
-use GuzzleHttp\Message\Request as GuzzleRequest;
-use GuzzleHttp\Ring\Future\FutureArray;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Judopay\Exception\ApiException;
 
 class Request
@@ -16,7 +15,6 @@ class Request
     /** @var  Client */
     protected $client;
 
-
     public function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;
@@ -25,77 +23,95 @@ class Request
     public function setClient(Client $client)
     {
         $this->client = $client;
+    }
 
-        // Set SSL connection
-        $this->client->setDefaultOption(
-            'verify',
-            __DIR__.'/../../cert/digicert_sha256_ca.pem'
-        );
+    /**
+     * Sets the headers and the authentication
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return [
+            'api-version'   => $this->configuration->get('apiVersion'),
+            'Accept'        => 'application/json; charset=utf-8',
+            'Content-Type'  => 'application/json',
+            'User-Agent'    => $this->configuration->get('userAgent'),
+            'Authorization' => $this->getRequestAuthenticationHeader()
+        ];
     }
 
     /**
      * Make a GET request to the specified resource path
      * @param string $resourcePath
      * @throws ApiException
-     * @return FutureArray|FutureResponse
+     * @return Response
      */
     public function get($resourcePath)
     {
-        $endpointUrl = $this->configuration->get('endpointUrl');
+        $headers = $this->getHeaders();
 
-        $request = $this->client->createRequest(
-            'GET',
-            $endpointUrl.'/'.$resourcePath,
-            [
-                'json' => null
-            ]
-        );
+        try {
+            $guzzleResponse = $this->client->request(
+                'GET',
+                $resourcePath,
+                [
+                    'headers'       => $headers
+                ]
+            );
+        } catch (BadResponseException $e) {
+            throw ApiException::factory($e);
+        } catch (GuzzleException $e) {
+            throw new ApiException($e->getMessage());
+        }
 
-        return $this->send($request);
+        return $guzzleResponse;
     }
 
     /**
-     * Make a POST request to the specified resource path
+     * Make a POST request to the specified resource path and the provided data
      * @param string $resourcePath
-     * @param array  $data
-     * @return FutureArray|FutureResponse
+     * @param array $data
+     * @return Response
      */
     public function post($resourcePath, $data)
     {
-        $endpointUrl = $this->configuration->get('endpointUrl');
+        $headers = $this->getHeaders();
 
-        $request = $this->client->createRequest(
-            'POST',
-            $endpointUrl.'/'.$resourcePath,
-            [
-                'json' => $data
-            ]
-        );
+        try {
+            $guzzleResponse = $this->client->request(
+                'POST',
+                $resourcePath,
+                [
+                    'headers'   => $headers,
+                    'json'      => $data
+                ]
+            );
+        } catch (BadResponseException $e) {
+            throw ApiException::factory($e);
+        } catch (GuzzleException $e) {
+            throw new ApiException($e->getMessage());
+        }
 
-        return $this->send($request);
+        return $guzzleResponse;
     }
 
-    public function setRequestHeaders(GuzzleRequest $request)
+    /*
+     * Gets 'Authorization' header value
+     */
+    private function getRequestAuthenticationHeader()
     {
-        $request->setHeader('api-version', $this->configuration->get('apiVersion'));
-        $request->setHeader('Accept', 'application/json; charset=utf-8');
-        $request->setHeader('Content-Type', 'application/json');
-        $request->setHeader('User-Agent', $this->configuration->get('userAgent'));
-    }
-
-    public function setRequestAuthentication(GuzzleRequest $request)
-    {
+        // Make sure we have all the required fields
         $this->configuration->validate();
         $oauthAccessToken = $this->configuration->get('oauthAccessToken');
 
         // Do we have an oAuth2 access token?
         if (!empty($oauthAccessToken)) {
-            $request->setHeader('Authorization', 'Bearer ' . $oauthAccessToken);
-        } else {
-            // Otherwise, use basic authentication
-            $basicAuth =  $this->configuration->get('apiToken'). ":" . $this->configuration->get('apiSecret');
-            $request->setHeader('Authorization', 'Basic ' . base64_encode($basicAuth));
+            return 'Bearer ' . $oauthAccessToken;
         }
+
+        // Otherwise, use basic authentication
+        $basicAuth =  $this->configuration->get('apiToken'). ":" . $this->configuration->get('apiSecret');
+        return 'Basic ' . base64_encode($basicAuth);
     }
 
     /**
@@ -105,27 +121,5 @@ class Request
     public function getConfiguration()
     {
         return $this->configuration;
-    }
-
-    /**
-     * @param GuzzleRequest $guzzleRequest
-     * @throws ApiException
-     * @return FutureArray|FutureResponse
-     */
-    protected function send(GuzzleRequest $guzzleRequest)
-    {
-        $this->setRequestHeaders($guzzleRequest);
-        $this->setRequestAuthentication($guzzleRequest);
-
-        try {
-            $guzzleResponse = $this->client->send($guzzleRequest);
-        } catch (BadResponseException $e) {
-            // Guzzle throws an exception when it encounters a 4xx or 5xx error
-            // Rethrow the exception so we can raise our custom exception classes
-            throw ApiException::factory($e->getResponse());
-        }
-
-
-        return $guzzleResponse;
     }
 }

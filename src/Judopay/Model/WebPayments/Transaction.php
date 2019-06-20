@@ -16,6 +16,7 @@ class Transaction extends Model
      **/
     public function find($reference)
     {
-        return $this->request->get($this->resourcePath.'/'.$reference)->json();
+        $response = $this->request->get($this->resourcePath.'/'.$reference);
+        return $this->getResponseArray($response);
     }
 }

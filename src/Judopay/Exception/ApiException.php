@@ -2,10 +2,11 @@
 
 namespace Judopay\Exception;
 
-use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Exception\BadResponseException;
 use Judopay\Helper\ArrayHelper;
+use RuntimeException;
 
-class ApiException extends \RuntimeException
+class ApiException extends RuntimeException
 {
     const MESSAGE = 'JudoPay ApiException (status code %d, error code %d, category %d) %s%s';
     const CATEGORY_UNKNOWN = 0;
@@ -23,12 +24,21 @@ class ApiException extends \RuntimeException
 
     /**
      * Factory method
-     * @param ResponseInterface $response
+     * @param BadResponseException $exception
      * @return static
      */
-    public static function factory(ResponseInterface $response)
+    public static function factory($exception)
     {
-        $parsedBody = $response->json();
+        $response = $exception->getResponse();
+        $responseBody= $response->getBody();
+
+        // Read the Psr7\Stream
+        $responseBodyAsString = $responseBody->getContents();
+
+        $statusCode = $exception->getCode();
+
+        // Parse the response in an array
+        $parsedBody = json_decode($responseBodyAsString, true);
 
         $category = ArrayHelper::get(
             $parsedBody,
@@ -36,9 +46,17 @@ class ApiException extends \RuntimeException
             static::CATEGORY_UNKNOWN
         );
 
-        $message = ArrayHelper::get($parsedBody, 'message', get_called_class());
+        $message = ArrayHelper::get(
+            $parsedBody,
+            'message',
+            get_called_class()
+        );
 
-        $errorCode = ArrayHelper::get($parsedBody, 'code', 0);
+        $errorCode = ArrayHelper::get(
+            $parsedBody,
+            'code',
+            0
+        );
 
         $fieldErrors = array();
 
@@ -59,8 +77,6 @@ class ApiException extends \RuntimeException
                 );
             }
         }
-
-        $statusCode = $response->getStatusCode();
 
         return new static(
             $message,
@@ -91,6 +107,8 @@ class ApiException extends \RuntimeException
         $this->statusCode = $statusCode;
         $this->category = $category;
         $this->fieldErrors = $fieldErrors;
+
+        parent::__construct();
     }
 
     /**
