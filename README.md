@@ -54,14 +54,14 @@ To make a new payment with full card details:
 ```
 **Note:** Please make sure that you are using a unique Consumer Reference for each different consumer, and a unique Payment Reference for each transaction.
 
-You can check on the required fields and the format of each field in the [Judopay REST API reference](https://www.judopay.com/docs/v5/api-reference/restful-api/#post-card-payment).
+You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/#payments-api).
 To send the request to the API, call:
 ```php
     $response = $payment->create();
 ```
 
 ##### 4. Check the payment result
-If the payment is successful, you'll receive a response array like this (see full response [here](https://www.judopay.com/docs/v5/api-reference/restful-api/#post-card-payment)):
+If the payment is successful, you'll receive a response array like this (see full response [here](https://docs.judopay.com/#card-payment)):
 ```php
     Array
     (
@@ -94,7 +94,7 @@ Also important to handle different exceptions in your code. See more details in 
 ```
 
 ## Next steps
-The judo PHP SDK supports a range of customization options. For more information on using judo see our [wiki documentation](https://github.com/JudoPay/PhpSdk/wiki). 
+The judo PHP SDK supports a range of customization options. For more information on using judo see our [documentation](https://docs.judopay.com/#php) or [wiki documentation](https://github.com/JudoPay/PhpSdk/wiki). 
 
 ## License
 See the [LICENSE](https://github.com/JudoPay/PhpSdk/blob/master/LICENSE.txt) file for license rights and limitations (MIT).
