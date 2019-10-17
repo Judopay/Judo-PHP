@@ -24,6 +24,7 @@ class CardPayment extends Model
             'mobileNumber'          => DataType::TYPE_STRING,
             'emailAddress'          => DataType::TYPE_STRING,
             'clientDetails'         => DataType::TYPE_OBJECT,
+            'dynamicDescriptor'     => DataType::TYPE_STRING,
         );
     protected $requiredAttributes
         = array(
