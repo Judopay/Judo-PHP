@@ -14,6 +14,7 @@ class CardPayment extends Model
             'yourConsumerReference' => DataType::TYPE_STRING,
             'yourPaymentReference'  => DataType::TYPE_STRING,
             'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
+            'paymentMetaData'       => DataType::TYPE_OBJECT,
             'judoId'                => DataType::TYPE_STRING,
             'amount'                => DataType::TYPE_FLOAT,
             'cardNumber'            => DataType::TYPE_STRING,
