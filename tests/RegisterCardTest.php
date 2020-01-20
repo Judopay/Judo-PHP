@@ -33,14 +33,17 @@ class RegisterCardTest extends PaymentTests
 
     public function testPaymentChangedAmount()
     {
+        // When we try to change the amount
         $registerCard = $this->getBuilder()
-            ->setAttribute('amount', 100500)
+            ->setAttribute('amount', 1.01)
             ->build(ConfigHelper::getConfig());
 
         $result = $registerCard->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
-        $this->assertEquals(1.01, $result['amount']);
+
+        // The amount is set by the API
+        $this->assertEquals(2.00, $result['amount']);
     }
 
     public function testPaymentWithoutCurrency()
