@@ -66,7 +66,8 @@ class ThreeDSecureTest extends TestCase
                 0,
                 72,
                 409,
-                ApiException::CATEGORY_PROCESSING);
+                ApiException::CATEGORY_PROCESSING
+            );
 
             return;
         }

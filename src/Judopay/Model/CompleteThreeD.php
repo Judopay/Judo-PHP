@@ -1,7 +1,9 @@
 <?php
 namespace Judopay\Model;
+
 use Judopay\DataType;
 use Judopay\Model;
+
 class CompleteThreeD extends Model
 {
     protected $resourcePath = 'transactions';
