@@ -49,7 +49,6 @@ class Request
     public function get($resourcePath)
     {
         $headers = $this->getHeaders();
-
         try {
             $guzzleResponse = $this->client->request(
                 'GET',
@@ -76,7 +75,6 @@ class Request
     public function post($resourcePath, $data)
     {
         $headers = $this->getHeaders();
-
         try {
             $guzzleResponse = $this->client->request(
                 'POST',
@@ -92,6 +90,32 @@ class Request
             throw new ApiException($e->getMessage());
         }
 
+        return $guzzleResponse;
+    }
+
+    /**
+     * Make a PUT request to the specified resource path and the provided data
+     * @param string $resourcePath
+     * @param array $data
+     * @return Response
+     */
+    public function put($resourcePath, $data)
+    {
+        $headers = $this->getHeaders();
+        try {
+            $guzzleResponse = $this->client->request(
+                'PUT',
+                $resourcePath,
+                [
+                    'headers'   => $headers,
+                    'json'      => $data
+                ]
+            );
+        } catch (BadResponseException $e) {
+            throw ApiException::factory($e);
+        } catch (GuzzleException $e) {
+            throw new ApiException($e->getMessage());
+        }
         return $guzzleResponse;
     }
 

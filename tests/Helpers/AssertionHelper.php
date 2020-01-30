@@ -2,6 +2,7 @@
 
 namespace Tests\Helpers;
 
+use Judopay\Exception\ApiException;
 use PHPUnit_Framework_Assert as Assert;
 
 class AssertionHelper
@@ -13,7 +14,7 @@ class AssertionHelper
         $statusCode = 400,
         $errorCategory = 2
     ) {
-        /** @var \Judopay\Exception\ApiException $apiException */
+        /** @var ApiException $apiException */
         Assert::assertInstanceOf(
             '\Judopay\Exception\ApiException',
             $apiException
@@ -40,6 +41,13 @@ class AssertionHelper
     {
         Assert::assertNotNull($result);
         Assert::assertEquals('Declined', $result['result']);
+        Assert::assertGreaterThan(0, $result['receiptId']);
+    }
+
+    public static function assertRequiresThreeDSecure($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertEquals('Requires 3D Secure', $result['result']);
         Assert::assertGreaterThan(0, $result['receiptId']);
     }
 }

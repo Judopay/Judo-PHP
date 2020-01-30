@@ -129,6 +129,28 @@ class Model
     }
 
     /**
+     * Update an existing record
+     * @return array API response
+     **/
+    public function update()
+    {
+        $this->checkApiMethodIsSupported(__FUNCTION__);
+        $this->checkJudoId();
+        $this->checkRequiredAttributes($this->attributeValues);
+
+        // PUT needs to be done on a specific transaction
+        $requestPath = $this->resourcePath . "/" . $this->attributeValues["ReceiptId"];
+
+        $response = $this->request->put(
+            $requestPath,
+            $this->attributeValues
+        );
+
+        return $this->getResponseArray($response);
+    }
+
+
+    /**
      * Validate card payment details without making a payment
      * @return array $response
      **/
