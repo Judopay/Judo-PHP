@@ -43,7 +43,7 @@ class Judopay
                 // The client is now immutable and needs all the options on creation
                 $client = new Client([
                     'base_uri' => $configuration->get("endpointUrl"), // Base URI is used with relative requests
-                    'verify' =>  __DIR__.'/../cert/digicert_sha256_ca.pem'
+                    'verify' => $configuration->get("verifyCertificate")
                 ]);
 
                 $request->setClient($client);

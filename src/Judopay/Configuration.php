@@ -10,6 +10,7 @@ class Configuration
 {
     const ENDPOINT_URL = 'endpointUrl';
     const USE_PRODUCTION = 'useProduction';
+    const VERIFY_CERTIFICATE = 'verifyCertificate';
 
     protected $settings = array();
     protected $valid_config_keys = array(
@@ -24,6 +25,7 @@ class Configuration
         self::USE_PRODUCTION,
         'logger',
         'httpLogFormat',
+        self::VERIFY_CERTIFICATE
     );
 
     public function __construct($settings = null)
@@ -42,6 +44,7 @@ class Configuration
         }
 
         $this->setEndpointUrl();
+        $this->setVerifyCertificate();
     }
 
     public function isValidConfigKey($key)
@@ -97,6 +100,15 @@ class Configuration
             && $this->settings[static::USE_PRODUCTION] === true
                 ? 'https://gw1.judopay.com/'
                 : 'https://gw1.judopay-sandbox.com/';
+        }
+    }
+
+    protected function setVerifyCertificate()
+    {
+        if (isset($this->settings[static::VERIFY_CERTIFICATE]) && $this->settings[static::VERIFY_CERTIFICATE] === false) {
+            return;
+        } else {
+            $this->settings[static::VERIFY_CERTIFICATE] = true;
         }
     }
 
