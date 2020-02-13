@@ -106,8 +106,8 @@ class Configuration
     protected function setVerifyCertificate()
     {
         if (isset($this->settings[static::VERIFY_CERTIFICATE])
-        && $this->settings[static::VERIFY_CERTIFICATE] === false) {
-            return;
+        && filter_var($this->settings[static::VERIFY_CERTIFICATE], FILTER_VALIDATE_BOOLEAN)  === false) {
+            $this->settings[static::VERIFY_CERTIFICATE] = false;
         } else {
             $this->settings[static::VERIFY_CERTIFICATE] = true;
         }
