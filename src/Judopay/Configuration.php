@@ -23,7 +23,7 @@ class Configuration
         'judoId',
         self::USE_PRODUCTION,
         'logger',
-        'httpLogFormat'
+        'httpLogFormat',
     );
 
     public function __construct($settings = null)
