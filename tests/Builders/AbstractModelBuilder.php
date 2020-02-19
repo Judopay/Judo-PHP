@@ -33,7 +33,7 @@ abstract class AbstractModelBuilder
         $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => $configuration->get("endpointUrl"),
-            'verify' =>  __DIR__.'/../../cert/digicert_sha256_ca.pem'
+            'verify' =>  true
         ]);
 
         $request->setClient($client);
