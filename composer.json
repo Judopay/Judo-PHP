@@ -18,7 +18,7 @@
     "require": {
       "php": ">=5.4",
       "guzzlehttp/guzzle": "~6.0",
-      "monolog/monolog": "~1.10",
+      "monolog/monolog": "^2.0",
       "pimple/pimple": "~3.0",
       "curl/curl" : ">=0.0.0",
       "ext-curl": ">=0.0.0",
