@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  test-php5.6:
+    docker:
+      - image: circleci/php:5.6
+    working_directory: ~/Judo-PHP
+    steps:
+      - run: 
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-php5.6
+      - test-php7.0
+      - test-php7.1
+      - test-php7.2
+      - test-php7.3
