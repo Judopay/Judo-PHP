@@ -26,7 +26,7 @@ executors:
       - image: circleci/php:<< parameters.php_version >>
 
 jobs:
-  code_analysis:
+  test_php73:
     executor:
       name: php
       php_version: "7.3"
@@ -40,6 +40,7 @@ jobs:
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
       - run: ./vendor/bin/phpspec run
+      - run: ./vendor/bin/phpunit --stop-on-failure --coverage-clover 'reports/clover.xml'
       - persist_to_workspace:
           root: .
           paths:
@@ -82,25 +83,17 @@ jobs:
   #   steps:
   #     - test:
   #         php_version: "7.2"
-  # test_php73:
-  #   executor:
-  #     name: php
-  #     php_version: "7.3"
-  #   steps:
-  #     - test:
-  #         php_version: "7.3"
 
 workflows:
   version: 2
   build:
     jobs:
-      - code_analysis
-      - sonar_scan:
-          context: shared-secrets
-          requires:
-            - code_analysis
       # - test_php56
       # - test_php70
       # - test_php71
       # - test_php72
-      # - test_php73
+       - test_php73
+       - sonar_scan:
+          context: shared-secrets
+          requires:
+            - test_php73
