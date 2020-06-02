@@ -1,18 +1,75 @@
 version: 2
+
+test_steps: &test_steps
+  steps:
+    - run: php -r "printf('PHP %s', phpversion());"
+    - run: ./vendor/bin/phpunit --stop-on-failure
+
 jobs:
+  restore-dependencies:
+    docker:
+      - image: circleci/php:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: v1-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+  code-analysis:
+    docker:
+      - image: circleci/php:latest
+    steps:
+     - run: ./vendor/bin/phpcs --standard=.phpcs.xml src
+     - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
+     - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
+     - run: ./vendor/bin/phpspec run
   test-php5.6:
     docker:
       - image: circleci/php:5.6
-    working_directory: ~/Judo-PHP
-    steps:
-      - run: 
+    <<: *test_steps
+  test-php7.0:
+    docker:
+      - image: circleci/php:7.0
+    <<: *test_steps
+  test-php7.1:
+    docker:
+      - image: circleci/php:7.1
+    <<: *test_steps
+  test-php7.2:
+    docker:
+      - image: circleci/php:7.2
+    <<: *test_steps
+  test-php7.3:
+    docker:
+      - image: circleci/php:7.3
+    <<: *test_steps
 
 workflows:
   version: 2
   test:
     jobs:
+      - restore-dependencies
+      - code-analysis:
+          requires:
+            - restore-dependencies
       - test-php5.6
+          requires:
+            - restore-dependencies
       - test-php7.0
+          requires:
+            - restore-dependencies
       - test-php7.1
+          requires:
+            - restore-dependencies
       - test-php7.2
+          requires:
+            - restore-dependencies
       - test-php7.3
+          requires:
+            - restore-dependencies
