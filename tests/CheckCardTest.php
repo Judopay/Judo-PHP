@@ -86,4 +86,10 @@ class CheckCardTest extends PaymentTests
         //Unneeded test
         $this->assertTrue(true);
     }
+
+    public function testPaymentWithAddress()
+    {
+        //Unneeded test
+        $this->assertTrue(true);
+    }
 }

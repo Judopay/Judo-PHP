@@ -124,4 +124,23 @@ abstract class PaymentTests extends TestCase
 
         $this->fail('An expected ApiException has not been raised.');
     }
+
+    public function testPaymentWithAddress()
+    {
+        $addressArray = [
+            'address1' => 'My house',
+            'address2' => 'My street',
+            'address3' => 'My area',
+            'town' => 'My town',
+            'postcode' => 'E20 6PQ',
+            'countryCode' => 826
+        ];
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('cardAddress', $addressArray)
+            ->build(ConfigHelper::getConfig());
+
+        $result = $cardPayment->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
+    }
 }

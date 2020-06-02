@@ -54,6 +54,25 @@ To make a new payment with full card details:
 ```
 **Note:** Please make sure that you are using a unique Consumer Reference for each different consumer, and a unique Payment Reference for each transaction.
 
+Card address details can optionally be included for use in AVS checks as follows, (see full list of parameters [here](https://docs.judopay.com/#register-a-card))
+
+```php
+    $payment = $judopay->getModel('Payment');
+    $payment->setAttributeValues(
+        array(
+            'judoId' => 'your_judo_id',
+            'yourConsumerReference' => '12345',
+            'yourPaymentReference' => '12345',
+            'amount' => 1.01,
+            'currency' => 'GBP',
+            'cardNumber' => '4976000000003436',
+            'expiryDate' => '12/15',
+            'cv2' => 452,
+            'cardAddress' => array('address1' => '1 Market Street', 'postCode' => 'E20 6PQ', 'countryCode' => 826)
+        )
+    );
+```
+
 You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/#payments-api).
 To send the request to the API, call:
 ```php
