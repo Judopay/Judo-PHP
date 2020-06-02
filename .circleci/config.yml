@@ -40,6 +40,10 @@ jobs:
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
       - run: ./vendor/bin/phpspec run
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   sonar_scan:
     docker:
       - image: gcr.io/opnf-management/sonar-scanner:latest
@@ -47,6 +51,8 @@ jobs:
           username: _json_key
           password: $GCLOUD_SERVICE_KEY
     steps:
+      - attach_workspace:
+          at: .
       - run: /opt/run-scan.sh
   # test_php56:
   #   executor:
