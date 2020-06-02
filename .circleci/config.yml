@@ -6,12 +6,13 @@ commands:
       php-version:
         type: string
     steps:
+      - checkout
       - restore_cache:
-        keys:
-          - vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+          keys:
+            - vendor-<< parameters.php-version >>-{{ checksum "composer.json" }}
       - run: composer install -n --prefer-dist
       - save_cache:
-          key: vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+          key: vendor-<< parameters.php-version >>-{{ checksum "composer.json" }}
           paths:
             - ./vendor
       - run: php -r "printf('PHP %s', phpversion());"
@@ -31,6 +32,7 @@ jobs:
       name: php
       php-version: "7.3"
     steps:
+      - checkout
       - restore_cache:
           keys:
             - vendor-7.3-{{ checksum "composer.json" }}
@@ -39,36 +41,37 @@ jobs:
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
       - run: ./vendor/bin/phpspec run
-  test-php5.6:
+  test-php56:
     executor:
-      name: test
+      name: php
       php-version: "5.6"
     steps:
       - test:
           php-version: "5.6"
-  test-php7.0:
+  test-php70:
     executor:
-      name: test
+      name: php
       php-version: "7.0"
     steps:
       - test:
           php-version: "7.0"
-  test-php7.1:
+  test-php71:
     executor:
-      name: test
+      name: php
+      php-version: "7.1"
     steps:
       - test:
           php-version: "7.1"
-  test-php7.2:
+  test-php72:
     executor:
-      name: test
+      name: php
       php-version: "7.2"
     steps:
       - test:
           php-version: "7.2"
-  test-php7.3:
+  test-php73:
     executor:
-      name: test
+      name: php
       php-version: "7.3"
     steps:
       - test:
@@ -79,8 +82,8 @@ workflows:
   test:
     jobs:
       - code-analysis
-      - test-php5.6
-      - test-php7.0
-      - test-php7.1
-      - test-php7.2
-      - test-php7.3
+      - test-php56
+      - test-php70
+      - test-php71
+      - test-php72
+      - test-php73
