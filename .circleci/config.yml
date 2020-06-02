@@ -25,9 +25,6 @@ executors:
     docker:
       - image: circleci/php:<< parameters.php_version >>
 
-orbs:
-  gcp-gcr: circleci/gcp-gcr@0.7.1
-
 jobs:
   code_analysis:
     executor:
@@ -46,8 +43,10 @@ jobs:
   sonar_scan:
     docker:
       - image: gcr.io/opnf-management/sonar-scanner:latest
+        auth:
+          username: _json_key
+          password: $GCLOUD_SERVICE_KEY
     steps:
-      - gcp-gcr/gcr-auth
       - run: /opt/run-scan.sh
   test_php56:
     executor:
