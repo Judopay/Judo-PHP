@@ -90,7 +90,7 @@ workflows:
     jobs:
       - code_analysis
       - sonar_scan:
-          context: Google Container Registry
+          context: shared-secrets
           requires:
             - code_analysis
       # - test_php56
