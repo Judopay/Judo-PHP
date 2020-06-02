@@ -2,10 +2,8 @@ version: 2
 
 test_steps: &test_steps
   steps:
-    - restore_cache:
-        keys:
-          - vendor-{{ checksum "composer.json" }}
-          - vendor-
+    - attach_workspace:
+        at: .
     - run: php -r "printf('PHP %s', phpversion());"
     - run: ./vendor/bin/phpunit --stop-on-failure
 
@@ -24,14 +22,15 @@ jobs:
           key: vendor-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+      - persist_to_workspace:
+          root: .
+          paths: .
   code-analysis:
     docker:
       - image: circleci/php:latest
     steps:
-      - restore_cache:
-          keys:
-            - vendor-{{ checksum "composer.json" }}
-            - vendor-
+      - attach_workspace:
+          at: .
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml src
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
