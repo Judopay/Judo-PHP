@@ -1,20 +1,24 @@
 version: 2.1
 
-test_steps: &test_steps
-  steps:
-    - restore_cache:
-      keys:
-        - vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
-    - run: composer install -n --prefer-dist
-    - save_cache:
-        key: vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
-        paths:
-          - ./vendor
-    - run: php -r "printf('PHP %s', phpversion());"
-    - run: ./vendor/bin/phpunit --stop-on-failure
+commands:
+  test:
+    parameters:
+      php-version:
+        type: string
+    steps:
+      - restore_cache:
+        keys:
+          - vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      - run: php -r "printf('PHP %s', phpversion());"
+      - run: ./vendor/bin/phpunit --stop-on-failure
 
 executors:
-  test:
+  php:
     parameters:
       php-version:
         type: string
@@ -23,8 +27,9 @@ executors:
 
 jobs:
   code-analysis:
-    docker:
-      - image: circleci/php:7.3
+    executor:
+      name: php
+      php-version: "7.3"
     steps:
       - restore_cache:
           keys:
@@ -38,27 +43,36 @@ jobs:
     executor:
       name: test
       php-version: "5.6"
-      <<: *test_steps
+    steps:
+      - test:
+          php-version: "5.6"
   test-php7.0:
     executor:
       name: test
       php-version: "7.0"
-      <<: *test_steps
+    steps:
+      - test:
+          php-version: "7.0"
   test-php7.1:
     executor:
       name: test
-      php-version: "7.1"
-      <<: *test_steps
+    steps:
+      - test:
+          php-version: "7.1"
   test-php7.2:
     executor:
       name: test
       php-version: "7.2"
-      <<: *test_steps
+    steps:
+      - test:
+          php-version: "7.2"
   test-php7.3:
     executor:
       name: test
       php-version: "7.3"
-      <<: *test_steps
+    steps:
+      - test:
+          php-version: "7.3"
 
 workflows:
   version: 2
