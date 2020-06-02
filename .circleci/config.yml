@@ -1,4 +1,17 @@
-version: 2
+version: 2.1
+
+test_steps: &test_steps
+  steps:
+    - restore_cache:
+      keys:
+        - vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+    - run: composer install -n --prefer-dist
+    - save_cache:
+        key: vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
+        paths:
+          - ./vendor
+    - run: php -r "printf('PHP %s', phpversion());"
+    - run: ./vendor/bin/phpunit --stop-on-failure
 
 executors:
   test:
@@ -7,17 +20,6 @@ executors:
         type: string
     docker:
       - image: circleci/php:<< parameters.php-version >>
-    steps:
-      - restore_cache:
-        keys:
-          - vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
-      - run: composer install -n --prefer-dist
-      - save_cache:
-          key: vendor-<< parameters.php_version >>-{{ checksum "composer.json" }}
-          paths:
-            - ./vendor
-      - run: php -r "printf('PHP %s', phpversion());"
-      - run: ./vendor/bin/phpunit --stop-on-failure
 
 jobs:
   code-analysis:
@@ -25,8 +27,8 @@ jobs:
       - image: circleci/php:7.3
     steps:
       - restore_cache:
-        keys:
-          - vendor-7.3-{{ checksum "composer.json" }}
+          keys:
+            - vendor-7.3-{{ checksum "composer.json" }}
       - run: composer install -n --prefer-dist
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml src
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
@@ -36,22 +38,27 @@ jobs:
     executor:
       name: test
       php-version: "5.6"
+      <<: *test_steps
   test-php7.0:
     executor:
       name: test
       php-version: "7.0"
+      <<: *test_steps
   test-php7.1:
     executor:
       name: test
       php-version: "7.1"
+      <<: *test_steps
   test-php7.2:
     executor:
       name: test
       php-version: "7.2"
+      <<: *test_steps
   test-php7.3:
     executor:
       name: test
       php-version: "7.3"
+      <<: *test_steps
 
 workflows:
   version: 2
