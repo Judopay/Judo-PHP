@@ -58,18 +58,18 @@ workflows:
       - code-analysis:
           requires:
             - restore-dependencies
-      - test-php5.6
+      - test-php5.6:
           requires:
             - restore-dependencies
-      - test-php7.0
+      - test-php7.0:
           requires:
             - restore-dependencies
-      - test-php7.1
+      - test-php7.1:
           requires:
             - restore-dependencies
-      - test-php7.2
+      - test-php7.2:
           requires:
             - restore-dependencies
-      - test-php7.3
+      - test-php7.3:
           requires:
             - restore-dependencies
