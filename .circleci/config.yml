@@ -40,7 +40,7 @@ jobs:
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml spec --exclude="PSR1.Methods.CamelCapsMethodName"
       - run: ./vendor/bin/phpcs --standard=.phpcs.xml tests
       - run: ./vendor/bin/phpspec run
-      - run: ./vendor/bin/phpunit --stop-on-failure --coverage-clover 'reports/clover.xml'
+      - run: ./vendor/bin/phpunit --stop-on-failure --coverage-clover 'reports/clover.xml' --log-junit 'reports/php-junit.xml'
       - persist_to_workspace:
           root: .
           paths:
@@ -51,9 +51,10 @@ jobs:
         auth:
           username: _json_key
           password: $GCLOUD_SERVICE_KEY
+    working_directory: /home/circleci/project
     steps:
       - attach_workspace:
-          at: .
+          at: /home/circleci/project
       - run: /opt/run-scan.sh
   test_php56:
     executor:
