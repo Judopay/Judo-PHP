@@ -2,7 +2,9 @@
     "name": "judopay/judopay-sdk",
     "type": "library",
     "description": "SDK for the Judopay API",
-    "keywords": ["payment"],
+    "keywords": [
+        "payment"
+    ],
     "homepage": "https://www.judopay.com/docs",
     "license": "MIT",
     "authors": [
@@ -13,16 +15,15 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-    ],
+    "repositories": [],
     "require": {
-      "php": ">=5.5",
-      "guzzlehttp/guzzle": "~6.0",
-      "monolog/monolog": "~1.10",
-      "pimple/pimple": "~3.0",
-      "ext-openssl": ">=0.0.0",
-      "ext-json": "*",
-      "ext-curl": "*"
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "~6.0",
+        "monolog/monolog": "~1.10",
+        "pimple/pimple": "~3.0",
+        "ext-openssl": ">=0.0.0",
+        "ext-json": "*",
+        "ext-curl": "*"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.0",
@@ -35,12 +36,9 @@
         "symfony/yaml": "~2.1",
         "phpdocumentor/reflection-docblock": "^2.0"
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "autoload": {
         "psr-4": {
-            "Judopay\\":"src/Judopay"
+            "Judopay\\": "src/Judopay"
         },
         "files": [
             "src/Judopay.php"
