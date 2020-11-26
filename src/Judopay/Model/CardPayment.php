@@ -26,6 +26,7 @@ class CardPayment extends Model
             'emailAddress'          => DataType::TYPE_STRING,
             'clientDetails'         => DataType::TYPE_OBJECT,
             'dynamicDescriptor'     => DataType::TYPE_STRING,
+            'primaryAccountDetails' => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
         );
     protected $requiredAttributes
         = array(
