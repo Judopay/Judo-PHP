@@ -136,7 +136,7 @@ abstract class PaymentTests extends TestCase
 
         $cardPayment = $this->getBuilder()
             ->setAttribute('primaryAccountDetails', $primaryAccountDetails)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getConfigAlt());
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
