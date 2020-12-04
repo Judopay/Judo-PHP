@@ -141,6 +141,4 @@ abstract class PaymentTests extends TestCase
 
         AssertionHelper::assertSuccessfulPayment($result);
     }
-
-
 }
