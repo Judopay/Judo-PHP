@@ -128,10 +128,10 @@ abstract class PaymentTests extends TestCase
     public function testPrimaryAccountDetailsPayment()
     {
         $primaryAccountDetails = array(
-            'name' => 'John Smith',
+            'name'          => 'John Smith',
             'accountNumber' => '123456',
-            'dateOfBirth' => '1980-01-01',
-            'postCode' => 'EC2A 4DP',
+            'dateOfBirth'   => '1980-01-01',
+            'postCode'      => 'EC2A 4DP',
         );
 
         $cardPayment = $this->getBuilder()

@@ -20,7 +20,6 @@ class SaveCard extends Model
             'cardAddress'           => DataType::TYPE_ARRAY,
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
-            'primaryAccountDetails' => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
         );
     protected $requiredAttributes
         = array(
