@@ -19,6 +19,8 @@ class CheckCard extends Model
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
             'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
+
+            'primaryAccountDetails' => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
         );
     protected $requiredAttributes
         = array(

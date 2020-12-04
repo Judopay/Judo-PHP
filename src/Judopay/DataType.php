@@ -13,12 +13,14 @@ class DataType
     const TYPE_STRING = 'string';
     const TYPE_FLOAT = 'float';
     const TYPE_INTEGER = 'int';
+    const TYPE_BOOLEAN = 'bool';
     const TYPE_ARRAY = 'array';
     const TYPE_OBJECT = 'object';
     const TYPE_PK_PAYMENT = 'pk_payment';
     const TYPE_WALLET = 'wallet';
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
+    const TYPE_RECURRING_TYPE = 'recurring_type';
 
     public static function coerce($targetDataType, $value)
     {
@@ -57,8 +59,18 @@ class DataType
                 $googleWallet = GooglePayWallet::factory($value);
                 return $googleWallet->toObject();
 
+            case static::TYPE_RECURRING_TYPE:
+                // Check that the provided value is one of the recurring payment types
+                if (strcasecmp($value, "recurring") != 0 && strcasecmp($value, "mit") != 0) {
+                    throw new ValidationError('Invalid recurring type value');
+                }
+                return $value;
+
             case static::TYPE_INTEGER:
                 return (int)$value;
+
+            case static::TYPE_BOOLEAN:
+                return boolval($value);
 
             case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
                 $primaryAccountDetails = PrimaryAccountDetails::factory($value);
