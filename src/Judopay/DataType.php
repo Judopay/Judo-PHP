@@ -6,6 +6,7 @@ use Judopay\Exception\ValidationError;
 use Judopay\Model\Inner\GooglePayWallet;
 use Judopay\Model\Inner\PkPayment;
 use Judopay\Model\Inner\Wallet;
+use Judopay\Model\Inner\PrimaryAccountDetails;
 
 class DataType
 {
@@ -17,6 +18,7 @@ class DataType
     const TYPE_PK_PAYMENT = 'pk_payment';
     const TYPE_WALLET = 'wallet';
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
+    const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
 
     public static function coerce($targetDataType, $value)
     {
@@ -45,21 +47,22 @@ class DataType
 
             case static::TYPE_PK_PAYMENT:
                 $pkPayment = PkPayment::factory($value);
-
                 return $pkPayment->toObject();
 
             case static::TYPE_WALLET:
                 $wallet = Wallet::factory($value);
-
                 return $wallet->toObject();
 
             case static::TYPE_GOOGLE_PAY_WALLET:
                 $googleWallet = GooglePayWallet::factory($value);
-
                 return $googleWallet->toObject();
 
             case static::TYPE_INTEGER:
                 return (int)$value;
+
+            case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
+                $primaryAccountDetails = PrimaryAccountDetails::factory($value);
+                return $primaryAccountDetails->toObject();
         }
 
         return $value;

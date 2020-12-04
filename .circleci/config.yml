@@ -30,6 +30,8 @@ jobs:
     executor:
       name: php
       php_version: "7.3"
+    environment:
+      XDEBUG_MODE: coverage
     steps:
       - checkout
       - restore_cache:

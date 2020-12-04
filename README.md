@@ -13,7 +13,7 @@ For the Judo PHP library in order to work correctly with your developer setup, p
 Installation of the SDK is implemented via the Composer package manager. Add the judopay package to your composer.json file:
 ```json
     "require": {
-        "judopay/judopay-sdk": "4.0.0"
+        "judopay/judopay-sdk": "4.5.0"
     }
 ```
 And then execute:
