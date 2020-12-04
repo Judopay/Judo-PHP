@@ -124,4 +124,23 @@ abstract class PaymentTests extends TestCase
 
         $this->fail('An expected ApiException has not been raised.');
     }
+
+    public function testPrimaryAccountDetailsPayment()
+    {
+        $primaryAccountDetails = array(
+            'name' => 'John Smith',
+            'accountNumber' => '123456',
+            'dateOfBirth' => '1980-01-01',
+            'postCode' => 'EC2A 4DP',
+        );
+
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('primaryAccountDetails', $primaryAccountDetails)
+            ->build(ConfigHelper::getConfig());
+        $result = $cardPayment->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
+    }
+
+
 }
