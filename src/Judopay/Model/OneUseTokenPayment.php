@@ -7,7 +7,7 @@ use Judopay\Model;
 
 class OneUseTokenPayment extends Model
 {
-    protected $resourcePath = 'transactions/preauths';
+    protected $resourcePath = 'transactions/payments';
     protected $validApiMethods = array('create');
     protected $attributes
         = array(

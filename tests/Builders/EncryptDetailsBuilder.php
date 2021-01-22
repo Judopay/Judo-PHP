@@ -8,7 +8,7 @@ class EncryptDetailsBuilder extends AbstractModelBuilder
     {
         $this->attributeValues = array(
             'cardNumber'            => '4976000000003436',
-            'expiryDate'            => '12/20',
+            'expiryDate'            => '12/25',
             'cv2'                   => 452,
         );
     }

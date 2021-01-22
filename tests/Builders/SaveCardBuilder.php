@@ -9,7 +9,7 @@ class SaveCardBuilder extends AbstractModelBuilder
         $this->attributeValues = array(
             'yourConsumerReference' => '12345',
             'cardNumber'            => '4976000000003436',
-            'expiryDate'            => '12/20',
+            'expiryDate'            => '12/25',
             'cv2'                   => 452,
         );
     }
