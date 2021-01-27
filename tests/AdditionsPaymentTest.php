@@ -5,6 +5,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use Tests\Builders\EncryptDetailsBuilder;
 use Tests\Builders\OneUseTokenPaymentBuilder;
+use Tests\Builders\OneUseTokenPreauthBuilder;
 use Tests\Builders\SaveEncryptedCardBuilder;
 use Tests\Builders\RegisterEncryptedCardBuilder;
 use Tests\Builders\CheckEncryptedCardBuilder;
@@ -24,9 +25,30 @@ class AdditionsPaymentTest extends TestCase
         $tokenPaymentResult = $this->makePaymentWithOneUseToken($oneUseToken);
         $this->assertEquals('Success', $tokenPaymentResult['result']);
 
-        # Try and fail to make second payment with one use token
+        # Try and fail to make a second payment with one use token
         try {
             $this->makePaymentWithOneUseToken($oneUseToken);
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 153, 400, 1);
+            return;
+        }
+        $this->fail('An expected ApiException has not been raised.');
+    }
+
+    public function testOneUseTokenPreauth()
+    {
+        # Generate one use token
+        $encryptionResult = $this->generateOneUseToken();
+        $oneUseToken = $encryptionResult['oneUseToken'];
+        $this->assertNotEmpty($oneUseToken);
+
+        # Make successful preauth with one use token
+        $tokenPreauthResult = $this->makePreauthWithOneUseToken($oneUseToken);
+        $this->assertEquals('Success', $tokenPreauthResult['result']);
+
+        # Try and fail to make a second preauth with one use token
+        try {
+            $this->makePreauthWithOneUseToken($oneUseToken);
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 153, 400, 1);
             return;
@@ -124,6 +146,11 @@ class AdditionsPaymentTest extends TestCase
         return new OneUseTokenPaymentBuilder();
     }
 
+    protected function tokenPreauthRequestBuilder()
+    {
+        return new OneUseTokenPreauthBuilder();
+    }
+
     protected function saveEncryptedCardRequestBuilder()
     {
         return new SaveEncryptedCardBuilder();
@@ -146,6 +173,14 @@ class AdditionsPaymentTest extends TestCase
             ->setAttribute('oneUseToken', $token)
             ->build(ConfigHelper::getConfig());
         return $tokenPayment->create();
+    }
+
+    protected function makePreauthWithOneUseToken($token)
+    {
+        $tokenPreauth = $this->tokenPreauthRequestBuilder()
+            ->setAttribute('oneUseToken', $token)
+            ->build(ConfigHelper::getConfig());
+        return $tokenPreauth->create();
     }
 
     protected function saveCardWithOneUseToken($token)

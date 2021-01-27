@@ -34,7 +34,7 @@ class CardPaymentBuilder extends AbstractModelBuilder
             case self::VALID_VISA_CARD:
                 $this->attributeValues += array(
                     'cardNumber' => '4976000000003436',
-                    'expiryDate' => '12/20',
+                    'expiryDate' => '12/25',
                     'cv2'        => 452,
                 );
                 break;
@@ -42,7 +42,7 @@ class CardPaymentBuilder extends AbstractModelBuilder
             case self::INVALID_VISA_CARD:
                 $this->attributeValues += array(
                     'cardNumber' => '4221690000004963',
-                    'expiryDate' => '12/20',
+                    'expiryDate' => '12/25',
                     'cv2'        => 125,
                 );
                 break;
