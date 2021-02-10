@@ -11,32 +11,50 @@ class ConfigHelper
      * @param array $settings custom settings
      * @return Configuration
      */
-    public static function getConfig(array $settings = array())
+    public static function getBaseConfig(array $settings = array())
     {
         return new Configuration(
             $settings +
             array(
-                'apiToken'      => getenv('JUDO_API_TOKEN'),
-                'apiSecret'     => getenv('JUDO_API_SECRET'),
-                'judoId'        => getenv('JUDO_API_ID'),
+                'judoId'        => getenv('BASE_JUDOID'),
+                'apiToken'      => getenv('BASE_TOKEN'),
+                'apiSecret'     => getenv('BASE_SECRET'),
                 'useProduction' => false,
             )
         );
     }
 
     /**
-     * Returns Configuration from an alternate set of environment variables
+     * Returns Configuration from an alternate set of environment variables that allow CheckCard operations
      * @param array $settings custom settings
      * @return Configuration
      */
-    public static function getConfigAlt(array $settings = array())
+    public static function getCybersourceConfig(array $settings = array())
     {
         return new Configuration(
             $settings +
             array(
-                'apiToken'      => getenv('JUDO_API_TOKEN_2'),
-                'apiSecret'     => getenv('JUDO_API_SECRET_2'),
-                'judoId'        => getenv('JUDO_API_ID_2'),
+                'judoId'        => getenv('CYB_JUDOID'),
+                'apiToken'      => getenv('CYB_TOKEN'),
+                'apiSecret'     => getenv('CYB_SECRET'),
+                'useProduction' => false,
+            )
+        );
+    }
+
+    /**
+     * Returns Configuration from an alternate set of environment variables that allow 3DS2 operations
+     * @param array $settings custom settings
+     * @return Configuration
+     */
+    public static function getSafeChargeConfig(array $settings = array())
+    {
+        return new Configuration(
+            $settings +
+            array(
+                'judoId'        => getenv('SC_JUDOID'),
+                'apiToken'      => getenv('SC_TOKEN'),
+                'apiSecret'     => getenv('SC_SECRET'),
                 'useProduction' => false,
             )
         );
