@@ -7,6 +7,7 @@ class CardPaymentBuilder extends AbstractModelBuilder
     const VALID_VISA_CARD = 0;
     const INVALID_VISA_CARD = 1;
     const THREEDS_VISA_CARD = 2;
+    const THREEDSTWO_VISA_CARD = 3;
 
     protected $type = self::VALID_VISA_CARD;
 
@@ -22,6 +23,33 @@ class CardPaymentBuilder extends AbstractModelBuilder
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function setThreeDSecureTwoFields($threeDSecure)
+    {
+        // Add any missing key
+        if (!array_key_exists('authenticationSource', $threeDSecure)) {
+            $threeDSecure += array('authenticationSource' => 'Unknown');
+        }
+
+        if (!array_key_exists('methodCompletion', $threeDSecure)) {
+            $threeDSecure += array('methodCompletion' => 'Unknown');
+        }
+
+        if (!array_key_exists('methodNotificationUrl', $threeDSecure)) {
+            $threeDSecure += array('methodNotificationUrl' => null);
+        }
+
+        if (!array_key_exists('challengeNotificationUrl', $threeDSecure)) {
+            $threeDSecure += array('challengeNotificationUrl' => null);
+        }
+
+        $this->setAttribute('threeDSecure', $threeDSecure);
+        $this->setAttribute('cardHolderName', 'CHALLENGE');
+        $this->setAttribute('mobileNumber', '07999999999');
+        $this->setAttribute('emailAddress', 'contact@judopay.com');
 
         return $this;
     }
@@ -52,6 +80,14 @@ class CardPaymentBuilder extends AbstractModelBuilder
                     'cardNumber' => '4976350000006891',
                     'expiryDate' => '12/21',
                     'cv2'        => 341,
+                );
+                break;
+
+            case self::THREEDSTWO_VISA_CARD:
+                $this->attributeValues += array(
+                    'cardNumber' => '4000023104662535',
+                    'expiryDate' => '12/25',
+                    'cv2'        => 452,
                 );
                 break;
         }

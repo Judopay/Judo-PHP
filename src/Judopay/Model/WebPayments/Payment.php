@@ -20,7 +20,10 @@ class Payment extends Model
             'clientIpAddress'       => DataType::TYPE_STRING,
             'clientUserAgent'       => DataType::TYPE_STRING,
             'webPaymentOperation'   => 'WebPaymentOperation',
-            'currency'              => DataType::TYPE_STRING
+            'currency'              => DataType::TYPE_STRING,
+
+            // Inner objects
+            'threeDSecure'           => DataType::TYPE_THREE_D_SECURE_TWO,
         );
     protected $requiredAttributes
         = array(

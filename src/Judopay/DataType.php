@@ -7,6 +7,7 @@ use Judopay\Model\Inner\GooglePayWallet;
 use Judopay\Model\Inner\PkPayment;
 use Judopay\Model\Inner\Wallet;
 use Judopay\Model\Inner\PrimaryAccountDetails;
+use Judopay\Model\Inner\ThreeDSecureTwo;
 
 class DataType
 {
@@ -21,6 +22,7 @@ class DataType
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
     const TYPE_RECURRING_TYPE = 'recurring_type';
+    const TYPE_THREE_D_SECURE_TWO = 'three_d_secure';
 
     public static function coerce($targetDataType, $value)
     {
@@ -75,6 +77,28 @@ class DataType
             case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
                 $primaryAccountDetails = PrimaryAccountDetails::factory($value);
                 return $primaryAccountDetails->toObject();
+
+            case static::TYPE_THREE_D_SECURE_TWO:
+                // Check that the provided value for authenticationSource is  part of the available lists
+                if (strcasecmp($value['authenticationSource'], "Unknown") != 0
+                    && strcasecmp($value['authenticationSource'], "Browser") != 0
+                    && strcasecmp($value['authenticationSource'], "Stored_Recurring") != 0
+                    && strcasecmp($value['authenticationSource'], "Mobile_Sdk") != 0
+                )
+                {
+                    throw new ValidationError('Invalid authenticationSource value');
+                }
+                // Check that the provided value for methodCompletion is  part of the available lists
+                if (strcasecmp($value['methodCompletion'], "Unknown") != 0
+                    && strcasecmp($value['methodCompletion'], "Yes") != 0
+                    && strcasecmp($value['methodCompletion'], "No") != 0
+                    && strcasecmp($value['methodCompletion'], "Unavailable") != 0
+                )
+                {
+                    throw new ValidationError('Invalid methodCompletion value');
+                }
+                $threeDSecureTwo = ThreeDSecureTwo::factory($value);
+                return $threeDSecureTwo->toObject();
         }
 
         return $value;

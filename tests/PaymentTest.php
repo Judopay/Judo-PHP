@@ -21,7 +21,7 @@ class PaymentTest extends PaymentTests
             ->setAttribute('recurringPaymentType', "aaa");
 
         try {
-            $cardPayment->build(ConfigHelper::getConfigAlt());
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
         } catch (\Exception $e) {
             Assert::assertEquals($e->getMessage(), "Invalid recurring type value");
             return;
@@ -36,7 +36,7 @@ class PaymentTest extends PaymentTests
             ->setAttribute('recurringPaymentType', "mit");
 
         try {
-            $cardPayment->build(ConfigHelper::getConfigAlt());
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
         } catch (\Exception $e) {
             $this->fail('An Exception should not have been raised.');
         }

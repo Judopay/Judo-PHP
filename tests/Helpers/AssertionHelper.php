@@ -50,4 +50,26 @@ class AssertionHelper
         Assert::assertEquals('Requires 3D Secure', $result['result']);
         Assert::assertGreaterThan(0, $result['receiptId']);
     }
+
+    public static function assertRequiresThreeDSecureTwoDeviceDetails($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertEquals('Additional device data is needed for 3D Secure 2', $result['result']);
+        Assert::assertEquals('Issuer ACS has requested additional device data gathering', $result['message']);
+        Assert::assertNotNull($result['methodUrl']);
+        Assert::assertNotNull($result['version']);
+        Assert::assertGreaterThan(0, $result['receiptId']);
+    }
+
+    public static function assertRequiresThreeDSecureTwoChallengeCompletion($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertEquals('Challenge completion is needed for 3D Secure 2', $result['result']);
+        Assert::assertEquals('Issuer ACS has responded with a Challenge URL', $result['message']);
+        Assert::assertNotNull($result['challengeUrl']);
+        Assert::assertNotNull($result['version']);
+        Assert::assertNotNull($result['md']);
+        Assert::assertNotNull($result['cReq']);
+        Assert::assertGreaterThan(0, $result['receiptId']);
+    }
 }

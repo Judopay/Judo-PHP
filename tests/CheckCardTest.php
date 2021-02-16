@@ -17,7 +17,7 @@ class CheckCardTest extends PaymentTests
     public function testValidPayment()
     {
         $cardPayment = $this->getBuilder()
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
@@ -27,7 +27,7 @@ class CheckCardTest extends PaymentTests
     {
         $checkCard = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
 
         try {
             $checkCard->create();
@@ -44,7 +44,7 @@ class CheckCardTest extends PaymentTests
     {
         $checkCard = $this->getBuilder()
             ->setAttribute('amount', 100500)
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
 
         $result = $checkCard->create();
 
@@ -56,7 +56,7 @@ class CheckCardTest extends PaymentTests
     {
         $checkCard = $this->getBuilder()
             ->unsetAttribute('currency')
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
 
         $result = $checkCard->create();
 
