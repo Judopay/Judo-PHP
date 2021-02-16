@@ -12,8 +12,8 @@ use Judopay\Request;
  */
 class Judopay
 {
-    const SDK_VERSION = '4.5.0';
-    const API_VERSION = '5.5.1';
+    const SDK_VERSION = '5.0.0';
+    const API_VERSION = '6.0.0';
     /**
      * Pimple DI container
      * @var object Pimple\Container

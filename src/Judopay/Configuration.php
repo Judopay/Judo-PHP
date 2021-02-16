@@ -95,8 +95,8 @@ class Configuration
         } else {
             $this->settings[static::ENDPOINT_URL] = isset($this->settings[static::USE_PRODUCTION])
             && $this->settings[static::USE_PRODUCTION] === true
-                ? 'https://gw1.judopay.com/'
-                : 'https://gw1.judopay-sandbox.com/';
+                ? 'https://api.judopay.com/'
+                : 'https://api-sandbox.judopay.com/';
         }
     }
 
