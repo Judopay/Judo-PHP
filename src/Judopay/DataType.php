@@ -84,8 +84,7 @@ class DataType
                     && strcasecmp($value['authenticationSource'], "Browser") != 0
                     && strcasecmp($value['authenticationSource'], "Stored_Recurring") != 0
                     && strcasecmp($value['authenticationSource'], "Mobile_Sdk") != 0
-                )
-                {
+                ) {
                     throw new ValidationError('Invalid authenticationSource value');
                 }
                 // Check that the provided value for methodCompletion is  part of the available lists
@@ -93,8 +92,7 @@ class DataType
                     && strcasecmp($value['methodCompletion'], "Yes") != 0
                     && strcasecmp($value['methodCompletion'], "No") != 0
                     && strcasecmp($value['methodCompletion'], "Unavailable") != 0
-                )
-                {
+                ) {
                     throw new ValidationError('Invalid methodCompletion value');
                 }
                 $threeDSecureTwo = ThreeDSecureTwo::factory($value);

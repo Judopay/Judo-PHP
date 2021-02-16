@@ -47,7 +47,6 @@ class ThreeDSecureTwoTest extends TestCase
                 ->build(ConfigHelper::getSafeChargeConfig());
 
             $this->fail('An expected ValidationError has not been raised.'); // We do not expect any other exception
-
         } catch (ValidationError $e) {
             Assert::assertNotNull($e); // We expect a validation error due to the invalid parameters
         } catch (\Exception $e) {

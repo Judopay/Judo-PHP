@@ -141,8 +141,7 @@ class Model
         // Replace any placeholder receiptId in a path
         if (strpos($this->resourcePath, 'receiptId') !== false) {
             $requestPath = str_replace('receiptId', $this->attributeValues["receiptId"], $this->resourcePath);
-        }
-        else {
+        } else {
             $requestPath = $this->resourcePath . "/" . $this->attributeValues["receiptId"];
         }
 

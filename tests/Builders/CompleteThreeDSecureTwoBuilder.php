@@ -22,5 +22,4 @@ class CompleteThreeDSecureTwoBuilder extends AbstractModelBuilder
         $this->setAttribute('version', $version);
         return $this;
     }
-
 }
