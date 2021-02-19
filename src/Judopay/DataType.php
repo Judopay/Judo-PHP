@@ -79,7 +79,7 @@ class DataType
                 return $primaryAccountDetails->toObject();
 
             case static::TYPE_THREE_D_SECURE_TWO:
-                // Check that the provided value for authenticationSource is  part of the available lists
+                // Provided value for mandatory authenticationSource part of the available lists?
                 if (strcasecmp($value['authenticationSource'], "Unknown") != 0
                     && strcasecmp($value['authenticationSource'], "Browser") != 0
                     && strcasecmp($value['authenticationSource'], "Stored_Recurring") != 0
@@ -87,7 +87,7 @@ class DataType
                 ) {
                     throw new ValidationError('Invalid authenticationSource value');
                 }
-                // Check that the provided value for methodCompletion is part of the available lists (if the key was added)
+                // If present, provided value for methodCompletion part of the available lists?
                 if (array_key_exists('methodCompletion', $value)) {
                     if (strcasecmp($value['methodCompletion'], "Unknown") != 0
                         && strcasecmp($value['methodCompletion'], "Yes") != 0
