@@ -30,14 +30,38 @@ class ThreeDSecureTwoTest extends TestCase
         return new CompleteThreeDSecureTwoBuilder($receiptId);
     }
 
-    public function testPaymentWithThreedSecureTwoInvalidRequest()
+    public function testPaymentWithThreedSecureTwoInvalidAuthenticationSource()
     {
         // Build a threeDSecureTwo payment with an invalid attribute
         $threeDSecureTwo = array(
-            'authenticationSource' => "invalid",
-            'methodNotificationUrl' => "https://www.test.com",
-            'challengeNotificationUrl' => "https://www.test.com",
-            'methodCompletion' => "No"
+            'authenticationSource'      => "invalid",
+            'methodNotificationUrl'     => "https://www.test.com",
+            'challengeNotificationUrl'  => "https://www.test.com",
+            'methodCompletion'          => "No"
+        );
+
+        try {
+            $cardPayment = $this->getPaymentBuilder()
+                ->setType(CardPaymentBuilder::THREEDSTWO_VISA_CARD)
+                ->setThreeDSecureTwoFields($threeDSecureTwo)
+                ->build(ConfigHelper::getSafeChargeConfig());
+
+            $this->fail('An expected ValidationError has not been raised.'); // We do not expect any other exception
+        } catch (ValidationError $e) {
+            Assert::assertNotNull($e); // We expect a validation error due to the invalid parameters
+        } catch (\Exception $e) {
+            $this->fail('An expected ValidationError has not been raised.'); // We do not expect any other exception
+        }
+    }
+
+    public function testPaymentWithThreedSecureTwoInvalidMethodCompletion()
+    {
+        // Build a threeDSecureTwo payment with an invalid attribute
+        $threeDSecureTwo = array(
+            'authenticationSource'      => "Browser",
+            'methodNotificationUrl'     => "https://www.test.com",
+            'challengeNotificationUrl'  => "https://www.test.com",
+            'methodCompletion'          => "invalid"
         );
 
         try {
@@ -60,8 +84,7 @@ class ThreeDSecureTwoTest extends TestCase
         $threeDSecureTwo = array(
             'authenticationSource' => "Browser",
             'methodNotificationUrl' => "https://www.test.com",
-            'challengeNotificationUrl' => "https://www.test.com",
-            'methodCompletion' => "No"
+            'challengeNotificationUrl' => "https://www.test.com"
         );
 
         $cardPayment = $this->getPaymentBuilder()
@@ -86,7 +109,6 @@ class ThreeDSecureTwoTest extends TestCase
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
             'authenticationSource'      => "Browser",
-            'methodCompletion'          => "No",
             'methodNotificationUrl'     => "https://www.test.com",
             'challengeNotificationUrl'  => "https://www.test.com"
         );

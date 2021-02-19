@@ -8,7 +8,6 @@ class ThreeDSecureTwo extends TransmittedField
         = array(
             'authenticationSource',
             'methodNotificationUrl',
-            'challengeNotificationUrl',
-            'methodCompletion',
+            'challengeNotificationUrl'
         );
 }

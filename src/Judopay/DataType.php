@@ -22,7 +22,7 @@ class DataType
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
     const TYPE_RECURRING_TYPE = 'recurring_type';
-    const TYPE_THREE_D_SECURE_TWO = 'three_d_secure';
+    const TYPE_THREE_D_SECURE_TWO = 'three_d_secure_two';
 
     public static function coerce($targetDataType, $value)
     {
@@ -87,14 +87,17 @@ class DataType
                 ) {
                     throw new ValidationError('Invalid authenticationSource value');
                 }
-                // Check that the provided value for methodCompletion is  part of the available lists
-                if (strcasecmp($value['methodCompletion'], "Unknown") != 0
-                    && strcasecmp($value['methodCompletion'], "Yes") != 0
-                    && strcasecmp($value['methodCompletion'], "No") != 0
-                    && strcasecmp($value['methodCompletion'], "Unavailable") != 0
-                ) {
-                    throw new ValidationError('Invalid methodCompletion value');
+                // Check that the provided value for methodCompletion is part of the available lists (if the key was added)
+                if (array_key_exists('methodCompletion', $value)) {
+                    if (strcasecmp($value['methodCompletion'], "Unknown") != 0
+                        && strcasecmp($value['methodCompletion'], "Yes") != 0
+                        && strcasecmp($value['methodCompletion'], "No") != 0
+                        && strcasecmp($value['methodCompletion'], "Unavailable") != 0
+                    ) {
+                        throw new ValidationError('Invalid methodCompletion value');
+                    }
                 }
+
                 $threeDSecureTwo = ThreeDSecureTwo::factory($value);
                 return $threeDSecureTwo->toObject();
         }
