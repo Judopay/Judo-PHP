@@ -79,18 +79,16 @@ class DataType
                 return $primaryAccountDetails->toObject();
 
             case static::TYPE_THREE_D_SECURE_TWO:
-                // Provided value for mandatory authenticationSource part of the available lists?
-                if (strcasecmp($value['authenticationSource'], "Unknown") != 0
-                    && strcasecmp($value['authenticationSource'], "Browser") != 0
+                // Provided value for mandatory authenticationSource part of the enum
+                if (strcasecmp($value['authenticationSource'], "Browser") != 0
                     && strcasecmp($value['authenticationSource'], "Stored_Recurring") != 0
                     && strcasecmp($value['authenticationSource'], "Mobile_Sdk") != 0
                 ) {
                     throw new ValidationError('Invalid authenticationSource value');
                 }
-                // If present, provided value for methodCompletion part of the available lists?
+                // If present, provided value for methodCompletion part of the enum
                 if (array_key_exists('methodCompletion', $value)) {
-                    if (strcasecmp($value['methodCompletion'], "Unknown") != 0
-                        && strcasecmp($value['methodCompletion'], "Yes") != 0
+                    if (strcasecmp($value['methodCompletion'], "Yes") != 0
                         && strcasecmp($value['methodCompletion'], "No") != 0
                         && strcasecmp($value['methodCompletion'], "Unavailable") != 0
                     ) {

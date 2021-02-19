@@ -19,23 +19,6 @@ class ResumeThreeDSecureTwoBuilder extends AbstractModelBuilder
 
     public function setThreeDSecureTwoFields($threeDSecure)
     {
-        // Add any missing key
-        if (!array_key_exists('authenticationSource', $threeDSecure)) {
-            $threeDSecure += array('authenticationSource' => 'Unknown');
-        }
-
-        if (!array_key_exists('methodCompletion', $threeDSecure)) {
-            $threeDSecure += array('methodCompletion' => 'Unknown');
-        }
-
-        if (!array_key_exists('methodNotificationUrl', $threeDSecure)) {
-            $threeDSecure += array('methodNotificationUrl' => null);
-        }
-
-        if (!array_key_exists('challengeNotificationUrl', $threeDSecure)) {
-            $threeDSecure += array('challengeNotificationUrl' => null);
-        }
-
         $this->setAttribute('threeDSecure', $threeDSecure);
         return $this;
     }

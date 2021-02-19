@@ -82,9 +82,9 @@ class ThreeDSecureTwoTest extends TestCase
     {
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
-            'authenticationSource' => "Browser",
-            'methodNotificationUrl' => "https://www.test.com",
-            'challengeNotificationUrl' => "https://www.test.com"
+            'authenticationSource'      => "Browser",
+            'methodNotificationUrl'     => "https://www.test.com",
+            'challengeNotificationUrl'  => "https://www.test.com"
         );
 
         $cardPayment = $this->getPaymentBuilder()
