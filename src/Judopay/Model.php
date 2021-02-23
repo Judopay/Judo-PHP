@@ -148,7 +148,7 @@ class Model
         // If the request is to Resume a 3DS2 payment, move the methodCompletion to the right depth
         if (strpos($this->resourcePath, 'resume3ds') !== false
             && array_key_exists('methodCompletion', $this->attributeValues)) {
-            $threeDSecure = array('methodCompletion' => $this->attributeValues['methodCompletion'];
+            $threeDSecure = array('methodCompletion' => $this->attributeValues['methodCompletion']);
             $this->attributeValues['threeDSecure'] = $threeDSecure;
             unset($this->attributeValues['methodCompletion']);
         }
