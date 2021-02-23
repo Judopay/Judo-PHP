@@ -130,15 +130,9 @@ class ThreeDSecureTwoTest extends TestCase
         AssertionHelper::assertRequiresThreeDSecureTwoDeviceDetails($paymentResult);
 
         // Build the Resume3d request for the payment after its device gathering happened
-        // Build a threeDSecureTwo payment
-        $threeDSecureTwo = array(
-            'authenticationSource'      => "Browser",
-            'methodCompletion'          => "Yes"
-        );
-
         $resumeThreeDSecureTwo = $this->getResumeThreeDSecureTwoBuilder($paymentResult['receiptId'])
             ->setCv2($cardPayment->getAttributeValue('cv2')) // Resending the cv2 as it it not saved
-            ->setThreeDSecureTwoFields($threeDSecureTwo)
+            ->setThreeDSecureTwoMethodCompletion("Yes")
             ->build(ConfigHelper::getSafeChargeConfig());
 
         Assert::assertNotNull($resumeThreeDSecureTwo);

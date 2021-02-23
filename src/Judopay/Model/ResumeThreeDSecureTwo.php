@@ -11,17 +11,15 @@ class ResumeThreeDSecureTwo extends Model
 
     protected $attributes
         = array(
-            'receiptId'            => DataType::TYPE_STRING,
-            'cv2'                  => DataType::TYPE_STRING,
-
-            // Inner objects
-            'threeDSecure'         => DataType::TYPE_THREE_D_SECURE_TWO,
+            'receiptId'         => DataType::TYPE_STRING,
+            'cv2'               => DataType::TYPE_STRING,
+            'methodCompletion'  => DataType::TYPE_STRING,
         );
 
     protected $requiredAttributes
         = array(
             'receiptId',
             'cv2',
-            'threeDSecure'
+            'methodCompletion'
         );
 }
