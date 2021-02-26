@@ -24,7 +24,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $builder = new CardPaymentBuilder();
         $cardPayment = $builder->setAttribute('yourConsumerReference', self::CONSUMER_REFERENCE)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $cardPayment->create();
 
@@ -37,7 +37,7 @@ abstract class TokenPaymentTests extends TestCase
     public function testValidTokenPayment()
     {
         $tokenPayment = $this->getBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         $result = $tokenPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
@@ -47,7 +47,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->setAttribute('cv2', '666')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $tokenPayment->create();
 
@@ -60,7 +60,7 @@ abstract class TokenPaymentTests extends TestCase
 
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('cardToken')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $tokenPayment->create();
     }
@@ -72,7 +72,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('cardToken')
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $tokenPayment->create();
     }
@@ -81,7 +81,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->setAttribute('amount', -1)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -98,7 +98,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->setAttribute('amount', 0)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -115,7 +115,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('currency')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $tokenPayment->create();
 
@@ -126,7 +126,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -145,7 +145,7 @@ abstract class TokenPaymentTests extends TestCase
 
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('yourConsumerReference')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $tokenPayment->create();
     }
@@ -154,7 +154,7 @@ abstract class TokenPaymentTests extends TestCase
     {
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $tokenPayment->create();
 
@@ -166,7 +166,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->setAttribute('amount', -1)
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -184,7 +184,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->setAttribute('amount', 0)
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -202,7 +202,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('currency')
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $tokenPayment->create();
 
@@ -214,7 +214,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $tokenPayment->create();
@@ -234,7 +234,7 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('yourConsumerReference')
             ->unsetAttribute('cv2')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $tokenPayment->create();
     }
@@ -242,7 +242,7 @@ abstract class TokenPaymentTests extends TestCase
     public function testDuplicatePayment()
     {
         $tokenPayment = $this->getBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         $successfulResult = $tokenPayment->create();
 
         try {

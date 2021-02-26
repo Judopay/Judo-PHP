@@ -17,7 +17,7 @@ class VoidTest extends TestCase
             ? new CardPreauthBuilder()
             : new CardPaymentBuilder();
 
-        $payment = $builder->build(ConfigHelper::getConfig())
+        $payment = $builder->build(ConfigHelper::getBaseConfig())
             ->create();
 
         AssertionHelper::assertSuccessfulPayment($payment);
@@ -30,7 +30,7 @@ class VoidTest extends TestCase
         $receiptId = $this->makePreauthPayment();
         $builder = new VoidTransactionBuilder($receiptId);
 
-        $result = $builder->build(ConfigHelper::getConfig())
+        $result = $builder->build(ConfigHelper::getBaseConfig())
             ->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
@@ -42,7 +42,7 @@ class VoidTest extends TestCase
         $builder = new VoidTransactionBuilder($receiptId);
 
         try {
-            $builder->build(ConfigHelper::getConfig())
+            $builder->build(ConfigHelper::getBaseConfig())
                 ->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 50, 404);
@@ -58,7 +58,7 @@ class VoidTest extends TestCase
         $builder = new VoidTransactionBuilder();
 
         try {
-            $builder->build(ConfigHelper::getConfig())
+            $builder->build(ConfigHelper::getBaseConfig())
                 ->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 1, 1);
@@ -74,12 +74,12 @@ class VoidTest extends TestCase
         $receiptId = $this->makePreauthPayment();
         $builder = new VoidTransactionBuilder($receiptId);
 
-        $void = $builder->build(ConfigHelper::getConfig());
+        $void = $builder->build(ConfigHelper::getBaseConfig());
 
         AssertionHelper::assertSuccessfulPayment($void->create());
 
         try {
-            $builder->build(ConfigHelper::getConfig())->create();
+            $builder->build(ConfigHelper::getBaseConfig())->create();
         } catch (\Exception $e) {
             AssertionHelper::assertApiExceptionWithModelErrors($e, 0, 51);
 
@@ -95,7 +95,7 @@ class VoidTest extends TestCase
         $builder = new VoidTransactionBuilder($receiptId);
 
         $void = $builder->setAttribute('amount', 100)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $void->create();

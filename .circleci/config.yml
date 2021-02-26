@@ -30,6 +30,8 @@ jobs:
     executor:
       name: php
       php_version: "7.3"
+    environment:
+      XDEBUG_MODE: coverage
     steps:
       - checkout
       - restore_cache:
@@ -56,6 +58,22 @@ jobs:
       - attach_workspace:
           at: /home/circleci/project
       - run: /opt/run-scan.sh
+  report_to_jira:
+    docker:
+      - image: gcr.io/opnf-management/deployer:latest
+        auth:
+          username: _json_key
+          password: $GCLOUD_SERVICE_KEY
+    parameters:
+      environment:
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Report Deployment to Jira
+          environment:
+            ENVIRONMENT: << parameters.environment >>
+          command: /resources/scripts/report-status-to-jira.sh
   test_php56:
     executor:
       name: php
@@ -98,3 +116,13 @@ workflows:
           context: shared-secrets
           requires:
             - test_php73
+      - report_to_jira:
+          context: shared-secrets
+          environment: prod
+          filters:
+            branches:
+              ignore:
+                - /.*/
+            tags:
+              only:
+                - /^((\d)+\.){1,2}(\d+)/i

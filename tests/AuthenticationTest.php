@@ -11,7 +11,7 @@ class AuthenticationTest extends TestCase
 {
     public function testPaymentWithInvalidJudoId()
     {
-        $config = ConfigHelper::getConfig();
+        $config = ConfigHelper::getBaseConfig();
 
         $builder = new CardPaymentBuilder();
         $builder->setAttribute('judoId', '123');
@@ -34,7 +34,7 @@ class AuthenticationTest extends TestCase
 
     public function testPaymentWithInvalidToken()
     {
-        $config = ConfigHelper::getConfig(array('apiToken' => 'Bad_token'));
+        $config = ConfigHelper::getBaseConfig(array('apiToken' => 'Bad_token'));
 
         $builder = new CardPaymentBuilder();
         $cardPayment = $builder->build($config);
@@ -52,7 +52,7 @@ class AuthenticationTest extends TestCase
 
     public function testPaymentWithInvalidSecret()
     {
-        $config = ConfigHelper::getConfig(array('apiSecret' => 'Bad_secret'));
+        $config = ConfigHelper::getBaseConfig(array('apiSecret' => 'Bad_secret'));
 
         $builder = new CardPaymentBuilder();
         $cardPayment = $builder->build($config);

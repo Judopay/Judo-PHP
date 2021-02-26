@@ -13,7 +13,7 @@ For the Judo PHP library in order to work correctly with your developer setup, p
 Installation of the SDK is implemented via the Composer package manager. Add the judopay package to your composer.json file:
 ```json
     "require": {
-        "judopay/judopay-sdk": "4.0.0"
+        "judopay/judopay-sdk": "5.0.0"
     }
 ```
 And then execute:
@@ -47,7 +47,7 @@ To make a new payment with full card details:
             'amount' => 1.01,
             'currency' => 'GBP',
             'cardNumber' => '4976000000003436',
-            'expiryDate' => '12/15',
+            'expiryDate' => '12/25',
             'cv2' => 452
         )
     );

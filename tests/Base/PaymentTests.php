@@ -18,7 +18,7 @@ abstract class PaymentTests extends TestCase
     public function testValidPayment()
     {
         $cardPayment = $this->getBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
@@ -28,7 +28,7 @@ abstract class PaymentTests extends TestCase
     {
         $cardPayment = $this->getBuilder()
             ->setType(CardPaymentBuilder::INVALID_VISA_CARD)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         $result = $cardPayment->create();
 
         AssertionHelper::assertDeclinedPayment($result);
@@ -38,7 +38,7 @@ abstract class PaymentTests extends TestCase
     {
         $cardPayment = $this->getBuilder()
             ->setAttribute('amount', -1)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $cardPayment->create();
@@ -55,7 +55,7 @@ abstract class PaymentTests extends TestCase
     {
         $cardPayment = $this->getBuilder()
             ->setAttribute('amount', 0)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $cardPayment->create();
@@ -74,7 +74,7 @@ abstract class PaymentTests extends TestCase
 
         $cardPayment = $this->getBuilder()
             ->setAttribute('currency', '')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $cardPayment->create();
     }
@@ -83,7 +83,7 @@ abstract class PaymentTests extends TestCase
     {
         $cardPayment = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $cardPayment->create();
@@ -102,7 +102,7 @@ abstract class PaymentTests extends TestCase
 
         $cardPayment = $this->getBuilder()
             ->unsetAttribute('yourConsumerReference')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $cardPayment->create();
     }
@@ -110,7 +110,7 @@ abstract class PaymentTests extends TestCase
     public function testDuplicatePayment()
     {
         $cardPayment = $this->getBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         $successfulResult = $cardPayment->create();
 
         try {
@@ -123,5 +123,22 @@ abstract class PaymentTests extends TestCase
         }
 
         $this->fail('An expected ApiException has not been raised.');
+    }
+
+    public function testPrimaryAccountDetailsPayment()
+    {
+        $primaryAccountDetails = array(
+            'name'          => 'John Smith',
+            'accountNumber' => '123456',
+            'dateOfBirth'   => '1980-01-01',
+            'postCode'      => 'EC2A 4DP',
+        );
+
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('primaryAccountDetails', $primaryAccountDetails)
+            ->build(ConfigHelper::getCybersourceConfig());
+        $result = $cardPayment->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
     }
 }

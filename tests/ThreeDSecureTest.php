@@ -4,7 +4,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use Tests\Builders\CardPaymentBuilder;
-use Tests\Builders\CompleteThreeDBuilder;
+use Tests\Builders\CompleteThreeDSecureBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 use Judopay\Exception\ApiException as ApiException;
@@ -13,7 +13,7 @@ class ThreeDSecureTest extends TestCase
 {
     protected function getBuilder()
     {
-        return new CompleteThreeDBuilder();
+        return new CompleteThreeDSecureBuilder();
     }
 
     protected function getPaymentBuilder()
@@ -26,7 +26,7 @@ class ThreeDSecureTest extends TestCase
         // Build a regular payment
         $cardPayment = $this->getPaymentBuilder()
             ->setType(CardPaymentBuilder::THREEDS_VISA_CARD)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         // Process the payment
         $paymentResult = $cardPayment->create();
@@ -36,10 +36,10 @@ class ThreeDSecureTest extends TestCase
 
         // Build the 3DS request
         $threeDSecureCompletion = $this->getBuilder()
-            ->setAttribute('ReceiptId', $paymentResult['receiptId'])
-            ->setAttribute('MD', $paymentResult['md'])
-            ->setAttribute('PaRes', "paResReturnedByTheAcsUrl") // The ACS URL needs to be visited by the consumer
-            ->build(ConfigHelper::getConfig());
+            ->setAttribute('receiptId', $paymentResult['receiptId'])
+            ->setAttribute('md', $paymentResult['md'])
+            ->setAttribute('paRes', "paResReturnedByTheAcsUrl") // The ACS URL needs to be visited by the consumer
+            ->build(ConfigHelper::getBaseConfig());
 
         // Update the existing payment with a PUT
         $threeDSecureResult = $threeDSecureCompletion->update();
@@ -52,10 +52,10 @@ class ThreeDSecureTest extends TestCase
     {
         // Build the 3DS request for a Receipt not linked to this account
         $threeDSecureCompletion = $this->getBuilder()
-            ->setAttribute('ReceiptId', "536586810336354304")
-            ->setAttribute('MD', "200120164510412101100951")
-            ->setAttribute('PaRes', "paResReturnedByTheAcsUrl") // The ACS URL needs to be visited by the consumer
-            ->build(ConfigHelper::getConfig());
+            ->setAttribute('receiptId', "536586810336354304")
+            ->setAttribute('md', "200120164510412101100951")
+            ->setAttribute('paRes', "paResReturnedByTheAcsUrl") // The ACS URL needs to be visited by the consumer
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             // Update the existing payment with a PUT
