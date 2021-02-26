@@ -7,6 +7,7 @@ use Judopay\Model\Inner\GooglePayWallet;
 use Judopay\Model\Inner\PkPayment;
 use Judopay\Model\Inner\Wallet;
 use Judopay\Model\Inner\PrimaryAccountDetails;
+use Judopay\Model\Inner\ThreeDSecureTwo;
 
 class DataType
 {
@@ -21,6 +22,7 @@ class DataType
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
     const TYPE_RECURRING_TYPE = 'recurring_type';
+    const TYPE_THREE_D_SECURE_TWO = 'three_d_secure_two';
 
     public static function coerce($targetDataType, $value)
     {
@@ -75,6 +77,27 @@ class DataType
             case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
                 $primaryAccountDetails = PrimaryAccountDetails::factory($value);
                 return $primaryAccountDetails->toObject();
+
+            case static::TYPE_THREE_D_SECURE_TWO:
+                // Provided value for mandatory authenticationSource part of the enum
+                if (strcasecmp($value['authenticationSource'], "Browser") != 0
+                    && strcasecmp($value['authenticationSource'], "Stored_Recurring") != 0
+                    && strcasecmp($value['authenticationSource'], "Mobile_Sdk") != 0
+                ) {
+                    throw new ValidationError('Invalid authenticationSource value');
+                }
+                // If present, provided value for methodCompletion part of the enum
+                if (array_key_exists('methodCompletion', $value)) {
+                    if (strcasecmp($value['methodCompletion'], "Yes") != 0
+                        && strcasecmp($value['methodCompletion'], "No") != 0
+                        && strcasecmp($value['methodCompletion'], "Unavailable") != 0
+                    ) {
+                        throw new ValidationError('Invalid methodCompletion value');
+                    }
+                }
+
+                $threeDSecureTwo = ThreeDSecureTwo::factory($value);
+                return $threeDSecureTwo->toObject();
         }
 
         return $value;

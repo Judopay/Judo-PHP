@@ -15,7 +15,7 @@ class RefundTest extends TestCase
     {
         $builder = new CardPaymentBuilder($amount);
 
-        $paymentResult = $builder->build(ConfigHelper::getConfig())
+        $paymentResult = $builder->build(ConfigHelper::getBaseConfig())
             ->create();
 
         AssertionHelper::assertSuccessfulPayment($paymentResult);
@@ -37,7 +37,7 @@ class RefundTest extends TestCase
         );
 
         // Make the refund
-        $refundResult = $builder->build(ConfigHelper::getConfig())
+        $refundResult = $builder->build(ConfigHelper::getBaseConfig())
             ->create();
 
         AssertionHelper::assertSuccessfulPayment($refundResult);

@@ -13,7 +13,7 @@ abstract class SaveCardTests extends TestCase
     {
         $saveCard = $this->getBuilder()
             ->setAttribute('cv2', '')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $saveCard->create();
 
@@ -23,7 +23,7 @@ abstract class SaveCardTests extends TestCase
     public function testValidSaveCardWithNoCv2()
     {
         $saveCard = $this->getBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $saveCard->create();
 

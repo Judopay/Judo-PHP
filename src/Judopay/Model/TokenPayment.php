@@ -24,12 +24,14 @@ class TokenPayment extends Model
             'currency'                  => DataType::TYPE_STRING,
             'clientDetails'             => DataType::TYPE_OBJECT,
 
-            'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
-
             'initialRecurringPayment'   => DataType::TYPE_BOOLEAN,
             'recurringPayment'          => DataType::TYPE_BOOLEAN,
             'relatedReceiptId'          => DataType::TYPE_STRING,
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
+
+            // Inner objects
+            'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
+            'threeDSecure'              => DataType::TYPE_THREE_D_SECURE_TWO,
         );
     protected $requiredAttributes
         = array(

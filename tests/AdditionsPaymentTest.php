@@ -102,7 +102,7 @@ class AdditionsPaymentTest extends TestCase
     {
         # Generate one use token
         # Uses the secondary account that allows £0 authorizations
-        $encryptionResult = $this->generateOneUseTokenAlt();
+        $encryptionResult = $this->generateOneUseTokenCyb();
         $oneUseToken = $encryptionResult['oneUseToken'];
         $this->assertNotEmpty($oneUseToken);
 
@@ -128,15 +128,15 @@ class AdditionsPaymentTest extends TestCase
     protected function generateOneUseToken()
     {
         $encryptDetails = $this->encryptDetailsRequestBuilder()
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         return $encryptDetails->create();
     }
 
-    protected function generateOneUseTokenAlt()
+    protected function generateOneUseTokenCyb()
     {
         $encryptDetails = $this->encryptDetailsRequestBuilder()
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
 
         return $encryptDetails->create();
     }
@@ -171,7 +171,7 @@ class AdditionsPaymentTest extends TestCase
     {
         $tokenPayment = $this->tokenPaymentRequestBuilder()
             ->setAttribute('oneUseToken', $token)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         return $tokenPayment->create();
     }
 
@@ -179,7 +179,7 @@ class AdditionsPaymentTest extends TestCase
     {
         $tokenPreauth = $this->tokenPreauthRequestBuilder()
             ->setAttribute('oneUseToken', $token)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         return $tokenPreauth->create();
     }
 
@@ -187,7 +187,7 @@ class AdditionsPaymentTest extends TestCase
     {
         $encryptedSaveCard = $this->saveEncryptedCardRequestBuilder()
             ->setAttribute('oneUseToken', $token)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         return $encryptedSaveCard->create();
     }
 
@@ -195,7 +195,7 @@ class AdditionsPaymentTest extends TestCase
     {
         $encryptedRegisterCard = $this->registerEncryptedCardRequestBuilder()
             ->setAttribute('oneUseToken', $token)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
         return $encryptedRegisterCard->create();
     }
 
@@ -203,7 +203,7 @@ class AdditionsPaymentTest extends TestCase
     {
         $encryptedCheckCard = $this->checkEncryptedCardRequestBuilder()
             ->setAttribute('oneUseToken', $token)
-            ->build(ConfigHelper::getConfigAlt());
+            ->build(ConfigHelper::getCybersourceConfig());
         return $encryptedCheckCard->create();
     }
 }

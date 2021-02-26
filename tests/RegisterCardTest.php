@@ -18,7 +18,7 @@ class RegisterCardTest extends PaymentTests
     {
         $registerCard = $this->getBuilder()
             ->setAttribute('currency', 'ZZZ')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         try {
             $registerCard->create();
@@ -36,7 +36,7 @@ class RegisterCardTest extends PaymentTests
         // When we try to change the amount
         $registerCard = $this->getBuilder()
             ->setAttribute('amount', 1.01)
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $registerCard->create();
 
@@ -50,7 +50,7 @@ class RegisterCardTest extends PaymentTests
     {
         $registerCard = $this->getBuilder()
             ->unsetAttribute('currency')
-            ->build(ConfigHelper::getConfig());
+            ->build(ConfigHelper::getBaseConfig());
 
         $result = $registerCard->create();
 

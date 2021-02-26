@@ -12,7 +12,7 @@ class CardDetailsTest extends TestCase
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
-        $config = ConfigHelper::getConfig();
+        $config = ConfigHelper::getBaseConfig();
 
         $builder = new CardPaymentBuilder();
         $builder->setAttribute('cardNumber', '');
@@ -25,7 +25,7 @@ class CardDetailsTest extends TestCase
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
-        $config = ConfigHelper::getConfig();
+        $config = ConfigHelper::getBaseConfig();
 
         $builder = new CardPaymentBuilder();
         $builder->setAttribute('cv2', '');
@@ -39,7 +39,7 @@ class CardDetailsTest extends TestCase
     {
         $this->setExpectedException('\Judopay\Exception\ValidationError', 'Missing required fields');
 
-        $config = ConfigHelper::getConfig();
+        $config = ConfigHelper::getBaseConfig();
 
         $builder = new CardPaymentBuilder();
         $builder->setAttribute('expiryDate', '');

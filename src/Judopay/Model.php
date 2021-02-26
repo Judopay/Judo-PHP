@@ -138,8 +138,12 @@ class Model
         $this->checkJudoId();
         $this->checkRequiredAttributes($this->attributeValues);
 
-        // PUT needs to be done on a specific transaction
-        $requestPath = $this->resourcePath . "/" . $this->attributeValues["ReceiptId"];
+        // Replace any placeholder receiptId in a path
+        if (strpos($this->resourcePath, 'receiptId') !== false) {
+            $requestPath = str_replace('receiptId', $this->attributeValues["receiptId"], $this->resourcePath);
+        } else {
+            $requestPath = $this->resourcePath . "/" . $this->attributeValues["receiptId"];
+        }
 
         $response = $this->request->put(
             $requestPath,
