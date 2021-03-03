@@ -12,14 +12,12 @@ class CompleteThreeDSecureTwo extends Model
     protected $attributes
         = array(
             'receiptId' => DataType::TYPE_STRING,
-            'cv2'       => DataType::TYPE_STRING,
-            'version'   => DataType::TYPE_STRING
+            'cv2'       => DataType::TYPE_STRING
         );
 
     protected $requiredAttributes
         = array(
             'receiptId',
-            'cv2',
-            'version'
+            'cv2'
         );
 }

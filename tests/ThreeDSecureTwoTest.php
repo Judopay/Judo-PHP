@@ -157,7 +157,6 @@ class ThreeDSecureTwoTest extends TestCase
         // Build the Complete3d request for the payment after its ACS challenge happened
         $completeThreeDSecureTwo = $this->getCompleteThreeDSecureTwoBuilder('12345678')
             ->setCv2('123')
-            ->setVersion('2.1.0')
             ->build(ConfigHelper::getSafeChargeConfig());
 
         Assert::assertNotNull($completeThreeDSecureTwo);
