@@ -16,10 +16,4 @@ class CompleteThreeDSecureTwoBuilder extends AbstractModelBuilder
         $this->setAttribute('cv2', $cv2);
         return $this;
     }
-
-    public function setVersion($version = '2.1.0')
-    {
-        $this->setAttribute('version', $version);
-        return $this;
-    }
 }

@@ -153,6 +153,12 @@ class Model
             unset($this->attributeValues['methodCompletion']);
         }
 
+        // If the request is to Complete a 3DS2 payment, set the Version to 2.0.0 to trigger the 3DS2 validation
+        // in PartnerApi (this version can be used for all 2.x versions of 3DS2)
+        if (strpos($this->resourcePath, 'complete3ds') !== false) {
+            $this->attributeValues['version'] = "2.0.0";
+        }
+
         $response = $this->request->put(
             $requestPath,
             $this->attributeValues

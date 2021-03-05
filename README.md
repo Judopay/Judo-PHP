@@ -26,7 +26,7 @@ For more information on getting started with Composer, see [Composer intro](http
 ##### 2. Setup
 To start using the SDK, create a new Judopay object with your API credentials:
 ```php
-    $judopay = new \Judopay(
+    $judopay = new Judopay(
         array(
             'apiToken' => 'your-token',
             'apiSecret' => 'your-secret',
@@ -54,7 +54,7 @@ To make a new payment with full card details:
 ```
 **Note:** Please make sure that you are using a unique Consumer Reference for each different consumer, and a unique Payment Reference for each transaction.
 
-You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/#payments-api).
+You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/api/index.html).
 To send the request to the API, call:
 ```php
     $response = $payment->create();
@@ -84,11 +84,11 @@ Also important to handle different exceptions in your code. See more details in 
         } else {
             echo 'There were some problems while processing your payment';
         }
-    } catch (\Judopay\Exception\ValidationError $e) {
+    } catch (JudopayExceptionValidationError $e) {
         echo $e->getSummary();
-    } catch (\Judopay\Exception\ApiException $e) {
+    } catch (JudopayExceptionApiException $e) {
         echo $e->getSummary();
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         echo $e->getMessage();
     }
 ```
