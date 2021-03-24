@@ -17,9 +17,9 @@ class ResumeThreeDSecureTwoBuilder extends AbstractModelBuilder
         return $this;
     }
 
-    public function setThreeDSecureTwoFields($threeDSecure)
+    public function setThreeDSecureTwoMethodCompletion($methodCompletion)
     {
-        $this->setAttribute('threeDSecure', $threeDSecure);
+        $this->setAttribute('methodCompletion', $methodCompletion);
         return $this;
     }
 }

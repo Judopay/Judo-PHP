@@ -145,6 +145,20 @@ class Model
             $requestPath = $this->resourcePath . "/" . $this->attributeValues["receiptId"];
         }
 
+        // If the request is to Resume a 3DS2 payment, move the methodCompletion to the right depth
+        if (strpos($this->resourcePath, 'resume3ds') !== false
+            && array_key_exists('methodCompletion', $this->attributeValues)) {
+            $threeDSecure = array('methodCompletion' => $this->attributeValues['methodCompletion']);
+            $this->attributeValues['threeDSecure'] = $threeDSecure;
+            unset($this->attributeValues['methodCompletion']);
+        }
+
+        // If the request is to Complete a 3DS2 payment, set the Version to 2.0.0 to trigger the 3DS2 validation
+        // in PartnerApi (this version can be used for all 2.x versions of 3DS2)
+        if (strpos($this->resourcePath, 'complete3ds') !== false) {
+            $this->attributeValues['version'] = "2.0.0";
+        }
+
         $response = $this->request->put(
             $requestPath,
             $this->attributeValues
