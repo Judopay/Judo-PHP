@@ -51,8 +51,10 @@ class PaymentTest extends PaymentTests
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
             $this->fail('An expected ValidationError has not been raised.');
+            return;
         } catch (\Exception $e) {
             Assert::assertEquals("Invalid challenge indicator value", $e->getMessage());
+            return;
         }
     }
 
@@ -62,9 +64,11 @@ class PaymentTest extends PaymentTests
             ->setAttribute('challengeRequestIndicator', "noPreference");
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
-            Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["challengeRequestIndicator"]);
         } catch (\Exception $e) {
             $this->fail('No exception should have been raised.');
+            return;
         }
+
+        Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["challengeRequestIndicator"]);
     }
 }
