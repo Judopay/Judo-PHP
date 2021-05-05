@@ -18,6 +18,7 @@ class CheckCard extends Model
             'cv2'                   => DataType::TYPE_STRING,
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
+            'cardAddress'               => DataType::TYPE_ARRAY,
             'phoneCountryCode'          => DataType::TYPE_STRING,
             'mobileNumber'              => DataType::TYPE_STRING,
             'cardHolderName'            => DataType::TYPE_STRING,
@@ -25,7 +26,6 @@ class CheckCard extends Model
             'initialRecurringPayment'   => DataType::TYPE_BOOLEAN,
 
             // Inner objects
-            'cardAddress'               => DataType::TYPE_ARRAY,
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
             'threeDSecure'              => DataType::TYPE_THREE_D_SECURE_TWO,
         );
