@@ -22,7 +22,6 @@ class DataType
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
     const TYPE_RECURRING_TYPE = 'recurring_type';
-    const TYPE_CARD_ADDRESS = 'card_address';
     const TYPE_THREE_D_SECURE_TWO = 'three_d_secure_two';
 
     public static function coerce($targetDataType, $value)
@@ -78,10 +77,6 @@ class DataType
             case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
                 $primaryAccountDetails = PrimaryAccountDetails::factory($value);
                 return $primaryAccountDetails->toObject();
-
-            case static::TYPE_CARD_ADDRESS:
-                $cardAddress = CardAddress::factory($value);
-                return $cardAddress->toObject();
 
             case static::TYPE_THREE_D_SECURE_TWO:
                 // Provided value for mandatory authenticationSource part of the enum

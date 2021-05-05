@@ -16,7 +16,7 @@ class CheckEncryptedCard extends Model
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
             'oneUseToken'           => DataType::TYPE_STRING,
-            'cardAddress'               => DataType::TYPE_CARD_ADDRESS,
+            'cardAddress'               => DataType::TYPE_ARRAY,
             'phoneCountryCode'          => DataType::TYPE_STRING,
             'mobileNumber'              => DataType::TYPE_STRING,
             'cardHolderName'            => DataType::TYPE_STRING,

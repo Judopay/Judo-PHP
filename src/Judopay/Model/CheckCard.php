@@ -28,7 +28,7 @@ class CheckCard extends Model
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
 
             // Inner objects
-            'cardAddress'               => DataType::TYPE_CARD_ADDRESS,
+            'cardAddress'               => DataType::TYPE_ARRAY,
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
             'threeDSecure'              => DataType::TYPE_THREE_D_SECURE_TWO,
         );
