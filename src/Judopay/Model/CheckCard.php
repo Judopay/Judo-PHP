@@ -23,9 +23,6 @@ class CheckCard extends Model
             'cardHolderName'            => DataType::TYPE_STRING,
             'emailAddress'              => DataType::TYPE_STRING,
             'initialRecurringPayment'   => DataType::TYPE_BOOLEAN,
-            'recurringPayment'          => DataType::TYPE_BOOLEAN,
-            'relatedReceiptId'          => DataType::TYPE_STRING,
-            'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
 
             // Inner objects
             'cardAddress'               => DataType::TYPE_ARRAY,
