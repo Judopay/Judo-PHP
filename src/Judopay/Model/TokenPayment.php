@@ -29,6 +29,8 @@ class TokenPayment extends Model
             'relatedReceiptId'          => DataType::TYPE_STRING,
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
 
+            'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
+
             // Inner objects
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
             'threeDSecure'              => DataType::TYPE_THREE_D_SECURE_TWO,

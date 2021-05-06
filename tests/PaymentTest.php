@@ -43,4 +43,32 @@ class PaymentTest extends PaymentTests
 
         Assert::assertEquals("mit", $cardPayment->getAttributeValues()["recurringPaymentType"]);
     }
+
+    public function testPaymentWithInvalidChallengeRequestIndicator()
+    {
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('challengeRequestIndicator', "test");
+        try {
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
+            $this->fail('An expected ValidationError has not been raised.');
+            return;
+        } catch (\Exception $e) {
+            Assert::assertEquals("Invalid challenge indicator value", $e->getMessage());
+            return;
+        }
+    }
+
+    public function testPaymentWithValidChallengeRequestIndicator()
+    {
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('challengeRequestIndicator', "noPreference");
+        try {
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
+        } catch (\Exception $e) {
+            $this->fail('No exception should have been raised.');
+            return;
+        }
+
+        Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["challengeRequestIndicator"]);
+    }
 }
