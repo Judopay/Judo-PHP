@@ -30,6 +30,7 @@ class TokenPayment extends Model
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
 
             'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
+            'scaExemption'              => DataType::TYPE_SCA_EXEMPTION,
 
             // Inner objects
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,

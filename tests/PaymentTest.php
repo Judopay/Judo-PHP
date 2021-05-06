@@ -71,4 +71,32 @@ class PaymentTest extends PaymentTests
 
         Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["challengeRequestIndicator"]);
     }
+
+    public function testPaymentWithInvalidScaExemption()
+    {
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('scaExemption', "test");
+        try {
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
+            $this->fail('An expected ValidationError has not been raised.');
+            return;
+        } catch (\Exception $e) {
+            Assert::assertEquals("Invalid SCA exemption value", $e->getMessage());
+            return;
+        }
+    }
+
+    public function testPaymentWithValidScaExemption()
+    {
+        $cardPayment = $this->getBuilder()
+            ->setAttribute('scaExemption', "trustedBeneficiary");
+        try {
+            $cardPayment->build(ConfigHelper::getCybersourceConfig());
+        } catch (\Exception $e) {
+            $this->fail('No exception should have been raised.');
+            return;
+        }
+
+        Assert::assertEquals("trustedBeneficiary", $cardPayment->getAttributeValues()["scaExemption"]);
+    }
 }

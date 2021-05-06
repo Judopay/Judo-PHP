@@ -21,6 +21,7 @@ class CheckCard extends Model
             'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
 
             'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
+            'scaExemption'              => DataType::TYPE_SCA_EXEMPTION,
 
             // Inner objects
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
