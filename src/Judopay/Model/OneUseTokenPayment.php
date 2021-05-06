@@ -19,6 +19,7 @@ class OneUseTokenPayment extends Model
             'currency'              => DataType::TYPE_STRING,
             'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
             'cardAddress'           => DataType::TYPE_ARRAY,
+            'phoneCountryCode'      => DataType::TYPE_STRING,
             'mobileNumber'          => DataType::TYPE_STRING,
             'emailAddress'          => DataType::TYPE_STRING,
             'clientDetails'         => DataType::TYPE_OBJECT,

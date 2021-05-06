@@ -19,6 +19,7 @@ class TokenPayment extends Model
             'consumerToken'             => DataType::TYPE_STRING,
             'cardToken'                 => DataType::TYPE_STRING,
             'cv2'                       => DataType::TYPE_STRING,
+            'phoneCountryCode'          => DataType::TYPE_STRING,
             'mobileNumber'              => DataType::TYPE_STRING,
             'emailAddress'              => DataType::TYPE_STRING,
             'currency'                  => DataType::TYPE_STRING,
