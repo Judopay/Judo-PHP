@@ -72,4 +72,31 @@ class AssertionHelper
         Assert::assertNotNull($result['cReq']);
         Assert::assertGreaterThan(0, $result['receiptId']);
     }
+
+    public static function assertAuthCodeAvailable($result)
+    {
+        Assert::assertNotNull($result['authCode']);
+    }
+
+    public static function assertSuccessfulGetReceipt($receipt)
+    {
+        Assert::assertNotNull($receipt);
+        Assert::assertEquals('Success', $receipt['result']);
+        Assert::assertGreaterThan(0, $receipt['receiptId']);
+        Assert::assertNotNull($receipt['acquirer']);
+    }
+
+    public static function assertSuccessfulWebPaymentCreation($result)
+    {
+        Assert::assertNotNull($result);
+        Assert::assertNotNull($result['payByLinkUrl']);
+        Assert::assertNotNull($result['postUrl']);
+        Assert::assertNotNull($result['reference']);
+    }
+
+    public static function assertSuccessfulGetWebPaymentReceipt($receipt)
+    {
+        AssertionHelper::assertSuccessfulGetReceipt($receipt);
+        Assert::assertNotNull($receipt['webPaymentReference']);
+    }
 }
