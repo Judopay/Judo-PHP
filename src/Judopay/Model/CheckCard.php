@@ -18,7 +18,12 @@ class CheckCard extends Model
             'cv2'                   => DataType::TYPE_STRING,
             'currency'              => DataType::TYPE_STRING,
             'judoId'                => DataType::TYPE_STRING,
-            'yourPaymentMetaData'   => DataType::TYPE_OBJECT,
+            'cardAddress'               => DataType::TYPE_ARRAY,
+            'phoneCountryCode'          => DataType::TYPE_STRING,
+            'mobileNumber'              => DataType::TYPE_STRING,
+            'cardHolderName'            => DataType::TYPE_STRING,
+            'emailAddress'              => DataType::TYPE_STRING,
+            'initialRecurringPayment'   => DataType::TYPE_BOOLEAN,
 
             'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
             'scaExemption'              => DataType::TYPE_SCA_EXEMPTION,
@@ -30,10 +35,7 @@ class CheckCard extends Model
     protected $requiredAttributes
         = array(
             'yourConsumerReference',
-            'yourPaymentReference',
-            'judoId',
             'cardNumber',
-            'expiryDate',
-            'cv2',
+            'expiryDate'
         );
 }

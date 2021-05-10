@@ -261,7 +261,7 @@ class Model
                 || $data[$requiredAttribute] === ''
                 || $data[$requiredAttribute] === null
             ) {
-                $errors[] = $requiredAttribute.' is missing or empty';
+                array_push($errors, $requiredAttribute.' is missing or empty');
             }
         }
 
