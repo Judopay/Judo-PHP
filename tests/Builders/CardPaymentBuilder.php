@@ -31,6 +31,7 @@ class CardPaymentBuilder extends AbstractModelBuilder
     {
         $this->setAttribute('threeDSecure', $threeDSecure);
         $this->setAttribute('cardHolderName', 'CHALLENGE');
+        $this->setAttribute('mobileNumber', '44');
         $this->setAttribute('mobileNumber', '07999999999');
         $this->setAttribute('emailAddress', 'contact@judopay.com');
 
