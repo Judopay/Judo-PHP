@@ -19,6 +19,7 @@ class TokenPayment extends Model
             'consumerToken'             => DataType::TYPE_STRING,
             'cardToken'                 => DataType::TYPE_STRING,
             'cv2'                       => DataType::TYPE_STRING,
+            'phoneCountryCode'          => DataType::TYPE_STRING,
             'mobileNumber'              => DataType::TYPE_STRING,
             'emailAddress'              => DataType::TYPE_STRING,
             'currency'                  => DataType::TYPE_STRING,
@@ -28,6 +29,9 @@ class TokenPayment extends Model
             'recurringPayment'          => DataType::TYPE_BOOLEAN,
             'relatedReceiptId'          => DataType::TYPE_STRING,
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
+
+            'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
+            'scaExemption'              => DataType::TYPE_SCA_EXEMPTION,
 
             // Inner objects
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
