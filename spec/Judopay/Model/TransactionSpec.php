@@ -18,7 +18,7 @@ class TransactionSpec extends ModelObjectBehavior
         $request = $this->concoctRequest('transactions/all.json');
         $this->beConstructedWith($request);
 
-        /** @var Transaction|TransactionSpec $this */
+        /** @var GetTransaction|TransactionSpec $this */
         $output = $this->all();
         $output->shouldBeArray();
         $output['results'][0]['amount']->shouldEqual(1.01);
@@ -30,7 +30,7 @@ class TransactionSpec extends ModelObjectBehavior
         $this->beConstructedWith($request);
 
         $receiptId = 439539;
-        /** @var Transaction|TransactionSpec $this */
+        /** @var GetTransaction|TransactionSpec $this */
         $output = $this->find($receiptId);
         $output->shouldBeArray();
         $output['receiptId']->shouldBeLike($receiptId);
