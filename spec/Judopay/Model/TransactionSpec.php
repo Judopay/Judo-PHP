@@ -2,7 +2,7 @@
 
 namespace spec\Judopay\Model;
 
-use Judopay\Model\Transaction;
+use Judopay\Model\GetTransaction;
 use Judopay\Request;
 
 class TransactionSpec extends ModelObjectBehavior
@@ -10,7 +10,7 @@ class TransactionSpec extends ModelObjectBehavior
     public function it_is_initializable()
     {
         $this->beConstructedWith(new Request($this->configuration));
-        $this->shouldHaveType('Judopay\Model\Transaction');
+        $this->shouldHaveType('Judopay\Model\GetTransaction');
     }
 
     public function it_should_list_all_transactions()

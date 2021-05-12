@@ -30,7 +30,7 @@ class JudopaySpec extends ObjectBehavior
     {
         /** @var $this JudopaySpec|\Judopay */
         $this->getModel('transaction')->shouldHaveType(
-            '\Judopay\Model\Transaction'
+            '\Judopay\Model\GetTransaction'
         );
     }
 
