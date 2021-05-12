@@ -2,10 +2,10 @@
 
 namespace Tests;
 
-use Tests\Base\PaymentTests;
+use Tests\Base\ThreeDSecureTwoTests;
 use Tests\Builders\CardPreauthBuilder;
 
-class PreauthTest extends PaymentTests
+class PreauthTest extends ThreeDSecureTwoTests
 {
     protected function getBuilder()
     {

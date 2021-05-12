@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Base;
 
 use GuzzleHttp\Exception\BadResponseException;
 use Judopay\Exception\ApiException;
@@ -13,7 +13,7 @@ use Tests\Builders\ResumeThreeDSecureTwoBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class ThreeDSecureTwoTest extends TestCase
+abstract class ThreeDSecureTwoTests extends PaymentTests
 {
     protected function getPaymentBuilder()
     {
@@ -173,5 +173,34 @@ class ThreeDSecureTwoTest extends TestCase
 
         // We should have received a request for additional device data gathering
         Assert::assertNull($completeResult);
+    }
+
+    public function testPaymentWithThreeDSecureTwoNoDeviceDetailsOrChallenge()
+    {
+        // Build a threeDSecureTwo payment
+        $threeDSecureTwo = array(
+            'authenticationSource'      => "Browser"
+        );
+
+        // Using a cardholder name that results in no device details or challenge call
+        $cardPayment = $this->getPaymentBuilder()
+            ->setType(CardPaymentBuilder::THREEDSTWO_VISA_CARD)
+            ->setThreeDSecureTwoFields($threeDSecureTwo)
+            ->setAttribute('cardHolderName', 'FL-SUCCESS-NO-METHOD')
+            ->build(ConfigHelper::getSafeChargeConfig());
+
+        $paymentResult = [];
+
+        try {
+            $paymentResult = $cardPayment->create();
+        } catch (BadResponseException $e) {
+            $this->fail('The request was expected to be successful.'); // We do not expect any exception
+        }
+
+        // We should have received a successful receipt
+        AssertionHelper::assertSuccessfulPayment($paymentResult);
+        $returnedThreeDSecureResponse = $paymentResult['threeDSecure'];
+        $this->assertEquals(true, $returnedThreeDSecureResponse['attempted']);
+        $this->assertEquals("PASSED", $returnedThreeDSecureResponse['result']);
     }
 }
