@@ -41,27 +41,4 @@ class WebPaymentTest extends TestCase
 
         AssertionHelper::assertSuccessfulPayment($cardPayment);
     }
-
-    public function testCompleteWebPaymentReceiptContainsWebPaymentReference()
-    {
-        $webPaymentResult = $this->getBuilder()
-            ->build(ConfigHelper::getBaseConfig())
-            ->create();
-
-        AssertionHelper::assertSuccessfulWebPaymentCreation($webPaymentResult);
-
-        $cardPaymentBuilder =  new CardPaymentBuilder();
-        $cardPaymentBuilder->setAttribute("webPaymentReference", $webPaymentResult['reference']);
-
-        $paymentResult = $cardPaymentBuilder->build(ConfigHelper::getBaseConfig())
-            ->create();
-
-        AssertionHelper::assertSuccessfulPayment($paymentResult);
-
-        $builder = new GetTransactionBuilder();
-        $paymentReceipt = $builder->build(ConfigHelper::getBaseConfig())
-            ->find($paymentResult["receiptId"]);
-
-        AssertionHelper::assertSuccessfulGetWebPaymentReceipt($paymentReceipt);
-    }
 }
