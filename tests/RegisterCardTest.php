@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use Tests\Base\PaymentTests;
+use Tests\Base\ThreeDSecureTwoTests;
 use Tests\Builders\RegisterCardBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class RegisterCardTest extends PaymentTests
+class RegisterCardTest extends ThreeDSecureTwoTests
 {
     protected function getBuilder()
     {

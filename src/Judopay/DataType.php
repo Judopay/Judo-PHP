@@ -22,6 +22,8 @@ class DataType
     const TYPE_GOOGLE_PAY_WALLET = 'google_pay_wallet';
     const TYPE_PRIMARY_ACCOUNT_DETAILS = 'primary_account_details';
     const TYPE_RECURRING_TYPE = 'recurring_type';
+    const TYPE_CHALLENGE_INDICATOR = 'challenge_indicator';
+    const TYPE_SCA_EXEMPTION = 'sca_exemption';
     const TYPE_THREE_D_SECURE_TWO = 'three_d_secure_two';
 
     public static function coerce($targetDataType, $value)
@@ -63,7 +65,8 @@ class DataType
 
             case static::TYPE_RECURRING_TYPE:
                 // Check that the provided value is one of the recurring payment types
-                if (strcasecmp($value, "recurring") != 0 && strcasecmp($value, "mit") != 0) {
+                if (strcasecmp($value, "recurring") != 0
+                    && strcasecmp($value, "mit") != 0) {
                     throw new ValidationError('Invalid recurring type value');
                 }
                 return $value;
@@ -77,6 +80,28 @@ class DataType
             case static::TYPE_PRIMARY_ACCOUNT_DETAILS:
                 $primaryAccountDetails = PrimaryAccountDetails::factory($value);
                 return $primaryAccountDetails->toObject();
+
+            case static::TYPE_CHALLENGE_INDICATOR:
+                // Check that the provided value is part of the challenge request indicator enum
+                if (strcasecmp($value, "noPreference") != 0
+                    && strcasecmp($value, "noChallenge") != 0
+                    && strcasecmp($value, "challengePreferred") != 0
+                    && strcasecmp($value, "challengeAsMandate") != 0
+                    ) {
+                    throw new ValidationError('Invalid challenge indicator value');
+                }
+                return $value;
+
+            case static::TYPE_SCA_EXEMPTION:
+                // Check that the provided value is part of the SCA exemption enum
+                if (strcasecmp($value, "lowValue") != 0
+                    && strcasecmp($value, "secureCorporate") != 0
+                    && strcasecmp($value, "trustedBeneficiary") != 0
+                    && strcasecmp($value, "transactionRiskAnalysis") != 0
+                ) {
+                    throw new ValidationError('Invalid SCA exemption value');
+                }
+                return $value;
 
             case static::TYPE_THREE_D_SECURE_TWO:
                 // Provided value for mandatory authenticationSource part of the enum

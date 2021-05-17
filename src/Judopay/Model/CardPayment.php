@@ -22,6 +22,7 @@ class CardPayment extends Model
             'expiryDate'                => DataType::TYPE_STRING,
             'cv2'                       => DataType::TYPE_STRING,
             'cardAddress'               => DataType::TYPE_ARRAY,
+            'phoneCountryCode'          => DataType::TYPE_STRING,
             'mobileNumber'              => DataType::TYPE_STRING,
             'cardHolderName'            => DataType::TYPE_STRING,
             'emailAddress'              => DataType::TYPE_STRING,
@@ -32,6 +33,9 @@ class CardPayment extends Model
             'recurringPayment'          => DataType::TYPE_BOOLEAN,
             'relatedReceiptId'          => DataType::TYPE_STRING,
             'recurringPaymentType'      => DataType::TYPE_RECURRING_TYPE,
+
+            'challengeRequestIndicator' => DataType::TYPE_CHALLENGE_INDICATOR,
+            'scaExemption'              => DataType::TYPE_SCA_EXEMPTION,
 
             // Inner objects
             'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,

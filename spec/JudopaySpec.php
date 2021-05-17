@@ -29,8 +29,8 @@ class JudopaySpec extends ObjectBehavior
     public function it_should_return_a_model_instance()
     {
         /** @var $this JudopaySpec|\Judopay */
-        $this->getModel('transaction')->shouldHaveType(
-            '\Judopay\Model\Transaction'
+        $this->getModel('getTransaction')->shouldHaveType(
+            '\Judopay\Model\GetTransaction'
         );
     }
 

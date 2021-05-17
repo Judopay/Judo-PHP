@@ -95,7 +95,7 @@ class Model
 
     /**
      * Retrieve a specific record
-     * @param  int $resourceId
+     * @param string $resourceId
      * @return array API response
      * @author
      **/
@@ -104,7 +104,7 @@ class Model
         $this->checkApiMethodIsSupported(__FUNCTION__);
 
         $response = $this->request->get(
-            $this->resourcePath.'/'.(int)$resourceId
+            $this->resourcePath.'/'.$resourceId
         );
 
         return $this->getResponseArray($response);
@@ -261,7 +261,7 @@ class Model
                 || $data[$requiredAttribute] === ''
                 || $data[$requiredAttribute] === null
             ) {
-                $errors[] = $requiredAttribute.' is missing or empty';
+                array_push($errors, $requiredAttribute.' is missing or empty');
             }
         }
 

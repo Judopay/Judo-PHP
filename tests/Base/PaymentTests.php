@@ -22,6 +22,7 @@ abstract class PaymentTests extends TestCase
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
+        AssertionHelper::assertAuthCodeAvailable($result);
     }
 
     public function testDeclinedPayment()
@@ -140,5 +141,38 @@ abstract class PaymentTests extends TestCase
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
+    }
+
+    public function testPaymentWithAddress()
+    {
+        $address1 = "My house";
+        $address2 = "My street";
+        $address3 = "My area";
+        $town = "My town";
+        $postCode = "AB1 2CD";
+        $countryCode = 826;
+        $cardAddress = array(
+            'address1'    => $address1,
+            'address2'    => $address2,
+            'address3'    => $address3,
+            'town'        => $town,
+            "postCode"    => $postCode,
+            "countryCode" => $countryCode
+        );
+
+        $checkCard = $this->getBuilder()
+            ->setAttribute('cardAddress', $cardAddress)
+            ->build(ConfigHelper::getCybersourceConfig());
+
+        $result = $checkCard->create();
+
+        AssertionHelper::assertSuccessfulPayment($result);
+        $returnedBillingAddress = $result['billingAddress'];
+        $this->assertEquals($address1, $returnedBillingAddress['address1']);
+        $this->assertEquals($address2, $returnedBillingAddress['address2']);
+        $this->assertEquals($address3, $returnedBillingAddress['address3']);
+        $this->assertEquals($town, $returnedBillingAddress['town']);
+        $this->assertEquals($postCode, $returnedBillingAddress['postCode']);
+        $this->assertEquals($countryCode, $returnedBillingAddress['countryCode']);
     }
 }
