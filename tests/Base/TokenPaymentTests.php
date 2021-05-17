@@ -150,22 +150,26 @@ abstract class TokenPaymentTests extends TestCase
         $tokenPayment->create();
     }
 
-    public function testDeclinedTokenPaymentWithoutCv2()
+    public function testTokenPaymentWithoutCv2()
     {
         $tokenPayment = $this->getBuilder()
             ->unsetAttribute('cv2')
             ->build(ConfigHelper::getBaseConfig());
 
-        $result = $tokenPayment->create();
+        try {
+            $tokenPayment->create();
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 1, 1);
+            return;
+        }
 
-        AssertionHelper::assertDeclinedPayment($result);
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCv2AndWithNegativeAmount()
     {
         $tokenPayment = $this->getBuilder()
             ->setAttribute('amount', -1)
-            ->unsetAttribute('cv2')
             ->build(ConfigHelper::getBaseConfig());
 
         try {
@@ -204,9 +208,14 @@ abstract class TokenPaymentTests extends TestCase
             ->unsetAttribute('cv2')
             ->build(ConfigHelper::getBaseConfig());
 
-        $result = $tokenPayment->create();
+        try {
+            $tokenPayment->create();
+        } catch (\Exception $e) {
+            AssertionHelper::assertApiExceptionWithModelErrors($e, 1, 1);
+            return;
+        }
 
-        AssertionHelper::assertDeclinedPayment($result);
+        $this->fail('An expected ApiException has not been raised.');
     }
 
     public function testTokenPaymentWithoutCv2AndWithUnknownCurrency()

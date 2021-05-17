@@ -5,6 +5,8 @@ namespace Tests;
 use PHPUnit_Framework_Assert as Assert;
 use Tests\Base\ThreeDSecureTwoTests;
 use Tests\Builders\CardPaymentBuilder;
+use Tests\Builders\GetTransactionBuilder;
+use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
 class PaymentTest extends ThreeDSecureTwoTests
@@ -12,6 +14,21 @@ class PaymentTest extends ThreeDSecureTwoTests
     protected function getBuilder()
     {
         return new CardPaymentBuilder();
+    }
+
+    public function testPaymentFollowedByGetReceipt()
+    {
+        $paymentResult = $this->getBuilder()
+            ->build(ConfigHelper::getCybersourceConfig())
+            ->create();
+
+        AssertionHelper::assertSuccessfulPayment($paymentResult);
+
+        $builder = new GetTransactionBuilder();
+        $paymentReceipt = $builder->build(ConfigHelper::getCybersourceConfig())
+            ->find($paymentResult["receiptId"]);
+
+        AssertionHelper::assertSuccessfulGetReceipt($paymentReceipt);
     }
 
     public function testBuildRecurringInvalidTypeAttribute()

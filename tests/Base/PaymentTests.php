@@ -22,6 +22,7 @@ abstract class PaymentTests extends TestCase
         $result = $cardPayment->create();
 
         AssertionHelper::assertSuccessfulPayment($result);
+        AssertionHelper::assertAuthCodeAvailable($result);
     }
 
     public function testDeclinedPayment()
