@@ -190,7 +190,8 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
             $this->fail('The request was expected to raise an ApiException.');
         } catch (ApiException $e) {
             // But we expect an API exception as this API key doesn't have optional CV2
-            assert::assertEquals("Sorry, the security code entered is invalid. Please check your details and try again.", $e->getFieldErrors()[0]->getMessage());
+            $expectedException = "Sorry, the security code entered is invalid. Please check your details and try again.";
+            assert::assertEquals($expectedException, $e->getFieldErrors()[0]->getMessage());
         }
     }
 
