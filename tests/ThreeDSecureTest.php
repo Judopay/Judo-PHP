@@ -44,8 +44,8 @@ class ThreeDSecureTest extends TestCase
         // Update the existing payment with a PUT
         $threeDSecureResult = $threeDSecureCompletion->update();
 
-        // The payment has a successful status
-        AssertionHelper::assertSuccessfulPayment($threeDSecureResult);
+        // The payment has a declined status because the PaRes is not the correct one
+        AssertionHelper::assertDeclinedPayment($threeDSecureResult);
     }
 
     public function testUpdateWrongThreeDSecurePayment()

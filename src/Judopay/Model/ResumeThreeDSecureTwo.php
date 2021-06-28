@@ -19,7 +19,6 @@ class ResumeThreeDSecureTwo extends Model
     protected $requiredAttributes
         = array(
             'receiptId',
-            'cv2',
             'methodCompletion'
         );
 }
