@@ -17,7 +17,6 @@ class CompleteThreeDSecureTwo extends Model
 
     protected $requiredAttributes
         = array(
-            'receiptId',
-            'cv2'
+            'receiptId'
         );
 }

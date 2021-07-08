@@ -149,6 +149,52 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         AssertionHelper::assertRequiresThreeDSecureTwoChallengeCompletion($resumeResult);
     }
 
+    public function testPaymentWithThreedSecureTwoResumeTransactionNoCv2()
+    {
+        // Build a threeDSecureTwo payment
+        $threeDSecureTwo = array(
+            'authenticationSource'      => "Browser",
+            'methodNotificationUrl'     => "https://www.test.com",
+            'challengeNotificationUrl'  => "https://www.test.com"
+        );
+
+        $cardPayment = $this->getPaymentBuilder()
+            ->setType(CardPaymentBuilder::THREEDSTWO_VISA_CARD)
+            ->setThreeDSecureTwoFields($threeDSecureTwo)
+            ->build(ConfigHelper::getSafeChargeConfig());
+
+        $paymentResult = [];
+
+        try {
+            $paymentResult = $cardPayment->create();
+        } catch (BadResponseException $e) {
+            $this->fail('The request was expected to be successful.'); // We do not expect any exception
+        }
+
+        // We should have received a request for additional device data gathering
+        AssertionHelper::assertRequiresThreeDSecureTwoDeviceDetails($paymentResult);
+
+        // Build the Resume3d request for the payment after its device gathering happened
+        // But without setting a CV2 as it is an optional value for that step
+        $resumeThreeDSecureTwo = $this->getResumeThreeDSecureTwoBuilder($paymentResult['receiptId'])
+            ->setThreeDSecureTwoMethodCompletion("Yes")
+            ->build(ConfigHelper::getSafeChargeConfig());
+
+        Assert::assertNotNull($resumeThreeDSecureTwo);
+
+        try {
+            $resumeResult = $resumeThreeDSecureTwo->update();
+            $this->fail('The request was expected to raise an exception.'); // We do not expect any exception
+        } catch (BadResponseException $e) {
+            // We do not expect any model exception because CV2 is not a mandatory request parameter
+            $this->fail('The request was expected to raise an ApiException.');
+        } catch (ApiException $e) {
+            // But we expect an API exception as this API key doesn't have optional CV2
+            $expected = "Sorry, the security code entered is invalid. Please check your details and try again.";
+            assert::assertEquals($expected, $e->getFieldErrors()[0]->getMessage());
+        }
+    }
+
     /*
      * This cannot run as a full automated test because of a step involving a web browser
      */
