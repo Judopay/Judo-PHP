@@ -80,12 +80,24 @@ class DataType
                 return $primaryAccountDetails->toObject();
 
             case static::TYPE_THREE_D_SECURE_TWO:
-
-                // Case-insensitive allowed values
-                $authenticationSourceValues = array("browser", "stored_recurring", "mobile_sdk");
-                $methodCompletionValues = array("yes", "no", "unavailable");
-                $challengeRequestIndicatorValues = array("nopreference", "nochallenge", "challengepreferred", "challengeasmandate");
-                $scaExemptionValues = array("lowvalue", "securecorporate", "trustedbeneficiary", "transactionriskanalysis");
+                $authenticationSourceValues = array(
+                    "browser",
+                    "stored_recurring",
+                    "mobile_sdk");
+                $methodCompletionValues = array(
+                    "yes",
+                    "no",
+                    "unavailable");
+                $challengeRequestIndicatorValues = array(
+                    "nopreference",
+                    "nochallenge",
+                    "challengepreferred",
+                    "challengeasmandate");
+                $scaExemptionValues = array(
+                    "lowvalue",
+                    "securecorporate",
+                    "trustedbeneficiary",
+                    "transactionriskanalysis");
 
                 if (!in_array(strtolower($value['authenticationSource']), $authenticationSourceValues)) {
                     throw new ValidationError('Invalid authenticationSource value');
