@@ -97,7 +97,8 @@ class PaymentTest extends ThreeDSecureTwoTests
             return;
         }
 
-        Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["threeDSecure"]["challengeRequestIndicator"]);
+        Assert::assertEquals("noPreference",
+            $cardPayment->getAttributeValues()["threeDSecure"]["challengeRequestIndicator"]);
     }
 
     public function testPaymentWithInvalidScaExemption()
@@ -136,6 +137,7 @@ class PaymentTest extends ThreeDSecureTwoTests
             return;
         }
 
-        Assert::assertEquals("trustedBeneficiary", $cardPayment->getAttributeValues()["threeDSecure"]["scaExemption"]);
+        Assert::assertEquals("trustedBeneficiary",
+            $cardPayment->getAttributeValues()["threeDSecure"]["scaExemption"]);
     }
 }
