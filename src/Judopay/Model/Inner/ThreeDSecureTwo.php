@@ -13,6 +13,8 @@ class ThreeDSecureTwo extends TransmittedField
             'methodCompletion'          => DataType::TYPE_STRING,
             'methodNotificationUrl'     => DataType::TYPE_STRING,
             'challengeNotificationUrl'  => DataType::TYPE_STRING,
+            'challengeRequestIndicator' => DataType::TYPE_STRING,
+            'scaExemption'              => DataType::TYPE_STRING,
         );
 
     protected $requiredAttributes

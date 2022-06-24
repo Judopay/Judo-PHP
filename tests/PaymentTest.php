@@ -62,8 +62,14 @@ class PaymentTest extends ThreeDSecureTwoTests
 
     public function testPaymentWithInvalidChallengeRequestIndicator()
     {
+        $threeDSecureTwo = array(
+            'authenticationSource' => "Browser",
+            'challengeRequestIndicator' => "test"
+        );
+
         $cardPayment = $this->getBuilder()
-            ->setAttribute('challengeRequestIndicator', "test");
+            ->setThreeDSecureTwoFields($threeDSecureTwo);
+
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
             $this->fail('An expected ValidationError has not been raised.');
@@ -76,8 +82,14 @@ class PaymentTest extends ThreeDSecureTwoTests
 
     public function testPaymentWithValidChallengeRequestIndicator()
     {
+        $threeDSecureTwo = array(
+            'authenticationSource' => "Browser",
+            'challengeRequestIndicator' => "noPreference"
+        );
+
         $cardPayment = $this->getBuilder()
-            ->setAttribute('challengeRequestIndicator', "noPreference");
+            ->setThreeDSecureTwoFields($threeDSecureTwo);
+
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
         } catch (\Exception $e) {
@@ -85,13 +97,21 @@ class PaymentTest extends ThreeDSecureTwoTests
             return;
         }
 
-        Assert::assertEquals("noPreference", $cardPayment->getAttributeValues()["challengeRequestIndicator"]);
+        Assert::assertEquals(
+            "noPreference",
+            $cardPayment->getAttributeValues()["threeDSecure"]["challengeRequestIndicator"]
+        );
     }
 
     public function testPaymentWithInvalidScaExemption()
     {
+        $threeDSecureTwo = array(
+            'authenticationSource' => "Browser",
+            'scaExemption' => "test"
+        );
+
         $cardPayment = $this->getBuilder()
-            ->setAttribute('scaExemption', "test");
+            ->setThreeDSecureTwoFields($threeDSecureTwo);
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
             $this->fail('An expected ValidationError has not been raised.');
@@ -104,8 +124,14 @@ class PaymentTest extends ThreeDSecureTwoTests
 
     public function testPaymentWithValidScaExemption()
     {
+        $threeDSecureTwo = array(
+            'authenticationSource' => "Browser",
+            'scaExemption' => "trustedBeneficiary"
+        );
+
         $cardPayment = $this->getBuilder()
-            ->setAttribute('scaExemption', "trustedBeneficiary");
+            ->setThreeDSecureTwoFields($threeDSecureTwo);
+
         try {
             $cardPayment->build(ConfigHelper::getCybersourceConfig());
         } catch (\Exception $e) {
@@ -113,6 +139,9 @@ class PaymentTest extends ThreeDSecureTwoTests
             return;
         }
 
-        Assert::assertEquals("trustedBeneficiary", $cardPayment->getAttributeValues()["scaExemption"]);
+        Assert::assertEquals(
+            "trustedBeneficiary",
+            $cardPayment->getAttributeValues()["threeDSecure"]["scaExemption"]
+        );
     }
 }

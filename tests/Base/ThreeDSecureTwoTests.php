@@ -30,7 +30,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         return new CompleteThreeDSecureTwoBuilder($receiptId);
     }
 
-    public function testPaymentWithThreedSecureTwoInvalidAuthenticationSource()
+    public function testPaymentWithThreeDSecureTwoInvalidAuthenticationSource()
     {
         // Build a threeDSecureTwo payment with an invalid attribute
         $threeDSecureTwo = array(
@@ -54,7 +54,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         }
     }
 
-    public function testPaymentWithThreedSecureTwoInvalidMethodCompletion()
+    public function testPaymentWithThreeDSecureTwoInvalidMethodCompletion()
     {
         // Build a threeDSecureTwo payment with an invalid attribute
         $threeDSecureTwo = array(
@@ -78,7 +78,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         }
     }
 
-    public function testPaymentWithThreedSecureTwoRequiresDeviceDetailsCheck()
+    public function testPaymentWithThreeDSecureTwoRequiresDeviceDetailsCheck()
     {
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
@@ -104,7 +104,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         AssertionHelper::assertRequiresThreeDSecureTwoDeviceDetails($paymentResult);
     }
 
-    public function testPaymentWithThreedSecureTwoResumeTransaction()
+    public function testPaymentWithThreeDSecureTwoResumeTransaction()
     {
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
@@ -149,7 +149,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
         AssertionHelper::assertRequiresThreeDSecureTwoChallengeCompletion($resumeResult);
     }
 
-    public function testPaymentWithThreedSecureTwoResumeTransactionNoCv2()
+    public function testPaymentWithThreeDSecureTwoResumeTransactionNoCv2()
     {
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
@@ -198,7 +198,7 @@ abstract class ThreeDSecureTwoTests extends PaymentTests
     /*
      * This cannot run as a full automated test because of a step involving a web browser
      */
-    public function testPaymentWithThreedSecureTwoCompleteTransaction()
+    public function testPaymentWithThreeDSecureTwoCompleteTransaction()
     {
         // Build the Complete3d request for the payment after its ACS challenge happened
         $completeThreeDSecureTwo = $this->getCompleteThreeDSecureTwoBuilder('12345678')
