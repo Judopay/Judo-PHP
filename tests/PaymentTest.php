@@ -2,14 +2,14 @@
 
 namespace Tests;
 
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_Assert as Assert;
-use Tests\Base\ThreeDSecureTwoTests;
 use Tests\Builders\CardPaymentBuilder;
 use Tests\Builders\GetTransactionBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class PaymentTest extends ThreeDSecureTwoTests
+class PaymentTest extends TestCase
 {
     protected function getBuilder()
     {
