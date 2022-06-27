@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Base;
+namespace Tests;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;

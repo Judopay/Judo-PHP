@@ -14,6 +14,9 @@ class ResumeThreeDSecureTwo extends Model
             'receiptId'         => DataType::TYPE_STRING,
             'cv2'               => DataType::TYPE_STRING,
             'methodCompletion'  => DataType::TYPE_STRING,
+
+            // Inner objects
+            'primaryAccountDetails'     => DataType::TYPE_PRIMARY_ACCOUNT_DETAILS,
         );
 
     protected $requiredAttributes
