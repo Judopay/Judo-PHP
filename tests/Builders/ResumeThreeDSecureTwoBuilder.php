@@ -22,4 +22,10 @@ class ResumeThreeDSecureTwoBuilder extends AbstractModelBuilder
         $this->setAttribute('methodCompletion', $methodCompletion);
         return $this;
     }
+
+    public function setThreeDSecureTwoPrimaryAccountDetails($primaryAccountDetails)
+    {
+        $this->setAttribute('primaryAccountDetails', $primaryAccountDetails);
+        return $this;
+    }
 }

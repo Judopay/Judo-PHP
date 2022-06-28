@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use Tests\Base\ThreeDSecureTwoTests;
+use PHPUnit\Framework\TestCase;
 use Tests\Builders\RegisterCardBuilder;
 use Tests\Helpers\AssertionHelper;
 use Tests\Helpers\ConfigHelper;
 
-class RegisterCardTest extends ThreeDSecureTwoTests
+class RegisterCardTest extends TestCase
 {
     protected function getBuilder()
     {
