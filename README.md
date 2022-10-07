@@ -54,7 +54,7 @@ To make a new payment with full card details:
 ```
 **Note:** Please make sure that you are using a unique Consumer Reference for each different consumer, and a unique Payment Reference for each transaction.
 
-Card address details can optionally be included for use in AVS checks as follows, (see full list of parameters [here](https://docs.judopay.com/#register-a-card))
+Card address details can optionally be included for use in AVS checks as follows, (see full list of parameters [here](https://docs.judopay.com/Content/Server%20SDKs/Server%20SDKs_1.htm#Server))
 
 ```php
     $payment = $judopay->getModel('Payment');
@@ -73,14 +73,14 @@ Card address details can optionally be included for use in AVS checks as follows
     );
 ```
 
-You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/api/index.html).
+You can check on the required fields and the format of each field in the [Judopay REST API reference](https://docs.judopay.com/api-reference/index.html).
 To send the request to the API, call:
 ```php
     $response = $payment->create();
 ```
 
 ##### 4. Check the payment result
-If the payment is successful, you'll receive a response array like this (see full response [here](https://docs.judopay.com/#card-payment)):
+If the payment is successful, you'll receive a response array like this (see full response [here](https://docs.judopay.com/Content/Server%20SDKs/Server%20SDKs_1.htm#Server)):
 ```php
     Array
     (
@@ -94,7 +94,7 @@ If the payment is successful, you'll receive a response array like this (see ful
         [yourPaymentReference] => 12345
     )
 ```
-Also important to handle different exceptions in your code. See more details in our [error handling section](https://github.com/JudoPay/PhpSdk/wiki/Error-handling). 
+Also important to handle different exceptions in your code. See more details in our [error handling section](https://docs.judopay.com/Content/Sandbox%20Testing/Test%20Scenarios.htm).
 ```php
     try {
         $response = $payment->create();
