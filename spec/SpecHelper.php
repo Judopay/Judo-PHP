@@ -110,7 +110,7 @@ class SpecHelper
             $fixtureContent = file_get_contents(__DIR__.'/fixtures/'.$fixtureFile);
         }
 
-        $stream = Psr7\stream_for($fixtureContent);
+        $stream = Psr7\Utils::streamFor($fixtureContent);
 
         $mockResponse = new Response(
             $responseCode,  // statusCode
