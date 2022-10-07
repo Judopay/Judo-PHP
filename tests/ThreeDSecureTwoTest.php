@@ -278,7 +278,8 @@ class ThreeDSecureTwoTest extends TestCase
     {
         // Build a threeDSecureTwo payment
         $threeDSecureTwo = array(
-            'authenticationSource'      => "Browser"
+            'authenticationSource'      => "Browser",
+            'challengeRequestIndicator' => "NoPreference"
         );
 
         // Using a cardholder name that results in no device details or challenge call
