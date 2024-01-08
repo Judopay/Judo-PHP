@@ -40,6 +40,10 @@ class ApiException extends RuntimeException
         // Parse the response in an array
         $parsedBody = json_decode($responseBodyAsString, true);
 
+        if (!is_array($parsedBody)) {
+            $parsedBody = [];
+        }
+
         $category = ArrayHelper::get(
             $parsedBody,
             'category',
