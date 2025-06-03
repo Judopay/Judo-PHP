@@ -47,17 +47,6 @@ jobs:
           root: .
           paths:
             - .
-  sonar_scan:
-    docker:
-      - image: europe-docker.pkg.dev/opnf-management/docker/sonar-scanner:latest
-        auth:
-          username: _json_key
-          password: $GCLOUD_SERVICE_KEY
-    working_directory: /home/circleci/project
-    steps:
-      - attach_workspace:
-          at: /home/circleci/project
-      - run: /opt/run-scan.sh
   report_to_jira:
     docker:
       - image: europe-docker.pkg.dev/opnf-management/docker/deployer:latest
@@ -112,10 +101,6 @@ workflows:
       - test_php71
       - test_php72
       - test_php73
-      - sonar_scan:
-          context: shared-secrets
-          requires:
-            - test_php73
       - report_to_jira:
           context: shared-secrets
           environment: prod
