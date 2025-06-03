@@ -23,7 +23,7 @@ executors:
       php_version:
         type: string
     docker:
-      - image: circleci/php:<< parameters.php_version >>
+      - image: cimg/php:<< parameters.php_version >>
 
 jobs:
   test_php73:
