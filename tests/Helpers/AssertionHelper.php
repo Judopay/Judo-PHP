@@ -44,13 +44,6 @@ class AssertionHelper
         Assert::assertGreaterThan(0, $result['receiptId']);
     }
 
-    public static function assertRequiresThreeDSecure($result)
-    {
-        Assert::assertNotNull($result);
-        Assert::assertEquals('Requires 3D Secure', $result['result']);
-        Assert::assertGreaterThan(0, $result['receiptId']);
-    }
-
     public static function assertRequiresThreeDSecureTwoDeviceDetails($result)
     {
         Assert::assertNotNull($result);

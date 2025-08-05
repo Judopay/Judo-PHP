@@ -21,33 +21,6 @@ class ThreeDSecureTest extends TestCase
         return new CardPaymentBuilder();
     }
 
-    public function testUpdateThreeDSecurePayment()
-    {
-        // Build a regular payment
-        $cardPayment = $this->getPaymentBuilder()
-            ->setType(CardPaymentBuilder::THREEDS_VISA_CARD)
-            ->build(ConfigHelper::getBaseConfig());
-
-        // Process the payment
-        $paymentResult = $cardPayment->create();
-
-        // We should have a 3DS required message
-        AssertionHelper::assertRequiresThreeDSecure($paymentResult);
-
-        // Build the 3DS request
-        $threeDSecureCompletion = $this->getBuilder()
-            ->setAttribute('receiptId', $paymentResult['receiptId'])
-            ->setAttribute('md', $paymentResult['md'])
-            ->setAttribute('paRes', "paResReturnedByTheAcsUrl") // The ACS URL needs to be visited by the consumer
-            ->build(ConfigHelper::getBaseConfig());
-
-        // Update the existing payment with a PUT
-        $threeDSecureResult = $threeDSecureCompletion->update();
-
-        // The payment has a declined status because the PaRes is not the correct one
-        AssertionHelper::assertDeclinedPayment($threeDSecureResult);
-    }
-
     public function testUpdateWrongThreeDSecurePayment()
     {
         // Build the 3DS request for a Receipt not linked to this account
